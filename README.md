@@ -1,4 +1,11 @@
-# Contentful Gatsby Starter Blog
+# Chiro Itterbeek
+
+Site for Chiro Itterbeek, youth movement in Belgium. Uses the Gatsbyjs frontend framework based on React. Sources content from the Contentful API, and is deployed on Netlify.
+[Chiro Itterbeek](https://wwww.chiro-itterbeek.be/)
+
+See below for official instructions provided by Gatsby and Contentful.
+
+## Contentful Gatsby Starter Blog
 
 Create a [Gatsby](http://gatsbyjs.com/) blog powered by [Contentful](https://www.contentful.com). This is a simplified version of the [Gatsby Contentful Starter](https://github.com/contentful-userland/gatsby-contentful-starter) which is maintained by our Community.
 
