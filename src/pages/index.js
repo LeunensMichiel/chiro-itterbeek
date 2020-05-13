@@ -1,20 +1,17 @@
 import React from "react"
-import { useColorMode } from "theme-ui"
+import styled from "@emotion/styled"
+
+import Layout from "../components/layout"
+
+const StyledHeader = styled.h1`
+  color: ${p => p.theme.colors.header};
+`
 
 const IndexPage = () => {
-  const [colorMode, setColorMode] = useColorMode()
-
   return (
-    <div>
-      <h1>Hello World!</h1>
-      <button
-        onClick={() => {
-          setColorMode(colorMode === "default" ? "dark" : "default")
-        }}
-      >
-        Toggle {colorMode === "default" ? "Dark" : "Light"}
-      </button>
-    </div>
+    <Layout>
+      <h1>titel</h1>
+    </Layout>
   )
 }
 

@@ -37,6 +37,7 @@ module.exports = {
     ],
   },
   plugins: [
+    `gatsby-plugin-theme-ui`,
     "gatsby-transformer-remark",
     "gatsby-transformer-sharp",
     "gatsby-plugin-react-helmet",
@@ -44,8 +45,8 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
+        name: `assets`,
+        path: `${__dirname}/src/assets/`,
       },
     },
     {
@@ -58,15 +59,21 @@ module.exports = {
         background_color: `#272728`,
         theme_color: `#E1143C`,
         display: `browser`,
-        icon: `src/images/favicon.png`,
+        icon: `src/assets/favicon.png`,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-react-svg",
+      options: {
+        rule: {
+          include: /assets/,
+        },
       },
     },
     {
       resolve: "gatsby-source-contentful",
       options: contentfulConfig,
     },
-    `gatsby-plugin-emotion`,
-    `gatsby-plugin-theme-ui`,
     `gatsby-plugin-sitemap`,
   ],
 }

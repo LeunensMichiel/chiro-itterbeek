@@ -6,6 +6,7 @@ export default {
     header: "#3B3B3D",
     styledHeaderText: "#F9F9FC",
     //black 2
+    text: "#272728",
     paragraph: "#272728",
     //Gray 0
     asideText: "#545456",
@@ -32,6 +33,7 @@ export default {
         //white 2
         header: "#F9F9FC",
         //white 1
+        text: "#EDEDF2",
         paragraph: "#EDEDF2",
         //Gray 2
         asideText: "#CACACE",
@@ -46,17 +48,17 @@ export default {
       },
     },
   },
-  space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
+  space: [0, 4, 8, 16, 24, 36, 48, 64, 96],
   fonts: {
     body:
-      'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+      '"PT Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
     heading:
-      'PT Sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+      '"PT Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
     headingAlternate:
       'Bangers, PT Sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
     monospace: "Menlo, monospace",
   },
-  fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 96],
+  fontSizes: [12, 14, 18, 20, 24, 36, 48, 72, 200],
   fontWeights: {
     body: 400,
     heading: 700,
@@ -66,12 +68,28 @@ export default {
     body: 1.5625,
     heading: 1,
   },
+  shadows: {
+    boxShadow: {
+      nav: "0px 4px 15px rgba(0, 0, 0, 0.15);",
+    },
+  },
+  radii: {
+    borderRadius: "2px",
+  },
   text: {
     heading: {
       fontFamily: "heading",
       lineHeight: "heading",
       fontWeight: "heading",
+    },
+    navHeading: {
+      fontFamily: "heading",
+      lineHeight: "heading",
+      fontWeight: "heading",
       color: "header",
+      textTransform: "uppercase",
+      textDecoration: "none",
+      fontSize: 3,
     },
   },
   styles: {
@@ -83,35 +101,30 @@ export default {
     },
     h1: {
       variant: "text.heading",
-      fontSize: 5,
     },
     h2: {
       variant: "text.heading",
       fontSize: 4,
     },
     h3: {
-      color: "text",
       fontFamily: "heading",
       lineHeight: "heading",
       fontWeight: "heading",
       fontSize: 3,
     },
     h4: {
-      color: "text",
       fontFamily: "heading",
       lineHeight: "heading",
       fontWeight: "heading",
       fontSize: 2,
     },
     h5: {
-      color: "text",
       fontFamily: "heading",
       lineHeight: "heading",
       fontWeight: "heading",
       fontSize: 1,
     },
     h6: {
-      color: "text",
       fontFamily: "heading",
       lineHeight: "heading",
       fontWeight: "heading",
