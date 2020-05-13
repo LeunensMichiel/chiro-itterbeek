@@ -2,6 +2,7 @@
 import { jsx } from "theme-ui"
 import { Link } from "gatsby"
 import { useColorMode } from "theme-ui"
+import { SwitchTransition, CSSTransition } from "react-transition-group"
 
 import {
   NavWrapper,
@@ -71,16 +72,43 @@ export const Navbar = () => {
           <Female />
         </a>
         <a>
-          <Dark
-            onClick={e => {
-              setColorMode(colorMode === "default" ? "dark" : "default")
-            }}
-          />
+          <SwitchTransition>
+            <CSSTransition
+              key={colorMode}
+              addEndListener={(node, done) =>
+                node.addEventListener("transitionend", done, false)
+              }
+              classNames="fade"
+            >
+              {colorMode === "dark" ? (
+                <Light
+                  onClick={e => {
+                    setColorMode(colorMode === "default" ? "dark" : "default")
+                  }}
+                />
+              ) : (
+                <Dark
+                  onClick={e => {
+                    setColorMode(colorMode === "default" ? "dark" : "default")
+                  }}
+                />
+              )}
+            </CSSTransition>
+          </SwitchTransition>
         </a>
-        <a>
+        <div className="divider__horizontal" />
+        <a
+          href="https://www.facebook.com/ChiroItterbeek"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Facebook />
         </a>
-        <a>
+        <a
+          href="https://www.instagram.com/chirojokonta/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Instagram />
         </a>
       </SocialWrapper>

@@ -50,7 +50,7 @@ export const SocialWrapper = styled.nav`
   align-items: center;
   justify-self: end;
   a {
-    &:not(:nth-of-type(1)) {
+    &:not(:nth-of-type(odd)) {
       margin-left: ${p => p.theme.space[2]}px;
     }
     cursor: pointer;
@@ -64,6 +64,28 @@ export const SocialWrapper = styled.nav`
         }
       }
     }
+    .fade-enter {
+      path {
+        clip-path: circle(0%);
+      }
+    }
+    .fade-exit {
+      path {
+        clip-path: circle(50%);
+      }
+    }
+    .fade-enter-active {
+      path {
+        clip-path: circle(50%);
+        transition: clip-path 0.2s cubic-bezier(0.87, 0, 0.13, 1);
+      }
+    }
+    .fade-exit-active {
+      path {
+        clip-path: circle(0%);
+        transition: clip-path 0.2s cubic-bezier(0.87, 0, 0.13, 1);
+      }
+    }
   }
   svg {
     path {
@@ -75,5 +97,14 @@ export const SocialWrapper = styled.nav`
       fill: ${p => p.theme.colors.backgroundMuted};
     }
     height: 36px;
+  }
+  .divider__horizontal {
+    content: "";
+    width: 2px;
+    height: 18px;
+    margin: 0 12px;
+    background-color: ${p => p.theme.colors.backgroundMuted};
+    border-radius: ${p => p.theme.radii.borderRadius};
+    transition: background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
   }
 `
