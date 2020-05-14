@@ -98,6 +98,7 @@ export default {
       color: "styledHeaderText",
       textTransform: "uppercase",
       fontSize: 7,
+      letterSpacing: "0.03em",
     },
     footer: {
       fontFamily: "body",

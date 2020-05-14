@@ -115,7 +115,9 @@ export const Navbar = () => {
           <Facebook />
         </a>
         <a
-          href="https://www.instagram.com/chirojokonta/"
+          href={`https://www.instagram.com/${
+            genderState.gender === 1 ? "chirojokonta" : "chiro_allegro"
+          }/`}
           target="_blank"
           rel="noopener noreferrer"
         >
