@@ -38,6 +38,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-theme-ui`,
+    `gatsby-plugin-emotion`,
     "gatsby-transformer-remark",
     "gatsby-transformer-sharp",
     "gatsby-plugin-react-helmet",

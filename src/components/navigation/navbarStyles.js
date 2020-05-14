@@ -1,6 +1,7 @@
 import styled from "@emotion/styled"
 
 export const NavWrapper = styled.header`
+  position: fixed;
   width: 100%;
   height: 100px;
   background-color: ${p => p.theme.colors.background};
@@ -55,10 +56,10 @@ export const SocialWrapper = styled.nav`
   align-items: center;
   justify-self: end;
   a {
+    cursor: pointer;
     &:not(:nth-of-type(odd)) {
       margin-left: ${p => p.theme.space[2]}px;
     }
-    cursor: pointer;
     &:hover {
       svg {
         circle {
@@ -98,6 +99,7 @@ export const SocialWrapper = styled.nav`
     }
   }
   svg {
+    height: 36px;
     path {
       transition: fill 0.3s ease-out;
       fill: ${p => p.theme.colors.header};
@@ -106,7 +108,6 @@ export const SocialWrapper = styled.nav`
       transition: fill 0.3s ease-out;
       fill: ${p => p.theme.colors.backgroundMuted};
     }
-    height: 36px;
   }
   .divider__horizontal {
     content: "";

@@ -102,7 +102,7 @@ export const Navbar = () => {
               }
               classNames="fade"
             >
-              {colorMode === "dark" ? <Light /> : <Dark />}
+              {colorMode === "default" ? <Dark /> : <Light />}
             </CSSTransition>
           </SwitchTransition>
         </a>

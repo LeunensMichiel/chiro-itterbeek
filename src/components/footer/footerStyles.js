@@ -43,10 +43,10 @@ export const SocialWrapper = styled.nav`
   align-items: center;
   justify-self: end;
   a {
+    cursor: pointer;
     &:not(:nth-of-type(1)) {
       margin-left: ${p => p.theme.space[2]}px;
     }
-    cursor: pointer;
     &:hover {
       svg {
         circle {
@@ -59,6 +59,7 @@ export const SocialWrapper = styled.nav`
     }
   }
   svg {
+    height: 36px;
     path {
       transition: fill 0.3s ease-out;
       fill: ${p => p.theme.colors.header};
@@ -67,7 +68,6 @@ export const SocialWrapper = styled.nav`
       transition: fill 0.3s ease-out;
       fill: ${p => p.theme.colors.backgroundMuted};
     }
-    height: 36px;
   }
 `
 
@@ -79,7 +79,6 @@ export const FooterText = styled.p`
     text-decoration: underline;
     transition: color 0.3s ease;
     color: ${p => p.theme.colors.invisibleText};
-    .active,
     :hover {
       color: ${p => p.theme.colors.asideText};
     }

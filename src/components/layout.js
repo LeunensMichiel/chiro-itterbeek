@@ -1,7 +1,19 @@
 import React, { useEffect } from "react"
 import PropTypes from "prop-types"
+import { css } from "@emotion/core"
 
 import { Navbar, Footer } from "../components"
+
+const mainCss = css`
+  width: 100%;
+  min-height: 100%;
+  display: grid;
+  grid-template-columns: minmax(16px, 1fr) repeat(12, minmax(24px, 95px)) minmax(
+      16px,
+      1fr
+    );
+  padding-top: 100px;
+`
 
 const Layout = ({ children }) => {
   useEffect(() => {
@@ -11,7 +23,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Navbar />
-      <main>{children}</main>
+      <main css={mainCss}>{children}</main>
       <Footer />
     </>
   )
