@@ -75,6 +75,15 @@ module.exports = {
       resolve: "gatsby-source-contentful",
       options: contentfulConfig,
     },
+    {
+      resolve: "gatsby-plugin-web-font-loader",
+      options: {
+        custom: {
+          families: ["PT Sans, Bangers"],
+          urls: ["/fonts/fonts.css"],
+        },
+      },
+    },
     `gatsby-plugin-sitemap`,
   ],
 }
