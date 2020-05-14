@@ -23,7 +23,7 @@ function reducer(genderState, action) {
 }
 
 const initialGenderState = {
-  gender: 0,
+  gender: 1,
 }
 
 export const GenderContext = createContext(initialGenderState)

@@ -1,2 +1,5 @@
 export * from "./navigation/navbar"
 export * from "./navigation/navbarStyles"
+export * from "./footer/footer"
+export * from "./footer/footerStyles"
+export * from "./pages/indexStyles"

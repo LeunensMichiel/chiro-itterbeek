@@ -91,6 +91,14 @@ export default {
       textDecoration: "none",
       fontSize: 3,
     },
+    footer: {
+      fontFamily: "body",
+      lineHeight: "heading",
+      fontWeight: "body",
+      color: "invisibleText",
+      textDecoration: "none",
+      fontSize: 1,
+    },
   },
   styles: {
     root: {

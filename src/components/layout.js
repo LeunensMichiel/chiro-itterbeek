@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import PropTypes from "prop-types"
 
-import { Navbar } from "../components"
+import { Navbar, Footer } from "../components"
 
 const Layout = ({ children }) => {
   useEffect(() => {
@@ -12,11 +12,7 @@ const Layout = ({ children }) => {
     <>
       <Navbar />
       <main>{children}</main>
-      <footer>
-        © {new Date().getFullYear()}, Built with
-        {` `}
-        <a href="https://www.gatsbyjs.org">Gatsby</a>
-      </footer>
+      <Footer />
     </>
   )
 }
