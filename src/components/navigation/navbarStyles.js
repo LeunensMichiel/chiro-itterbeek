@@ -17,7 +17,12 @@ export const NavWrapper = styled.header`
     transition: color 0.3s ease;
     .active,
     :hover {
-      color: ${p => p.theme.colors.accent};
+      color: ${p =>
+        p.gender === 0
+          ? p.theme.colors.accent
+          : p.gender === 1
+          ? p.theme.colors.jokontaLight
+          : p.theme.colors.allegroLight};
     }
   }
 `
@@ -57,7 +62,12 @@ export const SocialWrapper = styled.nav`
     &:hover {
       svg {
         circle {
-          fill: ${p => p.theme.colors.accent};
+          fill: ${p =>
+            p.gender === 0
+              ? p.theme.colors.accent
+              : p.gender === 1
+              ? p.theme.colors.jokontaLight
+              : p.theme.colors.allegroLight};
         }
         path {
           fill: ${p => p.theme.colors.styledHeaderText};

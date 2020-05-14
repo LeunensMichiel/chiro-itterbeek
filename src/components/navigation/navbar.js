@@ -1,8 +1,11 @@
 /** @jsx jsx */
+import { useContext } from "react"
 import { jsx } from "theme-ui"
 import { Link } from "gatsby"
 import { useColorMode } from "theme-ui"
 import { SwitchTransition, CSSTransition } from "react-transition-group"
+
+import { GenderContext } from "../../context/GenderContext"
 
 import {
   NavWrapper,
@@ -21,9 +24,10 @@ import Instagram from "../../assets/icons/instagram.svg"
 
 export const Navbar = () => {
   const [colorMode, setColorMode] = useColorMode()
+  const { genderState, dispatch } = useContext(GenderContext)
 
   return (
-    <NavWrapper>
+    <NavWrapper gender={genderState.gender}>
       <ItterbeekWrapper>
         <Link
           sx={{
@@ -67,11 +71,29 @@ export const Navbar = () => {
           Contact
         </Link>
       </LinkWrapper>
-      <SocialWrapper>
-        <a>
-          <Female />
+      <SocialWrapper gender={genderState.gender}>
+        <a
+          onClick={() => {
+            dispatch({ type: "TOGGLE_GENDER" })
+          }}
+        >
+          <SwitchTransition>
+            <CSSTransition
+              key={genderState.gender}
+              addEndListener={(node, done) =>
+                node.addEventListener("transitionend", done, false)
+              }
+              classNames="fade"
+            >
+              {genderState.gender === 1 ? <Female /> : <Male />}
+            </CSSTransition>
+          </SwitchTransition>
         </a>
-        <a>
+        <a
+          onClick={() => {
+            setColorMode(colorMode === "default" ? "dark" : "default")
+          }}
+        >
           <SwitchTransition>
             <CSSTransition
               key={colorMode}
@@ -80,19 +102,7 @@ export const Navbar = () => {
               }
               classNames="fade"
             >
-              {colorMode === "dark" ? (
-                <Light
-                  onClick={e => {
-                    setColorMode(colorMode === "default" ? "dark" : "default")
-                  }}
-                />
-              ) : (
-                <Dark
-                  onClick={e => {
-                    setColorMode(colorMode === "default" ? "dark" : "default")
-                  }}
-                />
-              )}
+              {colorMode === "dark" ? <Light /> : <Dark />}
             </CSSTransition>
           </SwitchTransition>
         </a>
