@@ -26,6 +26,7 @@ export const NavWrapper = styled.header`
           : p.theme.colors.allegroLight};
     }
   }
+  z-index: 100;
 `
 
 export const ItterbeekWrapper = styled.div`

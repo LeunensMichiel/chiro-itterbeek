@@ -91,6 +91,14 @@ export default {
       textDecoration: "none",
       fontSize: 3,
     },
+    banner: {
+      fontFamily: "headingAlternate",
+      lineHeight: "heading",
+      fontWeight: "body",
+      color: "styledHeaderText",
+      textTransform: "uppercase",
+      fontSize: 7,
+    },
     footer: {
       fontFamily: "body",
       lineHeight: "heading",

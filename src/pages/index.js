@@ -1,12 +1,15 @@
-import React from "react"
+import { React } from "react"
 
 import Layout from "../components/layout"
-import { StyledHeader } from "../components"
+import { Banner } from "../components"
+
+import Jokonta from "../assets/banners/jokonta-bg-kalender.svg"
+import Allegro from "../assets/banners/allegro-bg-kalender.svg"
 
 const IndexPage = () => {
   return (
     <Layout>
-      <StyledHeader>Kalender</StyledHeader>
+      <Banner jokonta={<Jokonta />} allegro={<Allegro />} text={`Programma`} />
     </Layout>
   )
 }

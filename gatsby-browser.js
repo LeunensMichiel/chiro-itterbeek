@@ -7,13 +7,12 @@ const GlobalStyles = css`
     height: 100%;
   }
   body,
-  #___gatsby,
-  #gatsby-focus-wrapper {
+  #___gatsby {
     height: 100%;
-    /* min-height: 100%; */
   }
 
   #gatsby-focus-wrapper {
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
