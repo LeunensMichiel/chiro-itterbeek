@@ -81,6 +81,10 @@ export default {
       fontFamily: "heading",
       lineHeight: "heading",
       fontWeight: "heading",
+      color: "header",
+      textTransform: "uppercase",
+      textDecoration: "none",
+      fontSize: 4,
     },
     navHeading: {
       fontFamily: "heading",
@@ -108,6 +112,14 @@ export default {
       textDecoration: "none",
       fontSize: 1,
     },
+    paragraph: {
+      fontFamily: "body",
+      lineHeight: "body",
+      fontWeight: "body",
+      color: "paragraph",
+      textDecoration: "none",
+      fontSize: 2,
+    },
   },
   styles: {
     root: {
@@ -115,73 +127,6 @@ export default {
       lineHeight: "body",
       fontWeight: "body",
       color: "paragraph",
-    },
-    h1: {
-      variant: "text.heading",
-    },
-    h2: {
-      variant: "text.heading",
-      fontSize: 4,
-    },
-    h3: {
-      fontFamily: "heading",
-      lineHeight: "heading",
-      fontWeight: "heading",
-      fontSize: 3,
-    },
-    h4: {
-      fontFamily: "heading",
-      lineHeight: "heading",
-      fontWeight: "heading",
-      fontSize: 2,
-    },
-    h5: {
-      fontFamily: "heading",
-      lineHeight: "heading",
-      fontWeight: "heading",
-      fontSize: 1,
-    },
-    h6: {
-      fontFamily: "heading",
-      lineHeight: "heading",
-      fontWeight: "heading",
-      fontSize: 0,
-    },
-    p: {
-      color: "text",
-      fontFamily: "body",
-      fontWeight: "body",
-      lineHeight: "body",
-    },
-    a: {
-      color: "primary",
-    },
-    pre: {
-      fontFamily: "monospace",
-      overflowX: "auto",
-      code: {
-        color: "inherit",
-      },
-    },
-    code: {
-      fontFamily: "monospace",
-      fontSize: "inherit",
-    },
-    table: {
-      width: "100%",
-      borderCollapse: "separate",
-      borderSpacing: 0,
-    },
-    th: {
-      textAlign: "left",
-      borderBottomStyle: "solid",
-    },
-    td: {
-      textAlign: "left",
-      borderBottomStyle: "solid",
-    },
-    img: {
-      maxWidth: "100%",
     },
   },
 }
