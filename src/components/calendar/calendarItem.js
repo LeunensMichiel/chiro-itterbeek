@@ -58,16 +58,6 @@ export const CalendarItem = () => {
         >
           Zaterdag is er eerst een kubbtoernooi, per ploeg mogen 6 mensen
           spelen. Dit gaat door aan de terreinen van de Chiro en start om 14u30.
-          Om in te schrijven mailt u uw ploegnaam door naar
-          55jaarchiroitterbeek@gmail.com. Betalen (€6) kan de dag zelf of door
-          de storten op BE68 7330 2243 6534 met vermelding ‘kubb’ en uw
-          ‘groepsnaam’. Vervolgens kan u genieten van de lekkerste
-          kampgerechten. Voor de meisjes is dat pitta met penne en bloemkool,
-          voor de jongens pensen met appelmoes. Er wordt ook een vegetarisch
-          alternatief voorzien. We vragen in te schrijven voor 7 mei via volgend
-          e-mailadres: 55jaarchiroitterbeek@gmail.com. Een kinderportie kost 8
-          euro, een volwassen portie 10 euro. Als laatste sluiten we de avond af
-          met een streekbierenavond en een kampvuur.
         </p>
         <button onClick={toggleAccordion}>
           <span>{`${calItemActive ? "Minder" : "Meer"} lezen`}</span>

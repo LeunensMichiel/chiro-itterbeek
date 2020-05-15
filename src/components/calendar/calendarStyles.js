@@ -110,6 +110,7 @@ export const CalendarItemBody = styled.div`
     }
     &.innertext {
       padding: 0;
+      min-height: 88px;
       overflow: hidden;
       transition: max-height 0.4s cubic-bezier(0.87, 0, 0.13, 1);
       max-height: calc(${props => props.maxHeight});
