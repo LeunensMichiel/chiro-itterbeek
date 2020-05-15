@@ -1,14 +1,14 @@
 @font-face {
   font-family: "PT Sans";
   src: url("PT-Sans-Regular.woff2") format("woff2");
-  font-display: swap;
+  /* font-display: swap; */
   font-weight: normal;
 }
 
 @font-face {
   font-family: "PT Sans";
   src: url("PT-Sans-Bold.woff2") format("woff2");
-  font-display: swap;
+  /* font-display: swap; */
   font-weight: bold;
 }
 
@@ -16,5 +16,5 @@
   font-family: "Bangers";
   src: url("Bangers-Regular.woff2") format("woff2"),
     url("Bangers-Regular.woff") format("woff");
-  font-display: swap;
+  /* font-display: swap; */
 }

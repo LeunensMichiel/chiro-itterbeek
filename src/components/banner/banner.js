@@ -1,22 +1,27 @@
 /** @jsx jsx */
 import { useContext } from "react"
 import { jsx } from "theme-ui"
+import { useColorMode } from "theme-ui"
+import { SwitchTransition, CSSTransition } from "react-transition-group"
 import { GenderContext } from "../../context/GenderContext"
 
-import { BannerWrapper } from "./bannerStyles"
-import { SwitchTransition, CSSTransition } from "react-transition-group"
+import { BannerWrapper, BannerOverlay } from "./bannerStyles"
 
 export const Banner = ({ jokonta, allegro, text }) => {
   const { genderState } = useContext(GenderContext)
+  const [colorMode] = useColorMode()
+
   return (
     <BannerWrapper>
-      <h1
-        sx={{
-          variant: "text.banner",
-        }}
-      >
-        {text}
-      </h1>
+      <BannerOverlay isDark={colorMode === "dark"}>
+        <h1
+          sx={{
+            variant: "text.banner",
+          }}
+        >
+          {text}
+        </h1>
+      </BannerOverlay>
       <SwitchTransition>
         <CSSTransition
           key={genderState.gender}
