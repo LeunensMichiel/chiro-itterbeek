@@ -1,10 +1,50 @@
-import React from "react"
-import { CalendarWrapper } from "./calendarStyles"
+import React, { useState } from "react"
+import { CalendarWrapper, CalendarNavigationWrapper } from "./calendarStyles"
 import { CalendarItem } from "./calendarItem"
 
+import Chevron from "../../assets/icons/chevron.svg"
+
 export const Calendar = () => {
+  const currentDate = new Date()
+  const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth())
+  const [dateState, setDateState] = useState(firstDay)
+  const changeDate = increment => {
+    let newDate
+    if (increment) {
+      newDate = new Date(dateState.setMonth(dateState.getMonth() + 1))
+      setDateState(newDate)
+    } else {
+      if (dateState >= currentDate) {
+        newDate = new Date(dateState.setMonth(dateState.getMonth() - 1))
+        setDateState(newDate)
+      }
+    }
+  }
   return (
     <CalendarWrapper>
+      <CalendarNavigationWrapper disabled={dateState >= currentDate}>
+        <div className="cal__nav__header">Kalender</div>
+        <div className="cal__nav__flex">
+          <button
+            onClick={() => {
+              changeDate(false)
+            }}
+          >
+            <Chevron />
+          </button>
+          <div className="cal__nav__month">
+            {dateState.toLocaleDateString("nl-BE", { month: "long" })}
+          </div>
+          <button
+            onClick={e => {
+              changeDate(true)
+            }}
+          >
+            <Chevron />
+          </button>
+        </div>
+        <div className="cal__nav__year">{dateState.getFullYear()}</div>
+      </CalendarNavigationWrapper>
       <CalendarItem />
     </CalendarWrapper>
   )

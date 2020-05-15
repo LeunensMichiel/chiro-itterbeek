@@ -3,7 +3,6 @@ import PropTypes from "prop-types"
 import { css } from "@emotion/core"
 
 import { Navbar, Footer } from "../components"
-
 const mainCss = css`
   width: 100%;
   min-height: 100%;

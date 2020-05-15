@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import { useContext } from "react"
 import { jsx } from "theme-ui"
+import { useContext } from "react"
 import { useColorMode } from "theme-ui"
 import { SwitchTransition, CSSTransition } from "react-transition-group"
 import { GenderContext } from "../../context/GenderContext"

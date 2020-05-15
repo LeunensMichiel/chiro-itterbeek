@@ -25,7 +25,6 @@ import Instagram from "../../assets/icons/instagram.svg"
 export const Navbar = () => {
   const [colorMode, setColorMode] = useColorMode()
   const { genderState, dispatch } = useContext(GenderContext)
-
   return (
     <NavWrapper gender={genderState.gender}>
       <ItterbeekWrapper>

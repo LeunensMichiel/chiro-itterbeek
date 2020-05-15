@@ -3,7 +3,56 @@ import styled from "@emotion/styled"
 export const CalendarWrapper = styled.section`
   grid-column: 3 / span 10;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: ${p => p.theme.space[8]}px;
+`
+
+export const CalendarNavigationWrapper = styled.nav`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 570px;
+  padding: ${p => p.theme.space[3]}px 0;
+  margin-bottom: ${p => p.theme.space[6]}px;
+  font-weight: 700;
+  font-size: ${p => p.theme.fontSizes[1]}px;
+  text-transform: uppercase;
+  color: ${p => p.theme.colors.paragraph};
+  background-color: ${p => p.theme.colors.backgroundMuted};
+  border-radius: ${p => p.theme.radii.borderRadius}px;
+  transition: background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+  line-height: 1;
+  .cal__nav__month {
+    width: 200px;
+    margin: ${p => p.theme.space[2]}px ${p => p.theme.space[5]}px;
+    font-size: ${p => p.theme.fontSizes[5]}px;
+    text-align: center;
+  }
+  .cal__nav__flex {
+    display: flex;
+    align-items: center;
+    button {
+      &:nth-of-type(1) {
+        svg {
+          transform: rotate(180deg);
+          path {
+            fill: ${p =>
+              p.disabled
+                ? p.theme.colors.paragraph
+                : p.theme.colors.accentGray};
+          }
+        }
+      }
+      svg {
+        height: 36px;
+        path {
+          fill: ${p => p.theme.colors.paragraph};
+        }
+      }
+    }
+  }
 `
 
 export const CalendarItemWrapper = styled.article`
@@ -56,12 +105,8 @@ export const CalendarItemBody = styled.div`
     }
   }
   button {
-    cursor: pointer;
     display: flex;
     align-items: center;
-    padding: 0;
-    border: none;
-    background: none;
     color: ${p => p.theme.colors.asideText};
     text-decoration: underline;
     font-size: ${p => p.theme.fontSizes[2]}px;
