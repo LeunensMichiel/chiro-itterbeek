@@ -18,6 +18,8 @@ export default {
     backgroundMuted: "#EDEDF2",
     //white 0
     border: "#E3E3E8",
+    //white 0
+    borderMuted: "#CACACE",
     //gray 2
     accentGray: "#CACACE",
     //chiro
@@ -43,6 +45,7 @@ export default {
         backgroundMuted: "#3B3B3D",
         //gray 0
         border: "#545456",
+        borderMuted: "#99999E",
         //gray 0
         accentGray: "#545456",
       },

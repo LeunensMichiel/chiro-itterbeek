@@ -21,7 +21,7 @@ export const CalendarNavigationWrapper = styled.nav`
   text-transform: uppercase;
   color: ${p => p.theme.colors.paragraph};
   background-color: ${p => p.theme.colors.backgroundMuted};
-  border-radius: ${p => p.theme.radii.borderRadius}px;
+  border-radius: ${p => p.theme.radii.borderRadius};
   transition: background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
   line-height: 1;
   .cal__nav__month {
@@ -46,6 +46,7 @@ export const CalendarNavigationWrapper = styled.nav`
         }
       }
       svg {
+        transition: fill 0.4s cubic-bezier(0.87, 0, 0.13, 1);
         height: 36px;
         path {
           fill: ${p => p.theme.colors.paragraph};
@@ -57,15 +58,19 @@ export const CalendarNavigationWrapper = styled.nav`
 
 export const CalendarItemWrapper = styled.article`
   width: 100%;
-  height: 260px;
+  max-height: calc(${props => props.maxHeight} + 172px);
   display: flex;
-  border-radius: ${p => p.theme.radii.borderRadius}px;
+  border-radius: ${p => p.theme.radii.borderRadius};
   border: 1px solid ${p => p.theme.colors.border};
-  transition: border 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+  transition: border 0.4s cubic-bezier(0.87, 0, 0.13, 1),
+    max-height 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+
+  &.cal__item__active {
+    border: 1px solid ${p => p.theme.colors.borderMuted};
+  }
 `
 export const CalendarItemHeader = styled.div`
   min-width: 260px;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -102,6 +107,12 @@ export const CalendarItemBody = styled.div`
     &.date {
       color: ${p => p.theme.colors.asideText};
       font-size: ${p => p.theme.fontSizes[1]}px;
+    }
+    &.innertext {
+      padding: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+      max-height: calc(${props => props.maxHeight});
     }
   }
   button {
