@@ -5,8 +5,20 @@ export const BannerWrapper = styled.div`
   display: flex;
   margin-bottom: ${p => p.theme.space[7]}px;
   position: relative;
+  overflow: hidden;
   svg {
     width: 100%;
+  }
+  h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: ${p => p.theme.space[3]}px 0;
+    position: absolute;
+    bottom: 0;
+    z-index: 2;
   }
   .fade-enter {
     opacity: 0;
@@ -27,24 +39,15 @@ export const BannerWrapper = styled.div`
 `
 
 export const BannerOverlay = styled.div`
+  width: 100%;
+  height: 100%;
   position: absolute;
   z-index: 1;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  max-height: ${p => (p.isDark ? "100%" : "110px")};
-  transition: max-height 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+  transform: ${p =>
+    p.isDark ? "translate3d(0,0,0)" : "translate3d(0, calc(100% - 110px), 0)"};
+  transform-origin: bottom;
+  transition: transform 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+  will-change: transform;
+  backface-visibility: hidden;
   background: rgba(24, 24, 25, 0.33);
-  h1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin: 0;
-    padding: ${p => p.theme.space[3]}px 0;
-    position: absolute;
-    bottom: 0;
-    z-index: 2;
-  }
 `

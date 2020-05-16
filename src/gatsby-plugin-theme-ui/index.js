@@ -73,7 +73,9 @@ export default {
   },
   shadows: {
     boxShadow: {
-      nav: "0px 4px 15px rgba(0, 0, 0, 0.15);",
+      nav: "0px 4px 15px rgba(0, 0, 0, 0.15)",
+      container:
+        "0px 4px 10px rgba(0, 0, 0, 0.1), 0px 2px 25px rgba(0, 0, 0, 0.1)",
     },
   },
   radii: {

@@ -37,12 +37,6 @@ module.exports = {
     ],
   },
   plugins: [
-    `gatsby-plugin-emotion`,
-    `gatsby-plugin-theme-ui`,
-    "gatsby-transformer-remark",
-    "gatsby-transformer-sharp",
-    "gatsby-plugin-react-helmet",
-    "gatsby-plugin-sharp",
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -50,6 +44,12 @@ module.exports = {
         path: `${__dirname}/src/assets/`,
       },
     },
+    `gatsby-plugin-emotion`,
+    `gatsby-plugin-theme-ui`,
+    "gatsby-transformer-remark",
+    "gatsby-transformer-sharp",
+    "gatsby-plugin-react-helmet",
+    "gatsby-plugin-sharp",
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

@@ -23,7 +23,6 @@ export const Calendar = () => {
   return (
     <CalendarWrapper>
       <CalendarNavigationWrapper disabled={dateState >= currentDate}>
-        <div className="cal__nav__header">Kalender</div>
         <div className="cal__nav__flex">
           <button
             onClick={() => {
@@ -34,6 +33,7 @@ export const Calendar = () => {
           </button>
           <div className="cal__nav__month">
             {dateState.toLocaleDateString("nl-BE", { month: "long" })}
+            <div className="cal__nav__year">{dateState.getFullYear()}</div>
           </div>
           <button
             onClick={e => {
@@ -43,7 +43,6 @@ export const Calendar = () => {
             <Chevron />
           </button>
         </div>
-        <div className="cal__nav__year">{dateState.getFullYear()}</div>
       </CalendarNavigationWrapper>
       <CalendarItem />
     </CalendarWrapper>

@@ -1,7 +1,6 @@
 /** @jsx jsx */
-import { jsx } from "theme-ui"
+import { jsx, useColorMode } from "theme-ui"
 import { useContext } from "react"
-import { useColorMode } from "theme-ui"
 import { SwitchTransition, CSSTransition } from "react-transition-group"
 import { GenderContext } from "../../context/GenderContext"
 
@@ -13,15 +12,14 @@ export const Banner = ({ jokonta, allegro, text }) => {
 
   return (
     <BannerWrapper>
-      <BannerOverlay isDark={colorMode === "dark"}>
-        <h1
-          sx={{
-            variant: "text.banner",
-          }}
-        >
-          {text}
-        </h1>
-      </BannerOverlay>
+      <h1
+        sx={{
+          variant: "text.banner",
+        }}
+      >
+        {text}
+      </h1>
+      <BannerOverlay isDark={colorMode === "dark"} />
       <SwitchTransition>
         <CSSTransition
           key={genderState.gender}

@@ -22,13 +22,17 @@ export const CalendarNavigationWrapper = styled.nav`
   color: ${p => p.theme.colors.paragraph};
   background-color: ${p => p.theme.colors.backgroundMuted};
   border-radius: ${p => p.theme.radii.borderRadius};
-  transition: background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+  transition: background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1),
+    color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
   line-height: 1;
   .cal__nav__month {
     width: 200px;
     margin: ${p => p.theme.space[2]}px ${p => p.theme.space[5]}px;
     font-size: ${p => p.theme.fontSizes[5]}px;
     text-align: center;
+    .cal__nav__year {
+      font-size: ${p => p.theme.fontSizes[2]}px;
+    }
   }
   .cal__nav__flex {
     display: flex;
@@ -46,9 +50,9 @@ export const CalendarNavigationWrapper = styled.nav`
         }
       }
       svg {
-        transition: fill 0.4s cubic-bezier(0.87, 0, 0.13, 1);
         height: 36px;
         path {
+          transition: fill 0.4s cubic-bezier(0.87, 0, 0.13, 1);
           fill: ${p => p.theme.colors.paragraph};
         }
       }
@@ -107,6 +111,7 @@ export const CalendarItemBody = styled.div`
     &.date {
       color: ${p => p.theme.colors.asideText};
       font-size: ${p => p.theme.fontSizes[1]}px;
+      transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
     }
     &.innertext {
       padding: 0;
@@ -123,12 +128,13 @@ export const CalendarItemBody = styled.div`
     text-decoration: underline;
     font-size: ${p => p.theme.fontSizes[2]}px;
     font-family: inherit;
-
+    transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
     svg {
       fill: ${p => p.theme.colors.asideText};
       margin-top: 4px;
       margin-left: ${p => p.theme.space[1]}px;
       height: 11px;
+      transition: fill 0.4s cubic-bezier(0.87, 0, 0.13, 1);
     }
   }
 `
