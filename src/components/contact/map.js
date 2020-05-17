@@ -9,9 +9,9 @@ export const Map = () => {
   const [colorMode] = useColorMode()
   const [viewport, setViewport] = useState({
     width: "100%",
-    height: 400,
-    latitude: 50.831854,
-    longitude: 4.234065,
+    height: "100%",
+    latitude: 50.830913,
+    longitude: 4.234039,
     zoom: 16,
   })
   return (

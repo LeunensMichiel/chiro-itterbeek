@@ -97,7 +97,80 @@ export const MapWrapper = styled.aside`
   grid-column: 2 / span 7;
   margin-bottom: ${p => p.theme.space[7]}px;
   position: relative;
+  border-radius: ${p => p.theme.radii.borderRadius};
+
   div {
     border-radius: ${p => p.theme.radii.borderRadius};
+  }
+`
+
+export const ContactInfoWrapper = styled.aside`
+  grid-column: 9 / span 5;
+  border: 1px solid ${p => p.theme.colors.border};
+  border-radius: ${p => p.theme.radii.borderRadius};
+  margin-bottom: ${p => p.theme.space[7]}px;
+  margin-left: ${p => p.theme.space[6]}px;
+  padding: ${p => p.theme.space[5]}px;
+  background-color: ${p => p.theme.colors.backgroundMuted2};
+  transition: border 0.4s cubic-bezier(0.87, 0, 0.13, 1),
+    background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+
+  h2 {
+    margin: 0;
+    margin-bottom: ${p => p.theme.space[4]}px;
+    transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+  }
+
+  h3 {
+    margin: 0;
+    margin-bottom: ${p => p.theme.space[2]}px;
+    transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+    color: ${p =>
+      p.gender === 1 ? p.theme.colors.jokonta : p.theme.colors.allegro};
+    text-transform: uppercase;
+    font-size: ${p => p.theme.fontSizes[2]}px;
+  }
+
+  .contact__info__sectionItem {
+    margin-bottom: ${p => p.theme.space[4]}px;
+    p {
+      margin: 0;
+    }
+    button {
+      text-decoration: underline;
+    }
+  }
+`
+
+export const SocialWrapper = styled.nav`
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  a {
+    cursor: pointer;
+    &:not(:nth-of-type(1)) {
+      margin-left: ${p => p.theme.space[2]}px;
+    }
+    &:hover {
+      svg {
+        circle {
+          fill: ${p => p.theme.colors.invisibleText};
+        }
+        path {
+          fill: ${p => p.theme.colors.styledHeaderText};
+        }
+      }
+    }
+  }
+  svg {
+    height: 36px;
+    path {
+      transition: fill 0.3s ease-out;
+      fill: ${p => p.theme.colors.header};
+    }
+    circle {
+      transition: fill 0.3s ease-out;
+      fill: ${p => p.theme.colors.border};
+    }
   }
 `

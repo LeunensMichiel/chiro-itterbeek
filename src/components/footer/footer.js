@@ -1,6 +1,8 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
+import { useContext } from "react"
 import { Link } from "gatsby"
+import { GenderContext } from "../../context/GenderContext"
 
 import {
   FooterWrapper,
@@ -15,6 +17,8 @@ import LinkLogo from "../../assets/icons/link.svg"
 import Chiro from "../../assets/icons/chiro.svg"
 
 export const Footer = () => {
+  const { genderState } = useContext(GenderContext)
+
   return (
     <FooterWrapper>
       <div className="flex">
@@ -38,7 +42,9 @@ export const Footer = () => {
             <Facebook />
           </a>
           <a
-            href="https://www.instagram.com/chirojokonta/"
+            href={`https://www.instagram.com/${
+              genderState.gender === 1 ? "chirojokonta" : "chiro_allegro"
+            }/`}
             target="_blank"
             rel="noopener noreferrer"
           >
