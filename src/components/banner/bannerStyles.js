@@ -45,7 +45,6 @@ export const BannerOverlay = styled.div`
   z-index: 1;
   transform: ${p =>
     p.isDark ? "translate3d(0,0,0)" : "translate3d(0, calc(100% - 110px), 0)"};
-  transform-origin: bottom;
   transition: transform 0.4s cubic-bezier(0.87, 0, 0.13, 1);
   will-change: transform;
   backface-visibility: hidden;

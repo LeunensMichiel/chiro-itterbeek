@@ -8,6 +8,7 @@ export default {
     //black 2
     text: "#272728",
     paragraph: "#272728",
+    navBackground: "#272728",
     //Gray 0
     asideText: "#545456",
     //Gray 1
@@ -100,6 +101,15 @@ export default {
       textDecoration: "none",
       fontSize: 3,
     },
+    navHeadingWhite: {
+      fontFamily: "heading",
+      lineHeight: "heading",
+      fontWeight: "heading",
+      color: "styledHeaderText",
+      textTransform: "uppercase",
+      textDecoration: "none",
+      fontSize: 3,
+    },
     banner: {
       fontFamily: "headingAlternate",
       lineHeight: "heading",
@@ -107,6 +117,15 @@ export default {
       color: "styledHeaderText",
       textTransform: "uppercase",
       fontSize: 7,
+      letterSpacing: "0.03em",
+    },
+    headingAlternative: {
+      fontFamily: "headingAlternate",
+      lineHeight: "heading",
+      fontWeight: "body",
+      color: "paragraph",
+      textTransform: "uppercase",
+      fontSize: 6,
       letterSpacing: "0.03em",
     },
     footer: {

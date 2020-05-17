@@ -1,7 +1,7 @@
 import { React } from "react"
 
 import Layout from "../components/layout"
-import { Banner, Calendar, Information } from "../components"
+import { Banner, Calendar, Information, Groups } from "../components"
 
 import JokontaCal from "../assets/banners/jokonta-bg-kalender.svg"
 import AllegroCal from "../assets/banners/allegro-bg-kalender.svg"
@@ -30,6 +30,7 @@ const IndexPage = () => {
         allegro={<AllegroGroep />}
         text={`Leeftijdsgroepen`}
       />
+      <Groups />
     </Layout>
   )
 }
