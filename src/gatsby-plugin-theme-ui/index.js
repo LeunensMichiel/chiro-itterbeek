@@ -123,7 +123,7 @@ export default {
       fontFamily: "headingAlternate",
       lineHeight: "heading",
       fontWeight: "body",
-      color: "paragraph",
+      color: "header",
       textTransform: "uppercase",
       fontSize: 6,
       letterSpacing: "0.03em",

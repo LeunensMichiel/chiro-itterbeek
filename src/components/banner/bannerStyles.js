@@ -50,3 +50,36 @@ export const BannerOverlay = styled.div`
   backface-visibility: hidden;
   background: rgba(24, 24, 25, 0.33);
 `
+
+export const ContactWrapper = styled.section`
+  grid-column: 1 / span 14;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: ${p => p.theme.space[7]}px 0;
+  margin-bottom: ${p => p.theme.space[7]}px;
+  background-color: ${p => p.theme.colors.backgroundMuted};
+  transition: background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+  text-align: center;
+  h1 {
+    max-width: 760px;
+    margin: 0;
+    margin-bottom: ${p => p.theme.space[5]}px;
+    transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+  }
+  p {
+    max-width: 570px;
+    margin: 0;
+    margin-bottom: ${p => p.theme.space[6]}px;
+    transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+  }
+  .contact__wrapper__goodbye {
+    color: ${p =>
+      p.gender === 1 ? p.theme.colors.jokonta : p.theme.colors.allegro};
+    line-height: 1;
+    font-size: ${p => p.theme.fontSizes[2]}px;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+  }
+`

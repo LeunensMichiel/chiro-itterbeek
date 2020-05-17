@@ -5,7 +5,7 @@ export const GroupWrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: ${p => p.theme.space[6]}px;
+  margin-bottom: ${p => p.theme.space[8]}px;
 `
 
 export const GroupNavigation = styled.nav`
@@ -44,6 +44,7 @@ export const Group = styled.div`
     padding: ${p => p.theme.space[4]}px;
     margin: 0;
     background: ${p => p.color};
+    color: ${p => p.theme.colors.paragraph};
     text-align: center;
     border-radius: ${p => p.theme.radii.borderRadius};
     transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
