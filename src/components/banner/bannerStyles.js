@@ -72,6 +72,10 @@ export const ContactWrapper = styled.section`
     margin: 0;
     margin-bottom: ${p => p.theme.space[6]}px;
     transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+    a {
+      color: ${p => p.theme.colors.paragraph};
+      transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+    }
   }
   .contact__wrapper__goodbye {
     color: ${p =>

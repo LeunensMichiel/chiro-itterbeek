@@ -83,6 +83,7 @@ export const CalendarItemHeader = styled.div`
   transition: background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
 
   span {
+    transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
     &:nth-of-type(1) {
       font-size: 96px;
       font-family: ${p => p.theme.fonts.headingAlternate};
@@ -90,7 +91,6 @@ export const CalendarItemHeader = styled.div`
       margin-bottom: ${p => p.theme.space[1]}px;
       color: ${p =>
         p.gender === 1 ? p.theme.colors.jokonta : p.theme.colors.allegro};
-      transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
     }
   }
 `
@@ -101,7 +101,9 @@ export const CalendarItemBody = styled.div`
   justify-content: center;
   flex-direction: column;
   padding: ${p => p.theme.space[6]}px;
+
   h3 {
+    transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
     margin-top: 0;
     margin-bottom: ${p => p.theme.space[1]}px;
   }
@@ -109,15 +111,16 @@ export const CalendarItemBody = styled.div`
     margin: 0;
     margin-bottom: ${p => p.theme.space[3]}px;
     &.date {
+      transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
       color: ${p => p.theme.colors.asideText};
       font-size: ${p => p.theme.fontSizes[1]}px;
-      transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
     }
     &.innertext {
       padding: 0;
       min-height: 88px;
       overflow: hidden;
-      transition: max-height 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+      transition: max-height 0.4s cubic-bezier(0.87, 0, 0.13, 1),
+        color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
       max-height: calc(${props => props.maxHeight});
     }
   }
