@@ -17,6 +17,8 @@ export default {
     background: "#F9F9FC",
     //white 1
     backgroundMuted: "#EDEDF2",
+    backgroundMuted2: "#F9F9FC",
+    input: "#EDEDF2",
     //white 0
     border: "#E3E3E8",
     //white 0
@@ -44,8 +46,10 @@ export default {
         background: "#272728",
         //black 3
         backgroundMuted: "#3B3B3D",
+        backgroundMuted2: "#3B3B3D",
         //gray 0
         border: "#545456",
+        input: "#545456",
         borderMuted: "#99999E",
         //gray 0
         accentGray: "#545456",
