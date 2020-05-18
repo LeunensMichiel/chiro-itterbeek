@@ -1,7 +1,7 @@
 import React from "react"
 
 import Layout from "../components/layout"
-import { Banner, Highlighted, More } from "../components"
+import { Banner, Highlighted, More, TopVideos, TopAlbums } from "../components"
 
 import JokontaMedia from "../assets/banners/jokonta-bg-media.svg"
 
@@ -15,6 +15,8 @@ const MediaPage = () => {
       />
       <More />
       <Highlighted />
+      <TopVideos />
+      <TopAlbums />
     </Layout>
   )
 }

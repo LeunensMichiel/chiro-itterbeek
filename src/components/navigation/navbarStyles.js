@@ -16,8 +16,15 @@ export const NavWrapper = styled.header`
     display: flex;
     align-items: center;
     transition: color 0.3s ease;
-    .active,
-    :hover {
+    &.active {
+      color: ${p =>
+        p.gender === 0
+          ? p.theme.colors.accent
+          : p.gender === 1
+          ? p.theme.colors.jokonta
+          : p.theme.colors.allegro};
+    }
+    &:hover {
       color: ${p =>
         p.gender === 0
           ? p.theme.colors.accent

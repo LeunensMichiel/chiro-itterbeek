@@ -19,7 +19,6 @@ export const FooterWrapper = styled.footer`
       display: flex;
       align-items: center;
       transition: color 0.3s ease;
-      .active,
       :hover {
         color: ${p => p.theme.colors.asideText};
       }
