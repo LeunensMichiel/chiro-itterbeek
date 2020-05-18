@@ -18,6 +18,7 @@ export const Map = () => {
     <MapWrapper>
       <ReactMapGL
         {...viewport}
+        mapboxApiAccessToken={`${process.env.GATSBY_TOKEN_MAPBOX}`}
         mapStyle={
           colorMode === "default"
             ? "mapbox://styles/michielleunens/ckabdvj7q2c7v1hqh2m8wvvdg"
