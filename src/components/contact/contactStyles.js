@@ -35,7 +35,8 @@ export const FormWrapper = styled.section`
     grid-row: 4;
     align-self: end;
     justify-self: end;
-    padding: ${p => p.theme.space[3]}px ${p => p.theme.space[5]}px;
+    padding: ${p => p.theme.space[3]}px ${p => p.theme.space[6]}px;
+    margin-bottom: ${p => p.theme.space[3]}px;
     background: ${p =>
       p.gender === 1 ? p.theme.colors.jokonta : p.theme.colors.allegro};
     text-transform: uppercase;
