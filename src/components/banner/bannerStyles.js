@@ -40,14 +40,10 @@ export const BannerWrapper = styled.div`
 
 export const BannerOverlay = styled.div`
   width: 100%;
-  height: 100%;
+  height: ${p => (p.isDark ? "100%" : "110px")};
   position: absolute;
   z-index: 1;
-  transform: ${p =>
-    p.isDark ? "translate3d(0,0,0)" : "translate3d(0, calc(100% - 110px), 0)"};
-  transition: transform 0.4s cubic-bezier(0.87, 0, 0.13, 1);
-  will-change: transform;
-  backface-visibility: hidden;
+  bottom: 0;
   background: rgba(24, 24, 25, 0.33);
 `
 
