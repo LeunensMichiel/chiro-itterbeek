@@ -42,7 +42,7 @@ export const Navbar = () => {
           sx={{
             variant: "text.navHeading",
           }}
-          to="/news/"
+          to="/nieuws/"
           partiallyActive={true}
           activeClassName="active"
         >

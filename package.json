@@ -30,7 +30,7 @@
     "theme-ui": "^0.3.1"
   },
   "devDependencies": {
-    "contentful-import": "^7.7.15",
+    "contentful-import": "^7.7.16",
     "netlify-cli": "^2.51.0"
   },
   "homepage": "https://chiro-itterbeek.be/",
