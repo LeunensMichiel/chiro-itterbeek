@@ -57,7 +57,7 @@ export const FormWrapper = styled.section`
 `
 
 export const ItterbeekForm = styled.form`
-  display: grid;
+  display: ${p => (p.hidden ? "none" : "grid")};
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(4, auto);
   margin: ${p => p.theme.space[7]}px 0;
