@@ -22,9 +22,12 @@ export const Form = () => {
         <input
           type="hidden"
           name="form-name"
-          value={`Contactformulier ${
-            genderState.gender === 1 ? "Jokonta" : "Allegro"
-          }`}
+          value="Contactformulier Jokonta"
+        />
+        <input
+          type="hidden"
+          name="form-name"
+          value="Contactformulier Allegro"
         />
         <input type="hidden" name="bot-field" />
         <StyledInput>
