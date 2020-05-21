@@ -10,11 +10,12 @@ import {
 
 import Chevron from "../../assets/icons/chevron.svg"
 
-export const CalendarItem = () => {
+export const CalendarItem = ({ calItem }) => {
   const { genderState } = useContext(GenderContext)
   const [calItemActive, setItemActive] = useState("")
   const [calItemHeight, setHeightState] = useState("88px")
   const contentRef = useRef(null)
+  const itemDate = new Date(calItem.date)
 
   function toggleAccordion() {
     setItemActive(calItemActive === "" ? "cal__item__active" : "")
@@ -31,13 +32,15 @@ export const CalendarItem = () => {
       className={`${calItemActive}`}
     >
       <CalendarItemHeader gender={genderState.gender}>
-        <span>5</span>
+        <span>{itemDate.getDate()}</span>
         <span
           sx={{
             variant: "text.heading",
           }}
         >
-          Oktober
+          {itemDate.toLocaleDateString("nl-BE", {
+            month: "long",
+          })}
         </span>
       </CalendarItemHeader>
       <CalendarItemBody maxHeight={calItemHeight}>
@@ -46,9 +49,19 @@ export const CalendarItem = () => {
             variant: "text.navHeading",
           }}
         >
-          Inspelenop 🔥
+          {calItem.title}
         </h3>
-        <p className="date">Zondag 5 oktober 2020 om 14:00</p>
+        <p className="date">
+          {`${itemDate.toLocaleDateString("nl-BE", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })} om  ${itemDate.toLocaleTimeString("nl-BE", {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}`}
+        </p>
         <p
           className="innertext"
           ref={contentRef}
@@ -56,8 +69,7 @@ export const CalendarItem = () => {
             variant: "text.paragraph",
           }}
         >
-          Zaterdag is er eerst een kubbtoernooi, per ploeg mogen 6 mensen
-          spelen. Dit gaat door aan de terreinen van de Chiro en start om 14u30.
+          {calItem.description.description}
         </p>
         <button onClick={toggleAccordion}>
           <span>{`${calItemActive ? "Minder" : "Meer"} lezen`}</span>

@@ -64,11 +64,14 @@ export const CalendarItemWrapper = styled.article`
   width: 100%;
   max-height: calc(${props => props.maxHeight} + 172px);
   display: flex;
+
   border-radius: ${p => p.theme.radii.borderRadius};
   border: 1px solid ${p => p.theme.colors.border};
   transition: border 0.4s cubic-bezier(0.87, 0, 0.13, 1),
     max-height 0.4s cubic-bezier(0.87, 0, 0.13, 1);
-
+  &:not(:last-of-type) {
+    margin-bottom: ${p => p.theme.space[2]}px;
+  }
   &.cal__item__active {
     border: 1px solid ${p => p.theme.colors.borderMuted};
   }
@@ -114,9 +117,11 @@ export const CalendarItemBody = styled.div`
       transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
       color: ${p => p.theme.colors.asideText};
       font-size: ${p => p.theme.fontSizes[1]}px;
+      text-transform: uppercase;
     }
     &.innertext {
       padding: 0;
+      white-space: pre-line;
       min-height: 88px;
       overflow: hidden;
       transition: max-height 0.4s cubic-bezier(0.87, 0, 0.13, 1),

@@ -1,3 +1,23 @@
+const today = new Date()
+const firstDay = new Date(today.getFullYear(), today.getMonth(), 1)
+
+exports.createSchemaCustomization = ({ actions, schema, getNode }) => {
+  actions.createTypes([
+    schema.buildObjectType({
+      name: "ContentfulKalenderItem",
+      interfaces: ["Node"],
+      fields: {
+        isFuture: {
+          type: "Boolean!",
+          resolve: source => {
+            return new Date(source.date) >= firstDay
+          },
+        },
+      },
+    }),
+  ])
+}
+
 // const Promise = require('bluebird')
 // const path = require('path')
 

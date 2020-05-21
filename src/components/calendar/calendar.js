@@ -1,12 +1,36 @@
 import React, { useState } from "react"
+import { useStaticQuery, graphql } from "gatsby"
+
 import { CalendarWrapper, CalendarNavigationWrapper } from "./calendarStyles"
 import { CalendarItem } from "./calendarItem"
 
 import Chevron from "../../assets/icons/chevron.svg"
 
 export const Calendar = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      calendar: allContentfulKalenderItem(
+        filter: { isFuture: { eq: true } }
+        sort: { fields: date, order: ASC }
+      ) {
+        edges {
+          node {
+            date
+            gender
+            title
+            id
+            description {
+              description
+            }
+          }
+        }
+      }
+    }
+  `)
+
   const currentDate = new Date()
   const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth())
+
   const [dateState, setDateState] = useState(firstDay)
   const changeDate = increment => {
     let newDate
@@ -20,6 +44,7 @@ export const Calendar = () => {
       }
     }
   }
+
   return (
     <CalendarWrapper>
       <CalendarNavigationWrapper disabled={dateState >= currentDate}>
@@ -44,7 +69,9 @@ export const Calendar = () => {
           </button>
         </div>
       </CalendarNavigationWrapper>
-      <CalendarItem />
+      {data.calendar.edges.map(calItem => (
+        <CalendarItem key={calItem.node.id} calItem={calItem.node} />
+      ))}
     </CalendarWrapper>
   )
 }
