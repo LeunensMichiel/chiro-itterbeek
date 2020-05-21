@@ -8,6 +8,7 @@ import {
   Information,
   Groups,
   ContactBanner,
+  NewsHighlight,
 } from "../components"
 
 import JokontaCal from "../assets/banners/jokonta-bg-kalender.svg"
@@ -16,7 +17,6 @@ import JokontaInfo from "../assets/banners/jokonta-bg-info.svg"
 import AllegroInfo from "../assets/banners/allegro-bg-info.svg"
 import JokontaGroep from "../assets/banners/jokonta-bg-groepen.svg"
 import AllegroGroep from "../assets/banners/allegro-bg-groepen.svg"
-import { NewsHighlight } from "../components/news/newsHighlight"
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
