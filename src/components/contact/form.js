@@ -10,7 +10,23 @@ export const Form = () => {
       <h1>{`Contactformulier ${
         genderState.gender === 1 ? "Jokonta" : "Allegro"
       }`}</h1>
-      <ItterbeekForm>
+      <ItterbeekForm
+        name={`Contactformulier ${
+          genderState.gender === 1 ? "Jokonta" : "Allegro"
+        }`}
+        // action="/success/"
+        method="POST"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+      >
+        <input
+          type="hidden"
+          name="form-name"
+          value={`Contactformulier ${
+            genderState.gender === 1 ? "Jokonta" : "Allegro"
+          }`}
+        />
+        <input type="hidden" name="bot-field" />
         <StyledInput>
           <label htmlFor="naam">
             Naam<sup>*</sup>
