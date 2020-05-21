@@ -65,7 +65,7 @@ export const Form = () => {
           </label>
           <textarea id="message" name="bericht" required />
         </StyledInput>
-        <button type="submit" form="form1" value="Submit">
+        <button type="submit" value="Submit">
           Verstuur
         </button>
       </ItterbeekForm>
