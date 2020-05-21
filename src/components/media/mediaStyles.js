@@ -104,17 +104,20 @@ export const MoreMedia = styled.nav`
       line-height: 1;
       transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
       svg {
-        fill: ${p => p.theme.colors.asideText};
         margin-top: 4px;
         margin-left: ${p => p.theme.space[1]}px;
         height: 11px;
-        transition: fill 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+        path {
+          fill: ${p => p.theme.colors.asideText};
+          transition: fill 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+        }
       }
     }
     small {
       display: block;
       font-size: ${p => p.theme.fontSizes[0]}px;
       color: ${p => p.theme.colors.invisibleText};
+      transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
     }
   }
 `

@@ -9,6 +9,7 @@ export default {
     text: "#272728",
     paragraph: "#272728",
     navBackground: "#272728",
+    highlightText: "#CACACE",
     //Gray 0
     asideText: "#545456",
     //Gray 1

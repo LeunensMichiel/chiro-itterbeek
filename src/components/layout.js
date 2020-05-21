@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import PropTypes from "prop-types"
 import { css } from "@emotion/core"
+import { useColorMode } from "theme-ui"
 
 import { Navbar, Footer } from "../components"
 const mainCss = css`
@@ -15,10 +16,11 @@ const mainCss = css`
 `
 
 const Layout = ({ children }) => {
+  const [colorMode] = useColorMode()
   useEffect(() => {
     document.body.style.transition =
-      "background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1), color 0.4s cubic-bezier(0.87, 0, 0.13, 1)"
-  })
+      "background 0.4s cubic-bezier(0.87, 0, 0.13, 1), color 0.4s cubic-bezier(0.87, 0, 0.13, 1)"
+  }, [colorMode])
   return (
     <>
       <Navbar />

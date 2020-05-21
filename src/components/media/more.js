@@ -2,8 +2,8 @@
 import { jsx } from "theme-ui"
 import { useContext } from "react"
 import { MoreMedia } from "./mediaStyles"
-import { Link } from "gatsby"
 import { GenderContext } from "../../context/GenderContext"
+import { Link } from "gatsby"
 
 import Chevron from "../../assets/icons/chevron.svg"
 export const More = () => {
