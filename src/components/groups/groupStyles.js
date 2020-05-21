@@ -77,6 +77,7 @@ export const Group = styled.div`
 
     p {
       margin-top: 0;
+      transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
     }
   }
 

@@ -215,6 +215,7 @@ export const NewsItemWrapper = styled.article`
     p {
       margin-top: 0;
       font-size: ${p => p.theme.fontSizes[1]}px;
+      transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
     }
     a {
       margin-top: auto;

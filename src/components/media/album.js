@@ -11,7 +11,7 @@ export const Album = ({ gender = 0 }) => {
       <div className="album__body">
         <div className="album__title">Kampfoto's 2019</div>
         <a href="#" target="_blank" rel="noopener noreferrer">
-          <span>Overige documenten</span>
+          <span>Bekijk album</span>
           <Chevron />
         </a>
       </div>
