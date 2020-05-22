@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import Img from "gatsby-image"
 import { useStaticQuery, graphql } from "gatsby"
 import { SwitchTransition, CSSTransition } from "react-transition-group"
@@ -69,6 +69,11 @@ export const Groups = () => {
 
   const { genderState } = useContext(GenderContext)
   const [activeGroup, setActiveGroup] = useState(0)
+  useEffect(() => {
+    return () => {
+      setActiveGroup(0)
+    }
+  }, [genderState.gender])
 
   const filteredGroups = data.allGroup.edges.filter(group =>
     genderState.gender === 1
