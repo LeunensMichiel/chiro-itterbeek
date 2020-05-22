@@ -1,9 +1,11 @@
 /** @jsx jsx */
-import { jsx, useColorMode } from "theme-ui"
-import { useContext } from "react"
-import { GenderContext } from "../../context/GenderContext"
+import { jsx } from "theme-ui"
+import React, { useContext, useState } from "react"
 import Img from "gatsby-image"
 import { useStaticQuery, graphql } from "gatsby"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import { SwitchTransition, CSSTransition } from "react-transition-group"
+import { GenderContext } from "../../context/GenderContext"
 
 import {
   InformationWrapper,
@@ -14,10 +16,22 @@ import {
 export const Information = () => {
   const data = useStaticQuery(graphql`
     query {
-      infoImage: file(relativePath: { eq: "images/jongens.jpg" }) {
-        childImageSharp {
-          fluid(maxWidth: 950, quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
+      infoBlocks: allContentfulInformatieblok(
+        sort: { fields: rank, order: ASC }
+      ) {
+        edges {
+          node {
+            gender
+            rank
+            id
+            banner {
+              fluid {
+                ...GatsbyContentfulFluid_withWebp
+              }
+            }
+            info {
+              json
+            }
           }
         }
       }
@@ -25,7 +39,12 @@ export const Information = () => {
   `)
 
   const { genderState } = useContext(GenderContext)
-  const [colorMode] = useColorMode()
+  const [currentTab, setCurrentTab] = useState(0)
+  const filteredBlocks = data.infoBlocks.edges.filter(block =>
+    genderState.gender === 1
+      ? block.node.gender === "Jokonta"
+      : block.node.gender === "Allegro"
+  )
 
   return (
     <InformationWrapper>
@@ -33,65 +52,68 @@ export const Information = () => {
         <button
           sx={{
             variant: "text.navHeading",
+            color:
+              currentTab === 0
+                ? genderState.gender === 1
+                  ? "jokonta"
+                  : "allegro"
+                : "header",
           }}
+          onClick={() => setCurrentTab(0)}
         >
           Algemeen
         </button>
         <button
           sx={{
             variant: "text.navHeading",
+            color:
+              currentTab === 1
+                ? genderState.gender === 1
+                  ? "jokonta"
+                  : "allegro"
+                : "header",
           }}
+          onClick={() => setCurrentTab(1)}
         >
           Inschrijven
         </button>
         <button
           sx={{
             variant: "text.navHeading",
+            color:
+              currentTab === 2
+                ? genderState.gender === 1
+                  ? "jokonta"
+                  : "allegro"
+                : "header",
           }}
+          onClick={() => setCurrentTab(2)}
         >
           Uniform
         </button>
       </InformationNavigation>
-      <InformationBlock isDark={colorMode === "dark"}>
-        <Img
-          className="information__image__container"
-          fluid={data.infoImage.childImageSharp.fluid}
-        />
-        <div className="information__article">
-          <h2>Wie zijn wij?</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisi
-            quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus.
-            Lacus vel facilisis volutpat est velit egestas dui. At urna
-            condimentum mattis pellentesque id. Nisl nunc mi ipsum faucibus
-            vitae aliquet. Nulla posuere sollicitudin aliquam ultrices sagittis.
-            Tortor at risus viverra adipiscing. Amet nisl purus in mollis nunc
-            sed. Est lorem ipsum dolor sit. Risus commodo viverra maecenas
-            accumsan lacus. Ac felis donec et odio pellentesque diam. Massa sed
-            elementum tempus egestas sed sed risus pretium quam. Ultrices
-            tincidunt arcu non sodales neque sodales ut etiam sit. Blandit
-            cursus risus at ultrices mi tempus imperdiet. Nunc lobortis mattis
-            aliquam faucibus purus. Magna fermentum iaculis eu non diam
-            phasellus vestibulum lorem sed. Eget aliquet nibh praesent
-            tristique. Adipiscing bibendum est ultricies integer quis auctor
-            elit.
-          </p>
-          <h3>blabla</h3>
-          <p>
-            Gravida rutrum quisque non tellus orci ac. Tempus iaculis urna id
-            volutpat lacus laoreet non curabitur gravida. Ac felis donec et odio
-            pellentesque diam volutpat commodo sed. Diam phasellus vestibulum
-            lorem sed. Duis at tellus at urna condimentum mattis pellentesque.
-            Facilisi cras fermentum odio eu feugiat pretium nibh ipsum.
-            Facilisis magna etiam tempor orci eu. Pretium fusce id velit ut.
-            Aliquet lectus proin nibh nisl condimentum id venenatis a. Ipsum a
-            arcu cursus vitae congue mauris rhoncus aenean vel. Pretium quam
-            vulputate dignissim suspendisse in. At erat pellentesque adipiscing
-            commodo elit. Amet dictum sit amet justo donec. In eu mi bibendum
-            neque egestas congue.
-          </p>
-        </div>
+      <InformationBlock gender={genderState.gender}>
+        <SwitchTransition>
+          <CSSTransition
+            key={filteredBlocks[currentTab].node.id}
+            addEndListener={(node, done) =>
+              node.addEventListener("transitionend", done, false)
+            }
+            classNames="fade"
+          >
+            <>
+              <Img
+                className="information__image__container"
+                fluid={filteredBlocks[currentTab].node.banner.fluid}
+              />
+              <div className="information__article">
+                {documentToReactComponents(
+                  filteredBlocks[currentTab].node.info.json
+                )}
+              </div>
+            </>
+          </CSSTransition>
+        </SwitchTransition>
       </InformationBlock>
     </InformationWrapper>
   )

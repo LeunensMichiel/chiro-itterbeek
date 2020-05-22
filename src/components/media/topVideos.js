@@ -24,6 +24,7 @@ export const TopVideos = () => {
             scrolling="no"
             frameBorder="0"
             allowFullScreen
+            title="Video 1"
             allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
           ></iframe>
         </div>
@@ -32,6 +33,7 @@ export const TopVideos = () => {
             width="100%"
             height="100%"
             scrolling="no"
+            title="Video 2"
             src="https://www.youtube-nocookie.com/embed/G2s9r_BohUE"
             style={{ border: "none", overflow: "hidden" }}
             frameBorder="0"
