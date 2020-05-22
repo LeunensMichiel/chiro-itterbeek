@@ -53,8 +53,19 @@ export const InformationBlock = styled.article`
     border-radius: ${p => p.theme.radii.borderRadius};
     transition: background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
 
-    h4 {
+    h2,
+    h3 {
       margin: 0;
+    }
+    h2 {
+      font-size: ${p => p.theme.fontSizes[3]}px;
+    }
+    h3 {
+      font-size: ${p => p.theme.fontSizes[2]}px;
+    }
+    p {
+      margin-top: ${p => p.theme.space[1]}px;
+      margin-bottom: ${p => p.theme.space[4]}px;
     }
   }
 `

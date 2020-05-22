@@ -58,7 +58,7 @@ export const Information = () => {
           fluid={data.infoImage.childImageSharp.fluid}
         />
         <div className="information__article">
-          <h4>wie zijn wij?</h4>
+          <h2>Wie zijn wij?</h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisi
@@ -77,6 +77,7 @@ export const Information = () => {
             tristique. Adipiscing bibendum est ultricies integer quis auctor
             elit.
           </p>
+          <h3>blabla</h3>
           <p>
             Gravida rutrum quisque non tellus orci ac. Tempus iaculis urna id
             volutpat lacus laoreet non curabitur gravida. Ac felis donec et odio

@@ -76,6 +76,7 @@ export const Calendar = () => {
           currentDate={dateState}
         />
       ))}
+      <p>Er is niets gepland deze maand.</p>
     </CalendarWrapper>
   )
 }
