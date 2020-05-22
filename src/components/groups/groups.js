@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 import { useState, useContext, useEffect } from "react"
-import Img from "gatsby-image"
 import { useStaticQuery, graphql } from "gatsby"
 import { SwitchTransition, CSSTransition } from "react-transition-group"
 
@@ -11,9 +10,9 @@ import {
   GroupWrapper,
   GroupNavigation,
   GroupNavigationItem,
-  Group,
-  LeidingItem,
 } from "./groupStyles"
+import { Leiding } from "./leiding"
+import { AgeGroup } from "./ageGroup"
 
 export const Groups = () => {
   const data = useStaticQuery(graphql`
@@ -110,57 +109,20 @@ export const Groups = () => {
             onClick={() => setActiveGroup(index)}
           />
         ))}
-        {/* <GroupNavigationItem
+        <GroupNavigationItem
           color={getColor()}
           onClick={() => setActiveGroup(filteredGroups.length + 1)}
           isActive={filteredGroups.length + 1 === activeGroup}
-        /> */}
-      </GroupNavigation>
-      <Group color={getColor(filteredGroups[activeGroup].node.color)}>
-        <h2
-          sx={{
-            variant: "text.headingAlternative",
-          }}
-          className="group__header"
-        >
-          {filteredGroups[activeGroup].node.name}
-        </h2>
-        <Img
-          className="group__image"
-          fluid={filteredGroups[activeGroup].node.banner.fluid}
-          title={filteredGroups[activeGroup].node.name}
-          alt={filteredGroups[activeGroup].node.name}
         />
-        <div className="group__description">
-          <h4>Voor welke leeftijd?</h4>
-          <p>{`${filteredGroups[activeGroup].node.age[0]} tot ${filteredGroups[activeGroup].node.age[1]} jaar`}</p>
-          <h4>Voor wie?</h4>
-          <p>{filteredGroups[activeGroup].node.description.description}</p>
-        </div>
-        <div className="group__leiding">
-          <h3
-            sx={{
-              variant: "text.navHeadingWhite",
-            }}
-            className="group__leiding__header"
-          >
-            Leiding
-          </h3>
-          <div className="group__leiding__items">
-            {filteredGroups[activeGroup].node.leiding.map(leiding => (
-              <LeidingItem>
-                <div className="group__leiding__title">{leiding.firstname}</div>
-                <Img
-                  className="group__leiding__image"
-                  fixed={leiding.profilePicture.fixed}
-                  alt={leiding.firstname}
-                  title={leiding.firstname}
-                />
-              </LeidingItem>
-            ))}
-          </div>
-        </div>
-      </Group>
+      </GroupNavigation>
+      {activeGroup === filteredGroups.length + 1 ? (
+        <Leiding color={getColor()} gender={genderState.gender} />
+      ) : (
+        <AgeGroup
+          color={getColor(filteredGroups[activeGroup].node.color)}
+          group={filteredGroups[activeGroup].node}
+        />
+      )}
     </GroupWrapper>
   )
 }
