@@ -70,7 +70,11 @@ export const Calendar = () => {
         </div>
       </CalendarNavigationWrapper>
       {data.calendar.edges.map(calItem => (
-        <CalendarItem key={calItem.node.id} calItem={calItem.node} />
+        <CalendarItem
+          key={calItem.node.id}
+          calItem={calItem.node}
+          currentDate={dateState}
+        />
       ))}
     </CalendarWrapper>
   )

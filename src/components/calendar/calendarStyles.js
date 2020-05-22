@@ -75,6 +75,21 @@ export const CalendarItemWrapper = styled.article`
   &.cal__item__active {
     border: 1px solid ${p => p.theme.colors.borderMuted};
   }
+
+  &.cal__item-enter {
+    opacity: 0;
+  }
+  &.cal__item-enter-active {
+    opacity: 1;
+    transition: opacity 0.8s cubic-bezier(0.87, 0, 0.13, 1);
+  }
+  &.cal__item-exit {
+    opacity: 1;
+  }
+  &.cal__item-exit-active {
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.87, 0, 0.13, 1);
+  }
 `
 export const CalendarItemHeader = styled.div`
   min-width: 260px;
