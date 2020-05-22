@@ -88,6 +88,9 @@ export const InformationBlock = styled.article`
     li p {
       margin: 0;
     }
+    img {
+      max-height: 200px;
+    }
     a {
       color: ${p =>
         p.gender === 1 ? p.theme.colors.jokonta : p.theme.colors.allegro};

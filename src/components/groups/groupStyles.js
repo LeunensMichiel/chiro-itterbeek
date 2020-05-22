@@ -25,8 +25,10 @@ export const GroupNavigationItem = styled.button`
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 4px solid ${p => (p.isActive ? p.theme.colors.accentGray : p.color)};
-  transition: border-color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+  border: ${p => (p.isActive ? "4px" : "0px")} solid
+    ${p => p.theme.colors.accentGray};
+  transition: border-width 0.2s cubic-bezier(0.87, 0, 0.13, 1),
+    background 0.2s cubic-bezier(0.87, 0, 0.13, 1);
 `
 
 export const Group = styled.div`
@@ -78,6 +80,7 @@ export const Group = styled.div`
     p {
       margin-top: 0;
       transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+      white-space: pre-line;
     }
   }
 
@@ -101,7 +104,7 @@ export const Group = styled.div`
 
     .group__leiding__items {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-evenly;
       height: 100%;
       padding: ${p => p.theme.space[4]}px ${p => p.theme.space[4]}px;
     }

@@ -23,9 +23,10 @@ export const Information = () => {
           node {
             gender
             rank
+            title
             id
             banner {
-              fluid {
+              fluid(maxWidth: 950, quality: 90) {
                 ...GatsbyContentfulFluid_withWebp
               }
             }
@@ -105,6 +106,8 @@ export const Information = () => {
               <Img
                 className="information__image__container"
                 fluid={filteredBlocks[currentTab].node.banner.fluid}
+                alt={filteredBlocks[currentTab].node.title}
+                title={filteredBlocks[currentTab].node.title}
               />
               <div className="information__article">
                 {documentToReactComponents(

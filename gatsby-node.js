@@ -15,6 +15,18 @@ exports.createSchemaCustomization = ({ actions, schema, getNode }) => {
         },
       },
     }),
+    schema.buildObjectType({
+      name: "ContentfulLeeftijdsgroep",
+      interfaces: ["Node"],
+      fields: {
+        rang: {
+          type: "Int!",
+          resolve: source => {
+            return Number(source.age[1])
+          },
+        },
+      },
+    }),
   ])
 }
 
