@@ -3,10 +3,32 @@ import { jsx } from "theme-ui"
 import { useContext } from "react"
 import { TopVideoWrapper } from "./mediaStyles"
 import { GenderContext } from "../../context/GenderContext"
+import { useStaticQuery, graphql } from "gatsby"
 
 export const TopVideos = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      featured: allContentfulVideo(
+        sort: { fields: createdAt, order: ASC }
+        filter: { featured: { eq: true } }
+      ) {
+        edges {
+          node {
+            gender
+            url
+            title
+            id
+          }
+        }
+      }
+    }
+  `)
   const { genderState } = useContext(GenderContext)
-
+  const filteredFeatured = data.featured.edges.filter(feat =>
+    genderState.gender === 1
+      ? feat.node.gender === "Itterbeek" || feat.node.gender === "Jokonta"
+      : feat.node.gender === "Itterbeek" || feat.node.gender === "Allegro"
+  )
   return (
     <TopVideoWrapper>
       <h2
@@ -17,30 +39,21 @@ export const TopVideos = () => {
         Uitgelichte video's
       </h2>
       <div className="media__vidcontainer">
-        <div className="media__video__wrapper">
-          <iframe
-            src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FChiroItterbeek%2Fvideos%2F2007405239562488%2F&show_text=0"
-            style={{ border: "none", overflow: "hidden" }}
-            scrolling="no"
-            frameBorder="0"
-            allowFullScreen
-            title="Video 1"
-            allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-          ></iframe>
-        </div>
-        <div className="media__video__wrapper">
-          <iframe
-            width="100%"
-            height="100%"
-            scrolling="no"
-            title="Video 2"
-            src="https://www.youtube-nocookie.com/embed/G2s9r_BohUE"
-            style={{ border: "none", overflow: "hidden" }}
-            frameBorder="0"
-            allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-        </div>
+        {filteredFeatured.map(ft => (
+          <div className="media__video__wrapper">
+            <iframe
+              width="100%"
+              height="100%"
+              scrolling="no"
+              title={ft.node.title}
+              src={ft.node.url}
+              style={{ border: "none", overflow: "hidden" }}
+              frameBorder="0"
+              allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+        ))}
       </div>
     </TopVideoWrapper>
   )
