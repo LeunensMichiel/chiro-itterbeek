@@ -2,8 +2,8 @@
 import { jsx } from "theme-ui"
 import { useContext } from "react"
 import { TopVideoWrapper } from "./mediaStyles"
-import { GenderContext } from "../../context/GenderContext"
 import { useStaticQuery, graphql } from "gatsby"
+import { GenderContext } from "../../context/GenderContext"
 
 export const TopVideos = () => {
   const data = useStaticQuery(graphql`

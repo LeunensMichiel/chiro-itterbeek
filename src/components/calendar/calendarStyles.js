@@ -76,6 +76,10 @@ export const CalendarItemWrapper = styled.article`
   }
   &.cal__item__active {
     border: 1px solid ${p => p.theme.colors.borderMuted};
+
+    svg {
+      transform: rotate(-90deg);
+    }
   }
 
   &.cal__item-enter {
@@ -154,12 +158,15 @@ export const CalendarItemBody = styled.div`
     font-size: ${p => p.theme.fontSizes[2]}px;
     font-family: inherit;
     transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+
     svg {
       fill: ${p => p.theme.colors.asideText};
       margin-top: 4px;
-      margin-left: ${p => p.theme.space[1]}px;
+      margin-left: ${p => p.theme.space[2]}px;
       height: 11px;
-      transition: fill 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+      transform: rotate(90deg);
+      transition: fill 0.4s cubic-bezier(0.87, 0, 0.13, 1),
+        transform 0.2s cubic-bezier(0.87, 0, 0.13, 1);
     }
   }
 `
