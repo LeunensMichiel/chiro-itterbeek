@@ -132,7 +132,26 @@ export const TopVideoWrapper = styled.section`
     margin: 0;
     margin-bottom: ${p => p.theme.space[6]}px;
   }
-
+  > a {
+    margin-bottom: ${p => p.theme.space[5]}px;
+    display: flex;
+    align-items: center;
+    color: ${p => p.theme.colors.paragraph};
+    text-decoration: underline;
+    font-size: ${p => p.theme.fontSizes[2]}px;
+    font-family: inherit;
+    line-height: 1;
+    transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+    svg {
+      margin-right: ${p => p.theme.space[1]}px;
+      transform: rotate(180deg);
+      height: 11px;
+      path {
+        fill: ${p => p.theme.colors.asideText};
+        transition: fill 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+      }
+    }
+  }
   .media__vidcontainer {
     width: 100%;
     display: grid;
@@ -202,6 +221,11 @@ export const AlbumItem = styled.div`
   background-color: ${p => p.theme.colors.backgroundMuted2};
   transition: border 0.4s cubic-bezier(0.87, 0, 0.13, 1),
     background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+  small {
+    display: block;
+    font-size: ${p => p.theme.fontSizes[0]}px;
+    color: ${p => p.theme.colors.invisibleText};
+  }
   .album__header {
     display: flex;
     justify-content: center;

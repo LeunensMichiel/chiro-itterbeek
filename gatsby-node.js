@@ -35,7 +35,6 @@ exports.createSchemaCustomization = ({ actions, schema, getNode }) => {
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
-
   const result = await graphql(
     `
       {
@@ -50,17 +49,47 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             }
           }
         }
+        videos: allContentfulVideo(sort: { fields: createdAt, order: DESC }) {
+          edges {
+            node {
+              gender
+              url
+              title
+              id
+            }
+          }
+        }
+        boekjes: allContentfulBoekje(sort: { fields: enddate, order: DESC }) {
+          edges {
+            node {
+              gender
+              title
+              url
+              enddate
+              id
+              startdate
+            }
+          }
+        }
       }
     `
   )
+
   if (result.errors) {
     reporter.panicOnBuild(`Error while running GraphQL pagination query.`)
     return
   }
 
   const albumsPerPage = 15
+  const videosPerPage = 4
   const numAlbumPages = Math.ceil(
     result.data.albums.edges.length / albumsPerPage
+  )
+  const numBoekjePages = Math.ceil(
+    result.data.boekjes.edges.length / albumsPerPage
+  )
+  const numVideoPages = Math.ceil(
+    result.data.videos.edges.length / videosPerPage
   )
 
   Array.from({ length: numAlbumPages }).forEach((_, i) => {
@@ -71,6 +100,30 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         limit: albumsPerPage,
         skip: i * albumsPerPage,
         numAlbumPages,
+        currentPage: i + 1,
+      },
+    })
+  })
+  Array.from({ length: numBoekjePages }).forEach((_, i) => {
+    createPage({
+      path: i === 0 ? `/media/krantjes` : `/media/krantjes/${i + 1}`,
+      component: path.resolve("./src/templates/allBoekjes.js"),
+      context: {
+        limit: albumsPerPage,
+        skip: i * albumsPerPage,
+        numBoekjePages,
+        currentPage: i + 1,
+      },
+    })
+  })
+  Array.from({ length: numVideoPages }).forEach((_, i) => {
+    createPage({
+      path: i === 0 ? `/media/videos` : `/media/videos/${i + 1}`,
+      component: path.resolve("./src/templates/allVideos.js"),
+      context: {
+        limit: videosPerPage,
+        skip: i * videosPerPage,
+        numVideoPages,
         currentPage: i + 1,
       },
     })

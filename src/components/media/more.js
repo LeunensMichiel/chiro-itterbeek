@@ -13,15 +13,15 @@ export const More = () => {
     <MoreMedia gender={genderState.gender}>
       <h2>Meer Media!</h2>
       <div className="media__links">
-        <Link>
-          <span>Bekijk alle boekjes</span>
+        <Link to="/media/krantjes">
+          <span>Bekijk alle krantjes</span>
           <Chevron />
         </Link>
         <Link to="/media/albums">
           <span>Bekijk alle foto's</span>
           <Chevron />
         </Link>
-        <Link>
+        <Link to="/media/videos">
           <span>Bekijk alle filmpjes</span>
           <Chevron />
         </Link>
