@@ -71,6 +71,16 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             }
           }
         }
+        documents: allContentfulDocument(sort: { fields: title }) {
+          edges {
+            node {
+              gender
+              title
+              url
+              createdAt
+            }
+          }
+        }
       }
     `
   )
@@ -87,6 +97,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   )
   const numBoekjePages = Math.ceil(
     result.data.boekjes.edges.length / albumsPerPage
+  )
+  const numDocumentPages = Math.ceil(
+    result.data.documents.edges.length / albumsPerPage
   )
   const numVideoPages = Math.ceil(
     result.data.videos.edges.length / videosPerPage
@@ -112,6 +125,18 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         limit: albumsPerPage,
         skip: i * albumsPerPage,
         numBoekjePages,
+        currentPage: i + 1,
+      },
+    })
+  })
+  Array.from({ length: numDocumentPages }).forEach((_, i) => {
+    createPage({
+      path: i === 0 ? `/media/documenten` : `/media/documenten/${i + 1}`,
+      component: path.resolve("./src/templates/allDocuments.js"),
+      context: {
+        limit: albumsPerPage,
+        skip: i * albumsPerPage,
+        numDocumentPages,
         currentPage: i + 1,
       },
     })

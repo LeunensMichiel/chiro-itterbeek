@@ -25,7 +25,7 @@ export const More = () => {
           <span>Bekijk alle filmpjes</span>
           <Chevron />
         </Link>
-        <Link>
+        <Link to="/media/documenten">
           <span>Overige documenten</span>
           <Chevron />
         </Link>

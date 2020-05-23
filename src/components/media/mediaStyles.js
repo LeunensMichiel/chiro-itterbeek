@@ -225,6 +225,7 @@ export const AlbumItem = styled.div`
     display: block;
     font-size: ${p => p.theme.fontSizes[0]}px;
     color: ${p => p.theme.colors.invisibleText};
+    margin-bottom: ${p => p.theme.space[1]}px;
   }
   .album__header {
     display: flex;
