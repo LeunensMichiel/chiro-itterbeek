@@ -2,6 +2,7 @@
 import { jsx } from "theme-ui"
 import { useContext } from "react"
 import { ContactInfoWrapper, SocialWrapper } from "./contactStyles"
+import { useStaticQuery, graphql } from "gatsby"
 import { GenderContext } from "../../context/GenderContext"
 
 import Facebook from "../../assets/icons/facebook.svg"
@@ -9,7 +10,28 @@ import Instagram from "../../assets/icons/instagram.svg"
 import LinkLogo from "../../assets/icons/link.svg"
 
 export const ContactInfo = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      info: allContentfulContactinfo(sort: { fields: updatedAt }) {
+        edges {
+          node {
+            gender
+            email
+            fullName
+            id
+            phone
+            vb
+          }
+        }
+      }
+    }
+  `)
   const { genderState, dispatch } = useContext(GenderContext)
+  const filteredInfo = data.info.edges.filter(block =>
+    genderState.gender === 1
+      ? block.node.gender === true
+      : block.node.gender === false
+  )
   return (
     <ContactInfoWrapper gender={genderState.gender}>
       <h2
@@ -26,17 +48,14 @@ export const ContactInfo = () => {
         <p>Vlaams-Brabant, België</p>
       </div>
       <h3>Hoofdleiding</h3>
-      <div className="contact__info__sectionItem">
-        <p>Louise Vaes</p>
-        <p>louise@idk.com</p>
-        <p>0400 12 34 56</p>
-      </div>
-      <div className="contact__info__sectionItem">
-        <p>Anne-Marie Govaert </p>
-        <p>(volwassen beleidster)</p>
-        <p>leidster@idk.com</p>
-        <p>0400 12 34 56</p>
-      </div>
+      {filteredInfo.map(block => (
+        <div className="contact__info__sectionItem">
+          <p>{block.node.fullName}</p>
+          {block.node.vb && <p>(volwassen begeleider)</p>}
+          <p>{block.node.email}</p>
+          <p>{block.node.phone}</p>
+        </div>
+      ))}
       <h3>Communicatie</h3>
       <div className="contact__info__sectionItem">
         <p>chiro.allegro@outlook.com</p>
