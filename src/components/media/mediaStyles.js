@@ -173,6 +173,26 @@ export const TopAlbumWrapper = styled.section`
     grid-column-gap: 16px;
     grid-row-gap: 16px;
   }
+  > a {
+    margin-bottom: ${p => p.theme.space[5]}px;
+    display: flex;
+    align-items: center;
+    color: ${p => p.theme.colors.paragraph};
+    text-decoration: underline;
+    font-size: ${p => p.theme.fontSizes[2]}px;
+    font-family: inherit;
+    line-height: 1;
+    transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+    svg {
+      margin-right: ${p => p.theme.space[1]}px;
+      transform: rotate(180deg);
+      height: 11px;
+      path {
+        fill: ${p => p.theme.colors.asideText};
+        transition: fill 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+      }
+    }
+  }
 `
 
 export const AlbumItem = styled.div`
@@ -229,6 +249,55 @@ export const AlbumItem = styled.div`
         path {
           fill: ${p => p.theme.colors.asideText};
           transition: fill 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+        }
+      }
+    }
+  }
+`
+
+export const MediaNavitation = styled.nav`
+  margin: 0 auto ${p => p.theme.space[6]}px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 570px;
+  padding: ${p => p.theme.space[3]}px 0;
+  font-weight: 700;
+  font-size: ${p => p.theme.fontSizes[1]}px;
+  text-transform: uppercase;
+  color: ${p => p.theme.colors.paragraph};
+  background-color: ${p => p.theme.colors.backgroundMuted};
+  border-radius: ${p => p.theme.radii.borderRadius};
+  transition: background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1),
+    color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+  line-height: 1;
+  .media__pagenumber {
+    margin: 0 ${p => p.theme.space[4]}px;
+    font-size: ${p => p.theme.fontSizes[4]}px;
+    line-height: 1;
+  }
+  a {
+    &:nth-of-type(1) {
+      pointer-events: ${p => (p.isFirst ? "none" : "auto")};
+      svg {
+        height: 18px;
+        transform: rotate(180deg);
+        path {
+          transition: fill 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+          fill: ${p =>
+            p.isFirst ? p.theme.colors.accentGray : p.theme.colors.paragraph};
+        }
+      }
+    }
+    &:nth-of-type(2) {
+      pointer-events: ${p => (p.isLast ? "none" : "auto")};
+      svg {
+        height: 18px;
+        path {
+          transition: fill 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+          fill: ${p =>
+            p.isLast ? p.theme.colors.accentGray : p.theme.colors.paragraph};
         }
       }
     }

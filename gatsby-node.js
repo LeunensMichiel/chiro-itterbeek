@@ -1,3 +1,6 @@
+const path = require("path")
+const { createFilePath } = require("gatsby-source-filesystem")
+
 const today = new Date()
 const firstDay = new Date(today.getFullYear(), today.getMonth(), 1)
 
@@ -30,45 +33,46 @@ exports.createSchemaCustomization = ({ actions, schema, getNode }) => {
   ])
 }
 
-// const Promise = require('bluebird')
-// const path = require('path')
+exports.createPages = async ({ graphql, actions, reporter }) => {
+  const { createPage } = actions
 
-// exports.createPages = ({ graphql, actions }) => {
-//   const { createPage } = actions
+  const result = await graphql(
+    `
+      {
+        albums: allContentfulAlbum(sort: { fields: date, order: DESC }) {
+          edges {
+            node {
+              title
+              url
+              id
+              gender
+              date
+            }
+          }
+        }
+      }
+    `
+  )
+  if (result.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL pagination query.`)
+    return
+  }
 
-//   return new Promise((resolve, reject) => {
-//     const blogPost = path.resolve('./src/templates/blog-post.js')
-//     resolve(
-//       graphql(
-//         `
-//           {
-//             allContentfulBlogPost {
-//               edges {
-//                 node {
-//                   title
-//                   slug
-//                 }
-//               }
-//             }
-//           }
-//         `
-//       ).then(result => {
-//         if (result.errors) {
-//           console.log(result.errors)
-//           reject(result.errors)
-//         }
+  const albumsPerPage = 15
+  const numAlbumPages = Math.ceil(
+    result.data.albums.edges.length / albumsPerPage
+  )
 
-//         const posts = result.data.allContentfulBlogPost.edges
-//         posts.forEach(post => {
-//           createPage({
-//             path: `/blog/${post.node.slug}/`,
-//             component: blogPost,
-//             context: {
-//               slug: post.node.slug,
-//             },
-//           })
-//         })
-//       })
-//     )
-//   })
-// }
+  Array.from({ length: numAlbumPages }).forEach((_, i) => {
+    createPage({
+      path: i === 0 ? `/media/albums` : `/media/albums/${i + 1}`,
+      component: path.resolve("./src/templates/allAlbums.js"),
+      context: {
+        limit: albumsPerPage,
+        skip: i * albumsPerPage,
+        numAlbumPages,
+        currentPage: i + 1,
+      },
+    })
+  })
+}

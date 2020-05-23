@@ -40,7 +40,7 @@ export const TopVideos = () => {
       </h2>
       <div className="media__vidcontainer">
         {filteredFeatured.map(ft => (
-          <div className="media__video__wrapper">
+          <div className="media__video__wrapper" key={ft.node.id}>
             <iframe
               width="100%"
               height="100%"

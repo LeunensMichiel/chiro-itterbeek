@@ -9,7 +9,9 @@ export const Album = ({ album }) => {
         album.gender === "Jokonta" ? 1 : album.gender === "Allegro" ? 2 : 3
       }
     >
-      <div className="album__header">{album.gender}</div>
+      <div className="album__header">
+        {album.gender === "Itterbeek" ? "Algemeen" : album.gender}
+      </div>
       <div className="album__body">
         <div className="album__title">{album.title}</div>
         <a href={album.url} target="_blank" rel="noopener noreferrer">

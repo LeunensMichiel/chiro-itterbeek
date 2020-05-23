@@ -10,7 +10,10 @@ import { Album } from "./album"
 export const TopAlbums = () => {
   const data = useStaticQuery(graphql`
     query {
-      albums: allContentfulAlbum(sort: { fields: date }) {
+      albums: allContentfulAlbum(
+        sort: { fields: date, order: DESC }
+        limit: 9
+      ) {
         edges {
           node {
             gender
@@ -40,7 +43,7 @@ export const TopAlbums = () => {
       </h2>
       <div className="album__grid">
         {filteredAlbums.map(album => (
-          <Album album={album.node} />
+          <Album key={album.node.id} album={album.node} />
         ))}
       </div>
     </TopAlbumWrapper>
