@@ -17,25 +17,6 @@ import { AgeGroup } from "./ageGroup"
 export const Groups = () => {
   const data = useStaticQuery(graphql`
     query {
-      allLeiding: allContentfulLeiding {
-        edges {
-          node {
-            firstname
-            food
-            gender
-            id
-            birthday(fromNow: true)
-            lastname
-            nickname
-            activities
-            profilePicture {
-              fixed(width: 120, height: 120, quality: 80) {
-                ...GatsbyContentfulFixed_withWebp
-              }
-            }
-          }
-        }
-      }
       allGroup: allContentfulLeeftijdsgroep(sort: { fields: rang }) {
         edges {
           node {
@@ -53,6 +34,7 @@ export const Groups = () => {
               description
             }
             leiding {
+              id
               firstname
               profilePicture {
                 fixed(height: 120, width: 120, quality: 80) {
@@ -79,6 +61,8 @@ export const Groups = () => {
       ? group.node.gender === true
       : group.node.gender === false
   )
+
+  const currentGroup = filteredGroups[activeGroup] || filteredGroups[0]
 
   const getColor = color => {
     switch (color) {
@@ -107,6 +91,7 @@ export const Groups = () => {
             isActive={index === activeGroup}
             color={getColor(group.node.color)}
             onClick={() => setActiveGroup(index)}
+            key={group.node.id}
           />
         ))}
         <GroupNavigationItem
@@ -119,8 +104,8 @@ export const Groups = () => {
         <Leiding color={getColor()} gender={genderState.gender} />
       ) : (
         <AgeGroup
-          color={getColor(filteredGroups[activeGroup].node.color)}
-          group={filteredGroups[activeGroup].node}
+          color={getColor(currentGroup.node.color)}
+          group={currentGroup.node}
         />
       )}
     </GroupWrapper>

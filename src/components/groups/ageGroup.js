@@ -38,7 +38,7 @@ export const AgeGroup = ({ color, group }) => {
         </h3>
         <div className="group__leiding__items">
           {group.leiding.map(leiding => (
-            <LeidingItem>
+            <LeidingItem key={leiding.id}>
               <div className="group__leiding__title">{leiding.firstname}</div>
               <Img
                 className="group__leiding__image"
