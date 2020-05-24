@@ -76,34 +76,73 @@ export const NewsHighlight = ({ margin }) => {
     }
   `)
   const { genderState } = useContext(GenderContext)
-  // // data.jokontaFt.edges[0] = undefined
-  // if (genderState.gender === 1) {
-  //   if (data.itterbeekFt.edges[0] || data.jokontaFt.edges[0]) {
-  //     return null
-  //   }
-  // }
-  // // const isCommon = () => {
-  // //   if (genderState.gender === 1) {
-  // //     return new
-  // //   } else {
 
-  // //   }
-  // // }
-  // console.log(data.itterbeekFt.edges[0])
-  // console.log(data.jokontaFt.edges[0])
+  let currentFeatured
+  //We set the Gender-based ones as currentFeatured
+  if (genderState.gender === 1) {
+    currentFeatured = data.jokontaFt.edges[0]
+  } else {
+    currentFeatured = data.allegroFt.edges[0]
+  }
+  if (
+    //There is no featured post
+    typeof currentFeatured === "undefined" &&
+    typeof data.itterbeekFt.edges[0] === "undefined"
+  ) {
+    return null
+  }
+  //There is a featured post
+  if (
+    typeof currentFeatured === "undefined" &&
+    typeof data.itterbeekFt.edges[0] !== "undefined"
+  ) {
+    //The commonGender is featured because there is no gender one
+    currentFeatured = data.itterbeekFt.edges[0]
+  } else if (typeof data.itterbeekFt.edges[0] !== "undefined") {
+    //there are 2 featured posts, so we return the one w/ latest date
+    const currentDate = new Date(currentFeatured.node.date)
+    const commonDate = new Date(data.itterbeekFt.edges[0].node.date)
+    if (currentDate < commonDate) {
+      currentFeatured = data.itterbeekFt.edges[0]
+    }
+  }
+
+  if (!currentFeatured.node.banner) {
+    currentFeatured.node.banner = data.headlineImage.childImageSharp
+  }
 
   return (
-    <HighlightWrapper margin={margin ? 1 : 0}>
-      <h2>Uitgelicht bericht: Algemeen</h2>
+    <HighlightWrapper
+      gender={
+        currentFeatured.node.gender === "Jokonta"
+          ? 1
+          : currentFeatured.node.gender === "Allegro"
+          ? 2
+          : 3
+      }
+      margin={margin ? 1 : 0}
+    >
+      <h2>{`Uitgelicht bericht: ${
+        currentFeatured.node.gender === "Itterbeek"
+          ? "Algemeen"
+          : currentFeatured.node.gender
+      }`}</h2>
       <HighlightItem>
         <Img
           className="headline__image"
-          fluid={data.headlineImage.childImageSharp.fluid}
+          fluid={currentFeatured.node.banner.fluid}
         />
         <div className="headline__text">
-          <h3>Toxken blijkt dan toch een schattig ventjn te zijn</h3>
-          <small>Vrijdag 1 april om 21:00</small>
-          <Link>
+          <h3>{currentFeatured.node.title}</h3>
+          <small>
+            {new Date(currentFeatured.node.date).toLocaleDateString("nl-BE", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </small>
+          <Link to={`/nieuws/${currentFeatured.node.slug}`}>
             <span>Lees meer</span>
             <Chevron />
           </Link>

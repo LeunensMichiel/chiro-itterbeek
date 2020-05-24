@@ -14,10 +14,16 @@ export const HighlightWrapper = styled.section`
     padding: ${p => p.theme.space[2]}px ${p => p.theme.space[4]}px;
     margin-top: 0;
     margin-bottom: 12px;
-    background: ${p => p.theme.colors.accent};
+    background-color: ${p =>
+      p.gender === 1
+        ? p.theme.colors.jokonta
+        : p.gender === 2
+        ? p.theme.colors.allegro
+        : p.theme.colors.accent};
     text-transform: uppercase;
     font-size: ${p => p.theme.fontSizes[2]}px;
     border-radius: ${p => p.theme.radii.borderRadius};
+    transition: background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
   }
 
   hr {
@@ -97,6 +103,7 @@ export const HighlightItem = styled.div`
 export const NewsWrapper = styled.section`
   grid-column: 2 / span 12;
   margin-bottom: ${p => p.theme.space[8]}px;
+  margin-top: ${p => (p.isFirst ? p.theme.space[0] : p.theme.space[7])}px;
 
   .news__navigation {
     margin: 0 auto ${p => p.theme.space[6]}px auto;

@@ -18,8 +18,8 @@ const allNews = ({ pageContext, data }) => {
 
   return (
     <Layout>
-      <NewsHighlight margin />
-      <NewsWrapper>
+      {isFirst && <NewsHighlight margin />}
+      <NewsWrapper isFirst>
         <MediaNavitation isFirst={isFirst} isLast={isLast}>
           <Link to={prevPage}>
             <Chevron />

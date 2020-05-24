@@ -6,6 +6,7 @@ import Klok from "../assets/icons/klok.svg"
 
 const NotFoundWrapper = styled.div`
   grid-column: 2 / span 12;
+  height: 100%;
   margin-top: ${p => p.theme.space[6]}px;
   display: flex;
   flex-direction: column;

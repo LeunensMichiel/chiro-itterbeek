@@ -26,7 +26,7 @@ export const NewsBlock = ({ news }) => {
   const options = {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: node => (
-        <img src={node.data.target.fields.file["nl-BE"].url} />
+        <img src={node.data?.target?.fields?.file["nl-BE"]?.url} />
       ),
     },
   }
