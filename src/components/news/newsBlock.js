@@ -48,7 +48,14 @@ export const NewsBlock = ({ news }) => {
         />
         <div className="information__article">
           <h1 className="news__block__title">{news.title}</h1>
-          <small className="news__block__title">{news.date}</small>
+          <small className="news__block__title">
+            {new Date(news.date).toLocaleDateString("nl-BE", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </small>
           {documentToReactComponents(news.body.json, options)}
         </div>
       </InformationBlock>

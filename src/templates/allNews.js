@@ -52,7 +52,6 @@ export const newsListQuery = graphql`
         node {
           slug
           title
-          isFeatured
           gender
           id
           body {

@@ -31,7 +31,14 @@ export const NewsItem = ({ news }) => {
         </div>
       </div>
       <div className="news__item__body">
-        <small>Vrijdag 1 april om 20:00</small>
+        <small>
+          {new Date(news.date).toLocaleDateString("nl-BE", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </small>
         <h3>{news.title}</h3>
         <p>{news.excerpt.childMarkdownRemark.excerpt}</p>
         <Link to={`/nieuws/${news.slug}`}>
