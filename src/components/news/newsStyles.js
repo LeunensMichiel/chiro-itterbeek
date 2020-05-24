@@ -240,3 +240,25 @@ export const NewsItemWrapper = styled.article`
     }
   }
 `
+
+export const NewsBlockWrapper = styled.article`
+  grid-column: 3 / span 10;
+  margin-top: ${p => p.theme.space[7]}px;
+  margin-bottom: ${p => p.theme.space[6]}px;
+  h1 {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: ${p => p.theme.fontSizes[4]}px;
+    transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+  }
+
+  small {
+    display: block;
+    font-size: ${p => p.theme.fontSizes[1]}px;
+    line-height: 1;
+    text-transform: uppercase;
+    color: ${p => p.theme.colors.asideText};
+    transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+    margin-bottom: ${p => p.theme.space[5]}px;
+  }
+`

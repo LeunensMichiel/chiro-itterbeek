@@ -73,6 +73,7 @@ export const InformationBlock = styled.article`
     h3 {
       margin: 0;
       text-transform: uppercase;
+      transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
     }
     h2 {
       font-size: ${p => p.theme.fontSizes[3]}px;
@@ -84,12 +85,16 @@ export const InformationBlock = styled.article`
       margin-top: ${p => p.theme.space[1]}px;
       margin-bottom: ${p => p.theme.space[4]}px;
       white-space: pre-line;
+      transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
     }
     li p {
       margin: 0;
     }
     img {
-      max-height: 200px;
+      display: block;
+      max-width: 500px;
+      margin: 0 auto;
+      width: 100%;
     }
     a {
       color: ${p =>
@@ -101,6 +106,28 @@ export const InformationBlock = styled.article`
           p.gender === 1
             ? p.theme.colors.jokontaLight
             : p.theme.colors.allegroLight};
+      }
+    }
+  }
+
+  > a {
+    align-self: flex-start;
+    margin-bottom: ${p => p.theme.space[5]}px;
+    display: flex;
+    align-items: center;
+    color: ${p => p.theme.colors.paragraph};
+    text-decoration: underline;
+    font-size: ${p => p.theme.fontSizes[2]}px;
+    font-family: inherit;
+    line-height: 1;
+    transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+    svg {
+      margin-right: ${p => p.theme.space[1]}px;
+      transform: rotate(180deg);
+      height: 11px;
+      path {
+        fill: ${p => p.theme.colors.asideText};
+        transition: fill 0.4s cubic-bezier(0.87, 0, 0.13, 1);
       }
     }
   }

@@ -17,7 +17,7 @@ const allDocuments = ({ pageContext, data }) => {
   const isLast = currentPage === numDocumentPages
   const prevPage =
     currentPage - 1 === 1
-      ? "/media/documenten"
+      ? "/media/documenten/"
       : `/media/documenten/${currentPage - 1}`
   const nextPage = `/media/documenten/${currentPage + 1}`
 

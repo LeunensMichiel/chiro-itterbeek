@@ -1,5 +1,4 @@
 import { React } from "react"
-import { useStaticQuery, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import {
@@ -19,17 +18,6 @@ import JokontaGroep from "../assets/banners/jokonta-bg-groepen.svg"
 import AllegroGroep from "../assets/banners/allegro-bg-groepen.svg"
 
 const IndexPage = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      headlineImage: file(relativePath: { eq: "images/jongens.jpg" }) {
-        childImageSharp {
-          fluid(maxWidth: 950, quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-    }
-  `)
   return (
     <Layout>
       <Banner
@@ -37,7 +25,7 @@ const IndexPage = () => {
         allegro={<AllegroCal />}
         text={`Programma`}
       />
-      <NewsHighlight img={data.headlineImage.childImageSharp.fluid} />
+      <NewsHighlight />
       <Calendar />
       <Banner
         jokonta={<JokontaInfo />}

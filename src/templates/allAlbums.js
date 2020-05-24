@@ -16,7 +16,9 @@ const allAlbums = ({ pageContext, data }) => {
   const isFirst = currentPage === 1
   const isLast = currentPage === numAlbumPages
   const prevPage =
-    currentPage - 1 === 1 ? "/media/albums" : `/media/albums/${currentPage - 1}`
+    currentPage - 1 === 1
+      ? "/media/albums/"
+      : `/media/albums/${currentPage - 1}`
   const nextPage = `/media/albums/${currentPage + 1}`
 
   return (

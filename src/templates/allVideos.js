@@ -15,7 +15,9 @@ const allVideos = ({ pageContext, data }) => {
   const isFirst = currentPage === 1
   const isLast = currentPage === numVideoPages
   const prevPage =
-    currentPage - 1 === 1 ? "/media/videos" : `/media/videos/${currentPage - 1}`
+    currentPage - 1 === 1
+      ? "/media/videos/"
+      : `/media/videos/${currentPage - 1}`
   const nextPage = `/media/videos/${currentPage + 1}`
 
   return (
@@ -65,7 +67,7 @@ const allVideos = ({ pageContext, data }) => {
 
 export default allVideos
 
-export const albumListQuery = graphql`
+export const videoListQuery = graphql`
   query allVideosQuery($skip: Int!, $limit: Int!) {
     videos: allContentfulVideo(
       sort: { fields: createdAt, order: DESC }

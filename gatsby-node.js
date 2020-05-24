@@ -1,10 +1,9 @@
 const path = require("path")
-const { createFilePath } = require("gatsby-source-filesystem")
 
 const today = new Date()
 const firstDay = new Date(today.getFullYear(), today.getMonth(), 1)
 
-exports.createSchemaCustomization = ({ actions, schema, getNode }) => {
+exports.createSchemaCustomization = ({ actions, schema }) => {
   actions.createTypes([
     schema.buildObjectType({
       name: "ContentfulKalenderItem",
@@ -41,10 +40,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         albums: allContentfulAlbum(sort: { fields: date, order: DESC }) {
           edges {
             node {
-              title
-              url
               id
-              gender
               date
             }
           }
@@ -52,9 +48,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         videos: allContentfulVideo(sort: { fields: createdAt, order: DESC }) {
           edges {
             node {
-              gender
-              url
-              title
               id
             }
           }
@@ -62,22 +55,23 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         boekjes: allContentfulBoekje(sort: { fields: enddate, order: DESC }) {
           edges {
             node {
-              gender
-              title
-              url
               enddate
               id
-              startdate
             }
           }
         }
         documents: allContentfulDocument(sort: { fields: title }) {
           edges {
             node {
-              gender
               title
-              url
-              createdAt
+            }
+          }
+        }
+        news: allContentfulBericht(sort: { fields: date, order: DESC }) {
+          edges {
+            node {
+              slug
+              id
             }
           }
         }
@@ -92,6 +86,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const albumsPerPage = 15
   const videosPerPage = 4
+  const newsPerPage = 9
   const numAlbumPages = Math.ceil(
     result.data.albums.edges.length / albumsPerPage
   )
@@ -104,10 +99,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const numVideoPages = Math.ceil(
     result.data.videos.edges.length / videosPerPage
   )
+  const numNewsPages = Math.ceil(result.data.news.edges.length / newsPerPage)
 
   Array.from({ length: numAlbumPages }).forEach((_, i) => {
     createPage({
-      path: i === 0 ? `/media/albums` : `/media/albums/${i + 1}`,
+      path: i === 0 ? `/media/albums/` : `/media/albums/${i + 1}`,
       component: path.resolve("./src/templates/allAlbums.js"),
       context: {
         limit: albumsPerPage,
@@ -119,7 +115,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   })
   Array.from({ length: numBoekjePages }).forEach((_, i) => {
     createPage({
-      path: i === 0 ? `/media/krantjes` : `/media/krantjes/${i + 1}`,
+      path: i === 0 ? `/media/krantjes/` : `/media/krantjes/${i + 1}`,
       component: path.resolve("./src/templates/allBoekjes.js"),
       context: {
         limit: albumsPerPage,
@@ -131,7 +127,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   })
   Array.from({ length: numDocumentPages }).forEach((_, i) => {
     createPage({
-      path: i === 0 ? `/media/documenten` : `/media/documenten/${i + 1}`,
+      path: i === 0 ? `/media/documenten/` : `/media/documenten/${i + 1}`,
       component: path.resolve("./src/templates/allDocuments.js"),
       context: {
         limit: albumsPerPage,
@@ -143,13 +139,36 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   })
   Array.from({ length: numVideoPages }).forEach((_, i) => {
     createPage({
-      path: i === 0 ? `/media/videos` : `/media/videos/${i + 1}`,
+      path: i === 0 ? `/media/videos/` : `/media/videos/${i + 1}`,
       component: path.resolve("./src/templates/allVideos.js"),
       context: {
         limit: videosPerPage,
         skip: i * videosPerPage,
         numVideoPages,
         currentPage: i + 1,
+      },
+    })
+  })
+  Array.from({ length: numNewsPages }).forEach((_, i) => {
+    createPage({
+      path: i === 0 ? `/nieuws/` : `/nieuws/${i + 1}`,
+      component: path.resolve("./src/templates/allNews.js"),
+      context: {
+        limit: newsPerPage,
+        skip: i * newsPerPage,
+        numNewsPages,
+        currentPage: i + 1,
+      },
+    })
+  })
+
+  //create single nieuws-page
+  result.data.news.edges.forEach(({ node }) => {
+    createPage({
+      path: `/nieuws/${node.slug}`,
+      component: path.resolve(`./src/templates/newsPost.js`),
+      context: {
+        slug: node.slug,
       },
     })
   })
