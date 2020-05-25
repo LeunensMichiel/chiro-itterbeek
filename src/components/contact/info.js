@@ -49,7 +49,7 @@ export const ContactInfo = () => {
       </div>
       <h3>Hoofdleiding</h3>
       {filteredInfo.map(block => (
-        <div className="contact__info__sectionItem">
+        <div key={block.node.id} className="contact__info__sectionItem">
           <p>{block.node.fullName}</p>
           {block.node.vb && <p>(volwassen begeleider)</p>}
           <p>{block.node.email}</p>

@@ -1,8 +1,12 @@
-import React, { useReducer, createContext } from "react"
+import React, { useReducer, createContext, useEffect } from "react"
 
 function reducer(genderState, action) {
   switch (action.type) {
     case "TOGGLE_GENDER":
+      localStorage.setItem(
+        "chiro-itterbeek-gender",
+        genderState.gender === 1 ? 2 : 1
+      )
       return {
         ...genderState,
         gender: genderState.gender === 1 ? 2 : 1,
@@ -22,14 +26,33 @@ function reducer(genderState, action) {
   }
 }
 
-const initialGenderState = {
-  gender: 1,
-}
+// const initialGenderState = {
+//   gender: 1,
+// }
 
-export const GenderContext = createContext(initialGenderState)
+export const GenderContext = createContext()
 
 const GenderProvider = ({ children }) => {
-  const [genderState, dispatch] = useReducer(reducer, initialGenderState)
+  let gender = () => {
+    if (typeof window !== `undefined`) {
+      const gender = Number(
+        window.localStorage.getItem("chiro-itterbeek-gender") || 1
+      )
+      return { gender }
+    }
+    // if window is undefined (during the build or when a refresh occurs)
+    else {
+      return 1
+    }
+  }
+  const [genderState, dispatch] = useReducer(reducer, { gender: 1 }, gender)
+
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     window.localStorage.setItem("chiro-itterbeek-gender", genderState.gender)
+  //   }
+  // }, [genderState.gender])
+
   return (
     <GenderContext.Provider value={{ genderState, dispatch }}>
       {children}
