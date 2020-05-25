@@ -12,11 +12,13 @@ function reducer(genderState, action) {
         gender: genderState.gender === 1 ? 2 : 1,
       }
     case "TOGGLE_MALE":
+      localStorage.setItem("chiro-itterbeek-gender", 1)
       return {
         ...genderState,
         gender: 1,
       }
     case "TOGGLE_FEMALE":
+      localStorage.setItem("chiro-itterbeek-gender", 2)
       return {
         ...genderState,
         gender: 2,
@@ -25,10 +27,6 @@ function reducer(genderState, action) {
       throw new Error("Bad Action Type")
   }
 }
-
-// const initialGenderState = {
-//   gender: 1,
-// }
 
 export const GenderContext = createContext()
 
@@ -39,19 +37,11 @@ const GenderProvider = ({ children }) => {
         window.localStorage.getItem("chiro-itterbeek-gender") || 1
       )
       return { gender }
-    }
-    // if window is undefined (during the build or when a refresh occurs)
-    else {
+    } else {
       return 1
     }
   }
   const [genderState, dispatch] = useReducer(reducer, { gender: 1 }, gender)
-
-  // useEffect(() => {
-  //   if (typeof window !== "undefined") {
-  //     window.localStorage.setItem("chiro-itterbeek-gender", genderState.gender)
-  //   }
-  // }, [genderState.gender])
 
   return (
     <GenderContext.Provider value={{ genderState, dispatch }}>
