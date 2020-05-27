@@ -11,7 +11,9 @@ export const FormWrapper = styled.section`
   background-color: ${p => p.theme.colors.backgroundMuted2};
   transition: border 0.4s cubic-bezier(0.87, 0, 0.13, 1),
     background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
-
+  @media ${p => p.theme.mq.tablet} {
+    margin-top: ${p => p.theme.space[6]}px;
+  }
   h1 {
     margin: 0;
     align-self: flex-start;
@@ -61,6 +63,11 @@ export const ItterbeekForm = styled.form`
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(4, auto);
   margin: ${p => p.theme.space[7]}px 0;
+
+  @media ${p => p.theme.mq.tablet} {
+    margin: ${p => p.theme.space[5]}px 0;
+    grid-column-gap: 16px;
+  }
 `
 
 export const StyledInput = styled.div`
@@ -92,6 +99,10 @@ export const StyledInput = styled.div`
   textarea {
     height: 100%;
   }
+
+  @media ${p => p.theme.mq.tablet} {
+    grid-column: ${p => (p.textarea ? "7 / span 5" : "2 / span 5")};
+  }
 `
 
 export const MapWrapper = styled.aside`
@@ -102,6 +113,12 @@ export const MapWrapper = styled.aside`
 
   div {
     border-radius: ${p => p.theme.radii.borderRadius};
+  }
+  @media ${p => p.theme.mq.tablet} {
+    grid-column: 2 / span 6;
+    margin-left: unset;
+    border: 1px solid ${p => p.theme.colors.border};
+    border-right: none;
   }
 `
 
@@ -136,10 +153,16 @@ export const ContactInfoWrapper = styled.aside`
     margin-bottom: ${p => p.theme.space[4]}px;
     p {
       margin: 0;
+      word-wrap: break-word;
     }
     button {
       text-decoration: underline;
     }
+  }
+
+  @media ${p => p.theme.mq.tablet} {
+    grid-column: 8 / span 6;
+    margin-left: unset;
   }
 `
 

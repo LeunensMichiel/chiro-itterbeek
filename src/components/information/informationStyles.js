@@ -6,6 +6,9 @@ export const InformationWrapper = styled.section`
   flex-direction: column;
   align-items: center;
   margin-bottom: ${p => p.theme.space[6]}px;
+  @media ${p => p.theme.mq.tablet} {
+    grid-column: 2 / span 12;
+  }
 `
 
 export const InformationNavigation = styled.nav`
@@ -18,7 +21,6 @@ export const InformationNavigation = styled.nav`
   background-color: ${p => p.theme.colors.backgroundMuted};
   border-radius: ${p => p.theme.radii.borderRadius};
   transition: background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
-
   button {
     transition: color 0.2s ease;
     &:hover {
@@ -35,7 +37,6 @@ export const InformationBlock = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   .fade-enter {
     opacity: 0;
   }
@@ -68,7 +69,6 @@ export const InformationBlock = styled.article`
     box-shadow: ${p => p.theme.shadows.boxShadow.container};
     border-radius: ${p => p.theme.radii.borderRadius};
     transition: background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
-
     h2,
     h3 {
       margin: 0;
@@ -109,7 +109,6 @@ export const InformationBlock = styled.article`
       }
     }
   }
-
   > a {
     align-self: flex-start;
     margin-bottom: ${p => p.theme.space[5]}px;
@@ -129,6 +128,16 @@ export const InformationBlock = styled.article`
         fill: ${p => p.theme.colors.asideText};
         transition: fill 0.4s cubic-bezier(0.87, 0, 0.13, 1);
       }
+    }
+  }
+
+  @media ${p => p.theme.mq.tablet} {
+    .information__article {
+      max-width: 650px;
+    }
+
+    .information__image__container {
+      height: 280px;
     }
   }
 `

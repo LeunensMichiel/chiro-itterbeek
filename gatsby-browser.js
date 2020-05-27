@@ -24,12 +24,9 @@ const GlobalStyles = css`
     padding: 0;
     width: auto;
     overflow: visible;
-
     background: transparent;
-
     color: inherit;
     font: inherit;
-
     line-height: normal;
     cursor: pointer;
     -webkit-font-smoothing: inherit;

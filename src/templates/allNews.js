@@ -65,7 +65,7 @@ export const newsListQuery = graphql`
           }
           excerpt {
             childMarkdownRemark {
-              excerpt(format: PLAIN, pruneLength: 210, truncate: true)
+              excerpt(format: PLAIN, pruneLength: 120, truncate: true)
             }
           }
         }

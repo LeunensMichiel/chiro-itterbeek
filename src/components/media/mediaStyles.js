@@ -20,7 +20,7 @@ export const HighlightedWrapper = styled.section`
       left: 0;
       top: -32px;
       max-height: 360px;
-      width: 290px;
+      width: auto;
     }
   }
   .pdftext {
@@ -63,6 +63,30 @@ export const HighlightedWrapper = styled.section`
       color: ${p => p.theme.colors.invisibleText};
     }
   }
+  @media ${p => p.theme.mq.tablet} {
+    height: 280px;
+    margin-bottom: ${p => p.theme.space[5]}px;
+
+    .boekje {
+      svg {
+        top: -32px;
+        max-width: 200px;
+      }
+    }
+    .pdftext {
+      h2 {
+        font-size: ${p => p.theme.fontSizes[5]}px;
+        margin-bottom: ${p => p.theme.space[2]}px;
+      }
+      p {
+        font-size: ${p => p.theme.fontSizes[1]}px;
+        margin-bottom: ${p => p.theme.space[3]}px;
+      }
+      a {
+        margin-bottom: ${p => p.theme.space[2]}px;
+      }
+    }
+  }
 `
 
 export const MoreMedia = styled.nav`
@@ -81,7 +105,7 @@ export const MoreMedia = styled.nav`
     align-self: flex-start;
     display: block;
     color: ${p => p.theme.colors.styledHeaderText};
-    padding: ${p => p.theme.space[3]}px ${p => p.theme.space[4]}px;
+    padding: ${p => p.theme.space[3]}px ${p => p.theme.space[5]}px;
     margin-top: 0;
     margin-bottom: ${p => p.theme.space[4]}px;
     background: ${p =>
@@ -118,6 +142,21 @@ export const MoreMedia = styled.nav`
       font-size: ${p => p.theme.fontSizes[0]}px;
       color: ${p => p.theme.colors.invisibleText};
       transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+    }
+  }
+
+  @media ${p => p.theme.mq.tablet} {
+    grid-column: 2 / span 4;
+    margin-right: 16px;
+    height: 280px;
+    margin-bottom: ${p => p.theme.space[5]}px;
+    h2 {
+      margin-bottom: ${p => p.theme.space[2]}px;
+    }
+    .media__links {
+      small {
+        font-size: 10px;
+      }
     }
   }
 `
@@ -173,6 +212,9 @@ export const TopVideoWrapper = styled.section`
       }
     }
   }
+  @media ${p => p.theme.mq.tablet} {
+    margin-bottom: ${p => p.theme.space[5]}px;
+  }
 `
 
 export const TopAlbumWrapper = styled.section`
@@ -212,6 +254,9 @@ export const TopAlbumWrapper = styled.section`
       }
     }
   }
+  @media ${p => p.theme.mq.tablet} {
+    margin-bottom: ${p => p.theme.space[6]}px;
+  }
 `
 
 export const AlbumItem = styled.div`
@@ -221,6 +266,9 @@ export const AlbumItem = styled.div`
   background-color: ${p => p.theme.colors.backgroundMuted2};
   transition: border 0.4s cubic-bezier(0.87, 0, 0.13, 1),
     background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   small {
     display: block;
     font-size: ${p => p.theme.fontSizes[0]}px;
@@ -249,6 +297,9 @@ export const AlbumItem = styled.div`
   }
   .album__body {
     padding: ${p => p.theme.space[3]}px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
     .album__title {
       margin-bottom: ${p => p.theme.space[3]}px;
       font-size: ${p => p.theme.fontSizes[2]}px;
@@ -258,6 +309,7 @@ export const AlbumItem = styled.div`
       transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
     }
     a {
+      margin-top: auto;
       margin-bottom: ${p => p.theme.space[3]}px;
       display: flex;
       align-items: center;
@@ -275,6 +327,16 @@ export const AlbumItem = styled.div`
           fill: ${p => p.theme.colors.asideText};
           transition: fill 0.4s cubic-bezier(0.87, 0, 0.13, 1);
         }
+      }
+    }
+  }
+  @media ${p => p.theme.mq.tablet} {
+    .album__header {
+      margin-bottom: ${p => p.theme.space[0]}px;
+    }
+    .album__body {
+      a {
+        margin-bottom: ${p => p.theme.space[2]}px;
       }
     }
   }

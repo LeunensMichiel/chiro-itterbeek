@@ -8,12 +8,13 @@ export const ChooseChiro = styled.div`
   align-items: center;
   justify-content: flex-end;
   position: relative;
-  padding-top: ${p => (p.jokonta ? p.theme.space[8] : p.theme.space[0])}px;
+  margin-top: ${p => (p.jokonta ? p.theme.space[4] : -p.theme.space[4])}px;
   height: 100%;
   width: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
   cursor: pointer;
-  &:hover {
+  &:hover,
+  &:focus {
     svg:nth-of-type(1) {
       display: none;
     }
@@ -26,11 +27,10 @@ export const ChooseChiro = styled.div`
       transition: color 0.3s ease;
     }
   }
-
   svg {
     display: block;
     height: 550px;
-    width: 320px;
+    width: 330px;
     [data-name="shadow"] {
       fill: ${p => p.theme.colors.backgroundMuted};
       transition: fill 0.4s cubic-bezier(0.87, 0, 0.13, 1);
@@ -55,5 +55,24 @@ export const ChooseChiro = styled.div`
     font-size: ${p => p.theme.fontSizes[5]}px;
     display: block;
     transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+  }
+
+  @media ${p => p.theme.mq.tablet} {
+    min-height: 100%;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: ${p => (p.jokonta ? "flex-end" : "flex-start")};
+    svg {
+      height: 400px;
+      width: unset;
+    }
+    h2 {
+      margin-top: ${p => p.theme.space[4]}px;
+      margin-left: ${p => (p.jokonta ? p.theme.space[0] : p.theme.space[6])}px;
+      margin-right: ${p => (p.jokonta ? p.theme.space[6] : p.theme.space[0])}px;
+    }
+    h1 {
+      font-size: 72px;
+    }
   }
 `

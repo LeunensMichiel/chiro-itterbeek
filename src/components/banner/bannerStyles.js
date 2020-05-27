@@ -3,6 +3,7 @@ import styled from "@emotion/styled"
 export const BannerWrapper = styled.div`
   grid-column: 1 / span 14;
   display: flex;
+  justify-content: center;
   margin-bottom: ${p => p.theme.space[7]}px;
   position: relative;
   overflow: hidden;
@@ -35,6 +36,13 @@ export const BannerWrapper = styled.div`
   .fade-enter-active,
   .fade-exit-active {
     transition: opacity 0.2s cubic-bezier(0.87, 0, 0.13, 1);
+  }
+
+  @media ${p => p.theme.mq.tablet} {
+    margin-bottom: ${p => p.theme.space[6]}px;
+    svg {
+      min-width: 130%;
+    }
   }
 `
 
@@ -81,5 +89,12 @@ export const ContactWrapper = styled.section`
     font-weight: 700;
     text-transform: uppercase;
     transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+  }
+
+  @media ${p => p.theme.mq.tablet} {
+    margin-bottom: ${p => p.theme.space[6]}px;
+    h1 {
+      font-size: ${p => p.theme.fontSizes[5]}px;
+    }
   }
 `

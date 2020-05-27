@@ -6,12 +6,16 @@ export const GroupWrapper = styled.section`
   flex-direction: column;
   align-items: center;
   margin-bottom: ${p => p.theme.space[8]}px;
+
+  @media ${p => p.theme.mq.tablet} {
+    grid-column: 2 / span 12;
+  }
 `
 
 export const GroupNavigation = styled.nav`
   width: 100%;
   max-width: 570px;
-  padding: ${p => p.theme.space[5]}px;
+  padding: ${p => p.theme.space[4]}px;
   margin-bottom: ${p => p.theme.space[6]}px;
   display: flex;
   justify-content: space-evenly;
@@ -22,12 +26,13 @@ export const GroupNavigation = styled.nav`
 
 export const GroupNavigationItem = styled.button`
   background: ${p => p.color};
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
-  border: ${p => (p.isActive ? "4px" : "0px")} solid
-    ${p => p.theme.colors.accentGray};
-  transition: border-width 0.2s cubic-bezier(0.87, 0, 0.13, 1),
+  border: 4px solid
+    ${p =>
+      p.isActive ? p.theme.colors.accentGray : p.theme.colors.backgroundMuted};
+  transition: border-color 0.2s cubic-bezier(0.87, 0, 0.13, 1),
     background 0.2s cubic-bezier(0.87, 0, 0.13, 1);
 `
 
@@ -85,9 +90,9 @@ export const Group = styled.div`
 
     .group__leiding__grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, 72px);
+      grid-template-columns: repeat(3, 1fr);
       grid-auto-rows: auto;
-      grid-column-gap: ${p => p.theme.space[1]}px;
+      grid-column-gap: ${p => p.theme.space[2]}px;
       grid-row-gap: ${p => p.theme.space[2]}px;
     }
   }
@@ -112,13 +117,15 @@ export const Group = styled.div`
 
     .group__leiding__items {
       display: flex;
-      justify-content: space-evenly;
+      justify-content: center;
+      flex-wrap: wrap;
       height: 100%;
       padding: ${p => p.theme.space[4]}px ${p => p.theme.space[4]}px;
     }
     &.group__leiding__about {
       padding: ${p => p.theme.space[4]}px;
       flex-direction: row;
+      align-items: center;
       .group__leiding__about__image {
         border-radius: 50%;
         width: 150px;
@@ -131,7 +138,7 @@ export const Group = styled.div`
 
         h3 {
           margin: 0;
-          margin-bottom: ${p => p.theme.space[2]}px;
+          margin-bottom: ${p => p.theme.space[3]}px;
           font-size: ${p => p.theme.fontSizes[3]}px;
           line-height: 1.2;
           text-transform: uppercase;
@@ -149,6 +156,9 @@ export const Group = styled.div`
       }
     }
   }
+
+  @media ${p => p.theme.mq.tablet} {
+  }
 `
 
 export const LeidingItem = styled.div`
@@ -156,8 +166,8 @@ export const LeidingItem = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
-  width: ${p => (p.small ? "72px" : "120px")};
-  height: ${p => (p.small ? "72px" : "120px")};
+  width: ${p => (p.small ? "100%" : "120px")};
+  height: ${p => (p.small ? "100%" : "120px")};
   grid-column: span 1;
   .group__leiding__title {
     color: ${p => p.theme.colors.styledHeaderText};

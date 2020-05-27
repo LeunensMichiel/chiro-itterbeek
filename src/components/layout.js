@@ -13,6 +13,7 @@ const mainCss = css`
       16px,
       1fr
     );
+  flex-grow: 1;
   padding-top: 100px;
 `
 

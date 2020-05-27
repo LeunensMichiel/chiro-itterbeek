@@ -34,6 +34,12 @@ export const NavWrapper = styled.header`
     }
   }
   z-index: 100;
+
+  @media ${p => p.theme.mq.tablet} {
+    a {
+      font-size: ${p => p.theme.fontSizes[2]}px;
+    }
+  }
 `
 
 export const ItterbeekWrapper = styled.div`
@@ -129,5 +135,11 @@ export const SocialWrapper = styled.nav`
     background-color: ${p => p.theme.colors.backgroundMuted};
     border-radius: ${p => p.theme.radii.borderRadius};
     transition: background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+  }
+
+  @media ${p => p.theme.mq.tablet} {
+    svg {
+      height: 32px;
+    }
   }
 `

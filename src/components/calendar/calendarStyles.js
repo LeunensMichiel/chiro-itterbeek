@@ -6,6 +6,10 @@ export const CalendarWrapper = styled.section`
   flex-direction: column;
   align-items: center;
   margin-bottom: ${p => p.theme.space[8]}px;
+
+  @media ${p => p.theme.mq.tablet} {
+    grid-column: 2 / span 12;
+  }
 `
 
 export const CalendarNavigationWrapper = styled.nav`
@@ -62,12 +66,10 @@ export const CalendarNavigationWrapper = styled.nav`
 
 export const CalendarItemWrapper = styled.article`
   width: 100%;
-  max-height: calc(${props => props.maxHeight} + 172px);
   display: flex;
   border-radius: ${p => p.theme.radii.borderRadius};
   border: 1px solid ${p => p.theme.colors.border};
-  transition: border 0.4s cubic-bezier(0.87, 0, 0.13, 1),
-    max-height 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+  transition: border 0.4s cubic-bezier(0.87, 0, 0.13, 1);
   &:not(:last-of-type) {
     margin-bottom: ${p => p.theme.space[2]}px;
   }
@@ -117,6 +119,14 @@ export const CalendarItemHeader = styled.div`
         p.gender === 1 ? p.theme.colors.jokonta : p.theme.colors.allegro};
     }
   }
+  @media ${p => p.theme.mq.tablet} {
+    min-width: 200px;
+    span {
+      &:nth-of-type(1) {
+        font-size: 72px;
+      }
+    }
+  }
 `
 
 export const CalendarItemBody = styled.div`
@@ -147,7 +157,7 @@ export const CalendarItemBody = styled.div`
       overflow: hidden;
       transition: max-height 0.4s cubic-bezier(0.87, 0, 0.13, 1),
         color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
-      max-height: calc(${props => props.maxHeight});
+      max-height: ${props => props.maxHeight};
     }
   }
   button {
