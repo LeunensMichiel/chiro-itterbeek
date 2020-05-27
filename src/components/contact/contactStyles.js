@@ -145,13 +145,12 @@ export const ContactInfoWrapper = styled.aside`
 
 export const SocialWrapper = styled.nav`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-self: end;
-  a {
+  > a,
+  button {
+    display: block;
     cursor: pointer;
-    &:not(:nth-of-type(1)) {
-      margin-left: ${p => p.theme.space[2]}px;
-    }
     &:hover {
       svg {
         circle {
@@ -172,6 +171,59 @@ export const SocialWrapper = styled.nav`
     circle {
       transition: fill 0.3s ease-out;
       fill: ${p => p.theme.colors.border};
+    }
+  }
+  > a:not(:nth-of-type(1)) {
+    margin-left: ${p => p.theme.space[2]}px;
+  }
+  button {
+    margin-left: ${p => p.theme.space[2]}px;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    &:focus {
+      svg {
+        circle {
+          fill: ${p => p.theme.colors.invisibleText};
+        }
+        path {
+          fill: ${p => p.theme.colors.styledHeaderText};
+        }
+      }
+      .links__other {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+  .links__other {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    position: absolute;
+    bottom: ${p => p.theme.space[6]}px;
+    background-color: ${p => p.theme.colors.backgroundMuted};
+    padding: ${p => p.theme.space[4]}px;
+    opacity: 0;
+    visibility: hidden;
+    border-radius: ${p => p.theme.radii.borderRadius};
+    transition: opacity 0.2s cubic-bezier(0.87, 0, 0.13, 1);
+    z-index: 10;
+
+    a {
+      white-space: nowrap;
+      font-weight: 700;
+      transition: color 0.3s ease;
+      color: ${p => p.theme.colors.asideText};
+      padding: ${p => p.theme.space[1]}px;
+      :hover {
+        color: ${p =>
+          p.gender === 1
+            ? p.theme.colors.jokonta
+            : p.gender === 2
+            ? p.theme.colors.allegro
+            : p.theme.colors.accent};
+      }
     }
   }
 `

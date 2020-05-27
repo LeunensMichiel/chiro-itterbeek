@@ -88,23 +88,25 @@ export const SocialWrapper = styled.nav`
       }
       .links__other {
         opacity: 1;
+        visibility: visible;
       }
     }
   }
   .links__other {
+    display: flex;
+    flex-direction: column;
     position: absolute;
-    bottom: 50px;
-    width: 220px;
+    bottom: ${p => p.theme.space[6]}px;
     background-color: ${p => p.theme.colors.backgroundMuted};
     padding: ${p => p.theme.space[4]}px;
     opacity: 0;
-    overflow: hidden;
+    visibility: hidden;
     border-radius: ${p => p.theme.radii.borderRadius};
     transition: opacity 0.2s cubic-bezier(0.87, 0, 0.13, 1);
-    display: flex;
-    flex-direction: column;
+    z-index: 10;
 
     a {
+      white-space: nowrap;
       font-weight: 700;
       transition: color 0.3s ease;
       color: ${p => p.theme.colors.asideText};

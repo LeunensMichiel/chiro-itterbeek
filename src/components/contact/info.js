@@ -73,7 +73,7 @@ export const ContactInfo = () => {
         </p>
       </div>
       <h3>Nuttige Links</h3>
-      <SocialWrapper>
+      <SocialWrapper gender={genderState.gender}>
         <a
           href="https://www.facebook.com/ChiroItterbeek"
           target="_blank"
@@ -90,9 +90,39 @@ export const ContactInfo = () => {
         >
           <Instagram />
         </a>
-        <a>
+        <button>
+          <div className="links__other">
+            <a
+              href="https://chiro.be/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Chiro Nationaal
+            </a>
+            <a
+              href="https://www.debanier.be/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              De Banier
+            </a>
+            <a
+              href="https://jongeren.jind.be/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              JIND
+            </a>
+            <a
+              href="https://www.dilbeek.be/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Gemeente Dilbeek
+            </a>
+          </div>
           <LinkLogo />
-        </a>
+        </button>
       </SocialWrapper>
     </ContactInfoWrapper>
   )
