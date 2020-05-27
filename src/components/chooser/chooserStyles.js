@@ -6,9 +6,12 @@ export const ChooseChiro = styled.div`
   display: flex;
   flex-direction: ${p => (p.jokonta ? "row" : "row-reverse")};
   align-items: center;
+  justify-content: flex-end;
   position: relative;
   padding-top: ${p => (p.jokonta ? p.theme.space[8] : p.theme.space[0])}px;
   height: 100%;
+  width: 100%;
+  overflow-x: hidden;
   cursor: pointer;
   &:hover {
     svg:nth-of-type(1) {
@@ -27,7 +30,7 @@ export const ChooseChiro = styled.div`
   svg {
     display: block;
     height: 550px;
-    width: 100%;
+    width: 320px;
     [data-name="shadow"] {
       fill: ${p => p.theme.colors.backgroundMuted};
       transition: fill 0.4s cubic-bezier(0.87, 0, 0.13, 1);

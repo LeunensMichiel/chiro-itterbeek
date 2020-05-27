@@ -34,7 +34,7 @@ const GenderProvider = ({ children }) => {
   let gender = () => {
     if (typeof window !== `undefined`) {
       const gender = Number(
-        window.localStorage.getItem("chiro-itterbeek-gender") || 1
+        window.localStorage.getItem("chiro-itterbeek-gender") || 0
       )
       return { gender }
     } else {

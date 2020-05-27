@@ -52,6 +52,7 @@ export const LinkWrapper = styled.nav`
   grid-column: 6 / span 4;
   justify-self: center;
   display: flex;
+  visibility: ${p => (p.gender === 0 ? "hidden" : "visible")};
   align-items: center;
   a {
     padding: ${p => p.theme.space[2]}px 12px;
@@ -67,6 +68,9 @@ export const SocialWrapper = styled.nav`
     cursor: pointer;
     &:not(:nth-of-type(odd)) {
       margin-left: ${p => p.theme.space[2]}px;
+    }
+    &:first-of-type {
+      visibility: ${p => (p.gender === 0 ? "hidden" : "visible")};
     }
     &:hover {
       svg {

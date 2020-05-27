@@ -37,7 +37,7 @@ export const Navbar = () => {
           <span>Chiro Itterbeek</span>
         </Link>
       </ItterbeekWrapper>
-      <LinkWrapper>
+      <LinkWrapper gender={genderState.gender}>
         <Link
           sx={{
             variant: "text.navHeading",

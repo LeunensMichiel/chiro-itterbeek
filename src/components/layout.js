@@ -1,8 +1,10 @@
-import React from "react"
+import React, { useContext } from "react"
 import PropTypes from "prop-types"
 import { css, Global } from "@emotion/core"
+import { GenderContext } from "../context/GenderContext"
 
 import { Navbar, Footer } from "../components"
+import { ChoosePage } from "./chooser/choosePage"
 const mainCss = css`
   width: 100%;
   min-height: 100%;
@@ -15,6 +17,8 @@ const mainCss = css`
 `
 
 const Layout = ({ children }) => {
+  const { genderState } = useContext(GenderContext)
+
   return (
     <>
       <Global
@@ -25,7 +29,9 @@ const Layout = ({ children }) => {
         })}
       />
       <Navbar />
-      <main css={mainCss}>{children}</main>
+      <main css={mainCss}>
+        {genderState.gender === 0 ? <ChoosePage /> : children}
+      </main>
       <Footer />
     </>
   )

@@ -1,4 +1,4 @@
-import { React } from "react"
+import React from "react"
 
 import Layout from "../components/layout"
 import {
@@ -8,7 +8,6 @@ import {
   Groups,
   ContactBanner,
   NewsHighlight,
-  ChoosePage,
 } from "../components"
 
 import JokontaCal from "../assets/banners/jokonta-bg-kalender.svg"
@@ -21,8 +20,7 @@ import AllegroGroep from "../assets/banners/allegro-bg-groepen.svg"
 const IndexPage = () => {
   return (
     <Layout>
-      <ChoosePage />
-      {/* <Banner
+      <Banner
         jokonta={<JokontaCal />}
         allegro={<AllegroCal />}
         text={`Programma`}
@@ -41,7 +39,7 @@ const IndexPage = () => {
         text={`Leeftijdsgroepen`}
       />
       <Groups />
-      <ContactBanner /> */}
+      <ContactBanner />
     </Layout>
   )
 }
