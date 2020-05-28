@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import PropTypes from "prop-types"
 import { css, Global } from "@emotion/core"
 import { GenderContext } from "../context/GenderContext"
@@ -15,11 +15,25 @@ const mainCss = css`
     );
   flex-grow: 1;
   padding-top: 100px;
-`
+  overflow-x: hidden;
 
+  @media (max-width: 767px) {
+    padding-top: 72px;
+  }
+`
+const IsIE = () => {
+  if (typeof window !== `undefined`) {
+    return window.navigator.userAgent.match(/(MSIE|Trident)/)
+  }
+}
 const Layout = ({ children }) => {
   const { genderState } = useContext(GenderContext)
-
+  const [sideDrawerOpen, setSideDrawerOpen] = useState(false)
+  if (IsIE()) {
+    alert(
+      "Internet Explorer is oud en wordt niet meer ondersteund. De site zal hier niet goed op draaien. Gelieve een moderne browser te downloaden zoals Google Chrome of Firefox"
+    )
+  }
   return (
     <>
       <Global
@@ -29,8 +43,14 @@ const Layout = ({ children }) => {
           },
         })}
       />
-      <Navbar />
-      <main css={mainCss}>
+      <Navbar
+        show={sideDrawerOpen}
+        hamburgerClickHandler={() => {
+          setSideDrawerOpen(!sideDrawerOpen)
+          document.getElementById("hamburger").classList.toggle("is-active")
+        }}
+      />
+      <main css={mainCss} aria-hidden={sideDrawerOpen}>
         {genderState.gender === 0 ? <ChoosePage /> : children}
       </main>
       <Footer />
