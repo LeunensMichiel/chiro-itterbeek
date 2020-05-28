@@ -9,6 +9,7 @@ export const GroupWrapper = styled.section`
 
   @media ${p => p.theme.mq.tablet} {
     grid-column: 2 / span 12;
+    margin-bottom: ${p => p.theme.space[7]}px;
   }
 `
 
@@ -22,6 +23,12 @@ export const GroupNavigation = styled.nav`
   background-color: ${p => p.theme.colors.backgroundMuted};
   border-radius: ${p => p.theme.radii.borderRadius};
   transition: background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+
+  @media ${p => p.theme.mq.mobileM} {
+    margin-bottom: ${p => p.theme.space[4]}px;
+    padding: ${p => p.theme.space[4]}px ${p => p.theme.space[2]}px;
+    flex-wrap: wrap;
+  }
 `
 
 export const GroupNavigationItem = styled.button`
@@ -34,6 +41,10 @@ export const GroupNavigationItem = styled.button`
       p.isActive ? p.theme.colors.accentGray : p.theme.colors.backgroundMuted};
   transition: border-color 0.2s cubic-bezier(0.87, 0, 0.13, 1),
     background 0.2s cubic-bezier(0.87, 0, 0.13, 1);
+  @media ${p => p.theme.mq.mobileM} {
+    width: 38px;
+    height: 38px;
+  }
 `
 
 export const Group = styled.div`
@@ -156,8 +167,29 @@ export const Group = styled.div`
       }
     }
   }
+  @media ${p => p.theme.mq.mobileM} {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
 
-  @media ${p => p.theme.mq.tablet} {
+    .group__image {
+      min-height: 200px;
+      max-height: 200px;
+    }
+    .group__description {
+      padding: ${p => p.theme.space[4]}px;
+    }
+    .group__leiding {
+      min-height: auto;
+
+      &.group__leiding__about {
+        flex-direction: column;
+        .group__leiding__about__image {
+          margin-bottom: ${p => p.theme.space[3]}px;
+        }
+      }
+    }
   }
 `
 

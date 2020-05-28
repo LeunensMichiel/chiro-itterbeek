@@ -38,6 +38,12 @@ export const HighlightWrapper = styled.section`
     grid-column: 2 / span 12;
     margin-bottom: ${p => p.theme.space[6]}px;
   }
+  @media ${p => p.theme.mq.mobileM} {
+    h2 {
+      padding: ${p => p.theme.space[2]}px ${p => p.theme.space[3]}px;
+      font-size: ${p => p.theme.fontSizes[1]}px;
+    }
+  }
 `
 
 export const HighlightItem = styled.div`
@@ -107,6 +113,18 @@ export const HighlightItem = styled.div`
   @media ${p => p.theme.mq.tablet} {
     .headline__image {
       height: 280px;
+    }
+  }
+
+  @media ${p => p.theme.mq.mobileM} {
+    .headline__image {
+      height: 200px;
+    }
+    .headline__text {
+      padding: ${p => p.theme.space[4]}px;
+      h3 {
+        font-size: ${p => p.theme.fontSizes[2]}px;
+      }
     }
   }
 `

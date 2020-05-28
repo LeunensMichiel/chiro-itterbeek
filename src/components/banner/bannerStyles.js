@@ -44,6 +44,14 @@ export const BannerWrapper = styled.div`
       min-width: 130%;
     }
   }
+  @media ${p => p.theme.mq.mobileM} {
+    h1 {
+      font-size: ${p => p.theme.fontSizes[5]}px;
+    }
+    svg {
+      min-width: 250%;
+    }
+  }
 `
 
 export const BannerOverlay = styled.div`
@@ -53,6 +61,10 @@ export const BannerOverlay = styled.div`
   z-index: 1;
   bottom: 0;
   background: rgba(24, 24, 25, 0.33);
+
+  @media ${p => p.theme.mq.mobileM} {
+    height: ${p => (p.isDark ? "100%" : "70px")} !important;
+  }
 `
 
 export const ContactWrapper = styled.section`
@@ -95,6 +107,13 @@ export const ContactWrapper = styled.section`
     margin-bottom: ${p => p.theme.space[6]}px;
     h1 {
       font-size: ${p => p.theme.fontSizes[5]}px;
+    }
+  }
+  @media ${p => p.theme.mq.tablet} {
+    padding: ${p => p.theme.space[6]}px ${p => p.theme.space[4]}px;
+    p {
+      font-size: 16px;
+      margin-bottom: ${p => p.theme.space[4]}px;
     }
   }
 `

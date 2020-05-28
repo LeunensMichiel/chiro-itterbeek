@@ -26,19 +26,19 @@ const IndexPage = () => {
         text={`Programma`}
       />
       <NewsHighlight />
-      {/* <Calendar /> */}
+      <Calendar />
       <Banner
         jokonta={<JokontaInfo />}
         allegro={<AllegroInfo />}
         text={`Informatie`}
       />
-      {/* <Information /> */}
+      <Information />
       <Banner
         jokonta={<JokontaGroep />}
         allegro={<AllegroGroep />}
         text={`Leeftijdsgroepen`}
       />
-      {/* <Groups /> */}
+      <Groups />
       <ContactBanner />
     </Layout>
   )

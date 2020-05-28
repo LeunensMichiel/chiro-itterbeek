@@ -25,6 +25,12 @@ export const FooterWrapper = styled.footer`
       }
     }
   }
+  @media ${p => p.theme.mq.mobileM} {
+    .flex {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
 `
 
 export const ItterbeekWrapper = styled.div`
@@ -121,12 +127,14 @@ export const SocialWrapper = styled.nav`
       }
     }
   }
+  @media ${p => p.theme.mq.mobileM} {
+    margin: ${p => p.theme.space[2]}px 0;
+  }
 `
 
 export const FooterText = styled.p`
   width: 100%;
   text-align: center;
-
   a {
     text-decoration: underline;
     transition: color 0.3s ease;
@@ -134,5 +142,9 @@ export const FooterText = styled.p`
     :hover {
       color: ${p => p.theme.colors.asideText};
     }
+  }
+  @media ${p => p.theme.mq.mobileM} {
+    width: 90%;
+    line-height: 1.2;
   }
 `

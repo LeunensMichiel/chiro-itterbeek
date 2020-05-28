@@ -8,6 +8,7 @@ export const InformationWrapper = styled.section`
   margin-bottom: ${p => p.theme.space[6]}px;
   @media ${p => p.theme.mq.tablet} {
     grid-column: 2 / span 12;
+    margin-bottom: ${p => p.theme.space[4]}px;
   }
 `
 
@@ -28,6 +29,18 @@ export const InformationNavigation = styled.nav`
         p.gender === 1
           ? p.theme.colors.jokontaLight
           : p.theme.colors.allegroLight};
+    }
+  }
+  @media ${p => p.theme.mq.mobileM} {
+    margin-bottom: ${p => p.theme.space[4]}px;
+    padding: ${p => p.theme.space[5]}px ${p => p.theme.space[2]}px;
+    button {
+      font-size: ${p => p.theme.fontSizes[2]}px;
+    }
+  }
+  @media ${p => p.theme.mq.mobileS} {
+    button {
+      font-size: ${p => p.theme.fontSizes[1]}px;
     }
   }
 `
@@ -87,6 +100,11 @@ export const InformationBlock = styled.article`
       white-space: pre-line;
       transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
     }
+    i,
+    strong,
+    em {
+      word-break: break-all;
+    }
     li p {
       margin: 0;
     }
@@ -138,6 +156,27 @@ export const InformationBlock = styled.article`
 
     .information__image__container {
       height: 280px;
+    }
+  }
+
+  @media ${p => p.theme.mq.mobileM} {
+    .information__image__container {
+      height: 200px;
+    }
+    .information__article {
+      padding: ${p => p.theme.space[4]}px;
+      h2 {
+        font-size: ${p => p.theme.fontSizes[2]}px;
+      }
+      h3 {
+        font-size: 16px;
+      }
+      p {
+        font-size: 16px;
+      }
+      ul {
+        padding-left: ${p => p.theme.space[4]}px;
+      }
     }
   }
 `

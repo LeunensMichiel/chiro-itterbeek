@@ -15,6 +15,7 @@ export const NavWrapper = styled.header`
   a {
     display: flex;
     align-items: center;
+    transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
     transition: color 0.3s ease;
     &.active {
       color: ${p =>
@@ -23,6 +24,7 @@ export const NavWrapper = styled.header`
           : p.gender === 1
           ? p.theme.colors.jokonta
           : p.theme.colors.allegro};
+      transition: color 0.3s ease;
     }
     &:hover {
       color: ${p =>
@@ -31,6 +33,7 @@ export const NavWrapper = styled.header`
           : p.gender === 1
           ? p.theme.colors.jokontaLight
           : p.theme.colors.allegroLight};
+      transition: color 0.3s ease;
     }
   }
   z-index: 100;
@@ -189,12 +192,15 @@ export const SocialWrapper = styled.nav`
     }
   }
   @media ${p => p.theme.mq.mobileM} {
-    min-height: 64px;
+    min-height: 96px;
     justify-content: center;
     a {
       &:not(:nth-of-type(odd)) {
         margin-left: ${p => p.theme.space[3]}px;
       }
+    }
+    svg {
+      height: 36px;
     }
   }
 `

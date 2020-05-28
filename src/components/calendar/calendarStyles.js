@@ -9,6 +9,7 @@ export const CalendarWrapper = styled.section`
 
   @media ${p => p.theme.mq.tablet} {
     grid-column: 2 / span 12;
+    margin-bottom: ${p => p.theme.space[7]}px;
   }
 `
 
@@ -18,7 +19,7 @@ export const CalendarNavigationWrapper = styled.nav`
   align-items: center;
   width: 100%;
   max-width: 570px;
-  padding: ${p => p.theme.space[3]}px 0;
+  padding: ${p => p.theme.space[4]}px 0;
   margin-bottom: ${p => p.theme.space[6]}px;
   font-weight: 700;
   font-size: ${p => p.theme.fontSizes[1]}px;
@@ -31,7 +32,7 @@ export const CalendarNavigationWrapper = styled.nav`
   line-height: 1;
   .cal__nav__month {
     width: 200px;
-    margin: ${p => p.theme.space[2]}px ${p => p.theme.space[5]}px;
+    margin: ${p => p.theme.space[0]}px ${p => p.theme.space[5]}px;
     font-size: ${p => p.theme.fontSizes[5]}px;
     text-align: center;
     .cal__nav__year {
@@ -60,6 +61,14 @@ export const CalendarNavigationWrapper = styled.nav`
           fill: ${p => p.theme.colors.paragraph};
         }
       }
+    }
+  }
+
+  @media ${p => p.theme.mq.mobileM} {
+    margin-bottom: ${p => p.theme.space[4]}px;
+    .cal__nav__month {
+      margin: 0;
+      font-size: ${p => p.theme.fontSizes[4]}px;
     }
   }
 `
@@ -98,6 +107,10 @@ export const CalendarItemWrapper = styled.article`
     opacity: 0;
     transition: opacity 0.8s cubic-bezier(0.87, 0, 0.13, 1);
   }
+
+  @media ${p => p.theme.mq.mobileM} {
+    flex-direction: column;
+  }
 `
 export const CalendarItemHeader = styled.div`
   min-width: 260px;
@@ -124,6 +137,16 @@ export const CalendarItemHeader = styled.div`
     span {
       &:nth-of-type(1) {
         font-size: 72px;
+      }
+    }
+  }
+  @media ${p => p.theme.mq.mobileM} {
+    flex-direction: row;
+    padding: ${p => p.theme.space[2]}px;
+    span {
+      &:nth-of-type(1) {
+        margin-bottom: ${p => p.theme.space[0]}px;
+        margin-right: ${p => p.theme.space[3]}px;
       }
     }
   }
@@ -177,6 +200,21 @@ export const CalendarItemBody = styled.div`
       transform: rotate(90deg);
       transition: fill 0.4s cubic-bezier(0.87, 0, 0.13, 1),
         transform 0.2s cubic-bezier(0.87, 0, 0.13, 1);
+    }
+  }
+
+  @media ${p => p.theme.mq.mobileM} {
+    padding: ${p => p.theme.space[4]}px;
+    h3 {
+      font-size: ${p => p.theme.fontSizes[2]}px;
+    }
+    p {
+      &.date {
+        font-size: ${p => p.theme.fontSizes[0]}px;
+      }
+      &.innertext {
+        font-size: ${p => p.theme.fontSizes[1]}px;
+      }
     }
   }
 `
