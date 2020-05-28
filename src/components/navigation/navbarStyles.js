@@ -125,7 +125,7 @@ export const SocialWrapper = styled.nav`
       margin-left: ${p => p.theme.space[2]}px;
     }
     &:first-of-type {
-      visibility: ${p => (p.gender === 0 ? "hidden" : "visible")};
+      display: ${p => (p.gender === 0 ? "none" : "block")};
     }
     &:hover {
       svg {

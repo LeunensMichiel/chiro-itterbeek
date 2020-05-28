@@ -8,10 +8,10 @@ export const ChooseChiro = styled.div`
   align-items: center;
   justify-content: flex-end;
   position: relative;
-  margin-top: ${p => (p.jokonta ? p.theme.space[4] : -p.theme.space[4])}px;
-  height: 100%;
   width: 100%;
-  overflow: hidden;
+  height: 75vh;
+  max-height: 100%;
+  min-height: 100%;
   cursor: pointer;
   &:hover,
   &:focus {
@@ -28,6 +28,7 @@ export const ChooseChiro = styled.div`
     }
   }
   svg {
+    margin-top: ${p => (p.jokonta ? p.theme.space[6] : -p.theme.space[6])}px;
     display: block;
     height: 550px;
     width: 330px;
@@ -73,6 +74,29 @@ export const ChooseChiro = styled.div`
     }
     h1 {
       font-size: 72px;
+    }
+  }
+  @media ${p => p.theme.mq.mobileM} {
+    height: 60vh;
+    svg {
+      margin-top: ${p => (p.jokonta ? p.theme.space[4] : -p.theme.space[6])}px;
+      height: 240px;
+    }
+    h1 {
+      display: none;
+    }
+    h2 {
+      margin-top: ${p => p.theme.space[3]}px;
+      margin-bottom: ${p => p.theme.space[3]}px;
+      margin-left: ${p => (p.jokonta ? p.theme.space[0] : p.theme.space[4])}px;
+      margin-right: ${p => (p.jokonta ? p.theme.space[4] : p.theme.space[0])}px;
+      font-size: ${p => p.theme.fontSizes[3]}px;
+    }
+  }
+  @media ${p => p.theme.mq.mobileS} {
+    svg {
+      margin-top: ${p => (p.jokonta ? p.theme.space[4] : -p.theme.space[4])}px;
+      height: 200px;
     }
   }
 `

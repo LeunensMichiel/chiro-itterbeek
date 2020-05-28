@@ -42,6 +42,17 @@ export const ItterbeekWrapper = styled.div`
     width: auto;
     margin-right: ${p => p.theme.space[3]}px;
   }
+  @media ${p => p.theme.mq.mobileM} {
+    svg {
+      height: ${p => p.theme.space[4]}px;
+      margin-right: ${p => p.theme.space[3]}px;
+    }
+    a {
+      display: flex;
+      align-items: center;
+      font-size: ${p => p.theme.fontSizes[1]}px;
+    }
+  }
 `
 
 export const SocialWrapper = styled.nav`
@@ -129,6 +140,9 @@ export const SocialWrapper = styled.nav`
   }
   @media ${p => p.theme.mq.mobileM} {
     margin: ${p => p.theme.space[2]}px 0;
+    svg {
+      height: 32px;
+    }
   }
 `
 
@@ -146,5 +160,6 @@ export const FooterText = styled.p`
   @media ${p => p.theme.mq.mobileM} {
     width: 90%;
     line-height: 1.2;
+    font-size: ${p => p.theme.fontSizes[0]}px;
   }
 `
