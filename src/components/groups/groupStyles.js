@@ -172,7 +172,9 @@ export const Group = styled.div`
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
-
+    .group__header {
+      padding: ${p => p.theme.space[3]}px;
+    }
     .group__image {
       min-height: 200px;
       max-height: 200px;

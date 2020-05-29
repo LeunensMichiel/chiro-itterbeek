@@ -125,7 +125,7 @@ export const SocialWrapper = styled.nav`
       margin-left: ${p => p.theme.space[2]}px;
     }
     &:first-of-type {
-      display: ${p => (p.gender === 0 ? "none" : "block")};
+      display: ${p => (p.gender === 0 ? "none" : "flex")};
     }
     &:hover {
       svg {
