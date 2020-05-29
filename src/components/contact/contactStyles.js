@@ -11,9 +11,6 @@ export const FormWrapper = styled.section`
   background-color: ${p => p.theme.colors.backgroundMuted2};
   transition: border 0.4s cubic-bezier(0.87, 0, 0.13, 1),
     background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
-  @media ${p => p.theme.mq.tablet} {
-    margin-top: ${p => p.theme.space[6]}px;
-  }
   h1 {
     margin: 0;
     align-self: flex-start;
@@ -39,7 +36,7 @@ export const FormWrapper = styled.section`
     justify-self: end;
     padding: ${p => p.theme.space[3]}px ${p => p.theme.space[6]}px;
     margin-bottom: ${p => p.theme.space[3]}px;
-    background: ${p =>
+    background-color: ${p =>
       p.gender === 1 ? p.theme.colors.jokonta : p.theme.colors.allegro};
     text-transform: uppercase;
     font-weight: 700;
@@ -50,10 +47,24 @@ export const FormWrapper = styled.section`
 
     &:hover {
       transition: background-color 0.4s ease;
-      background: ${p =>
+      background-color: ${p =>
         p.gender === 1
           ? p.theme.colors.jokontaLight
           : p.theme.colors.allegroLight};
+    }
+  }
+  @media ${p => p.theme.mq.tablet} {
+    margin-top: ${p => p.theme.space[6]}px;
+  }
+  @media ${p => p.theme.mq.mobileM} {
+    h1 {
+      padding: ${p => p.theme.space[2]}px ${p => p.theme.space[3]}px;
+      font-size: ${p => p.theme.fontSizes[1]}px;
+    }
+    button {
+      grid-row: unset;
+      grid-column: 11 / span 2;
+      margin-bottom: ${p => p.theme.space[0]}px;
     }
   }
 `
@@ -67,6 +78,14 @@ export const ItterbeekForm = styled.form`
   @media ${p => p.theme.mq.tablet} {
     margin: ${p => p.theme.space[5]}px 0;
     grid-column-gap: 16px;
+  }
+
+  @media ${p => p.theme.mq.mobileM} {
+    grid-template-rows: unset;
+    grid-auto-rows: auto;
+    grid-column-gap: 0;
+    margin: ${p => p.theme.space[3]}px 0;
+    padding: 0 ${p => p.theme.space[3]}px;
   }
 `
 
@@ -103,6 +122,22 @@ export const StyledInput = styled.div`
   @media ${p => p.theme.mq.tablet} {
     grid-column: ${p => (p.textarea ? "7 / span 5" : "2 / span 5")};
   }
+
+  @media ${p => p.theme.mq.mobileM} {
+    grid-column: 1 / span 12;
+    grid-row: unset;
+    label {
+      font-size: ${p => p.theme.fontSizes[1]}px;
+    }
+    input,
+    textarea {
+      font-size: 16px;
+      padding: ${p => p.theme.space[2]}px ${p => p.theme.space[2]}px;
+    }
+    textarea {
+      min-height: 200px;
+    }
+  }
 `
 
 export const MapWrapper = styled.aside`
@@ -114,11 +149,35 @@ export const MapWrapper = styled.aside`
   div {
     border-radius: ${p => p.theme.radii.borderRadius};
   }
+
+  .map__marker {
+    content: "";
+    width: 24px;
+    height: 24px;
+    display: block;
+    background-color: ${p =>
+      p.gender === 1 ? p.theme.colors.jokonta : p.theme.colors.allegro};
+    transition: background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1),
+      border-color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+    border-radius: 50%;
+    border: 4px solid
+      ${p =>
+        p.gender === 1
+          ? p.theme.colors.jokontaLight
+          : p.theme.colors.allegroLight};
+  }
   @media ${p => p.theme.mq.tablet} {
     grid-column: 2 / span 6;
     margin-left: unset;
     border: 1px solid ${p => p.theme.colors.border};
     border-right: none;
+  }
+  @media ${p => p.theme.mq.mobileM} {
+    grid-column: 2 / span 12;
+    border: none;
+    min-height: 200px;
+    margin-bottom: ${p => p.theme.space[6]}px;
+    padding: 0 ${p => p.theme.space[2]}px;
   }
 `
 
@@ -163,6 +222,10 @@ export const ContactInfoWrapper = styled.aside`
   @media ${p => p.theme.mq.tablet} {
     grid-column: 8 / span 6;
     margin-left: unset;
+    margin-bottom: ${p => p.theme.space[6]}px;
+  }
+  @media ${p => p.theme.mq.mobileM} {
+    grid-column: 2 / span 12;
   }
 `
 
@@ -203,7 +266,7 @@ export const SocialWrapper = styled.nav`
     margin-left: ${p => p.theme.space[2]}px;
     position: relative;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     &:focus {
       svg {
         circle {
@@ -225,7 +288,7 @@ export const SocialWrapper = styled.nav`
     text-align: left;
     position: absolute;
     bottom: ${p => p.theme.space[6]}px;
-    background-color: ${p => p.theme.colors.backgroundMuted};
+    background-color: ${p => p.theme.colors.border};
     padding: ${p => p.theme.space[4]}px;
     opacity: 0;
     visibility: hidden;
