@@ -39,6 +39,7 @@ export const HighlightWrapper = styled.section`
     margin-bottom: ${p => p.theme.space[6]}px;
   }
   @media ${p => p.theme.mq.mobileM} {
+    margin-top: ${p => (p.margin ? p.theme.space[6] : 0)}px;
     h2 {
       padding: ${p => p.theme.space[2]}px ${p => p.theme.space[3]}px;
       font-size: ${p => p.theme.fontSizes[1]}px;
@@ -189,6 +190,11 @@ export const NewsWrapper = styled.section`
   @media ${p => p.theme.mq.tablet} {
     margin-bottom: ${p => p.theme.space[6]}px;
   }
+  @media ${p => p.theme.mq.mobileM} {
+    .news__grid {
+      grid-template-columns: 1fr;
+    }
+  }
 `
 
 export const NewsItemWrapper = styled.article`
@@ -282,12 +288,14 @@ export const NewsItemWrapper = styled.article`
 
   @media ${p => p.theme.mq.tablet} {
     height: auto;
-    .news__item__body {
-      p {
-        overflow: hidden;
-        display: -webkit-box;
-        line-clamp: 3;
-        text-overflow: ellipsis;
+  }
+  @media ${p => p.theme.mq.mobileM} {
+    height: auto;
+    .news__item__header {
+      .news__item__type {
+        padding: ${p => p.theme.space[2]}px ${p => p.theme.space[3]}px;
+        font-size: ${p => p.theme.fontSizes[1]}px;
+        width: auto;
       }
     }
   }
@@ -317,5 +325,13 @@ export const NewsBlockWrapper = styled.article`
   @media ${p => p.theme.mq.tablet} {
     margin-top: ${p => p.theme.space[6]}px;
     grid-column: 2 / span 12;
+  }
+  @media ${p => p.theme.mq.mobileM} {
+    margin-top: ${p => p.theme.space[5]}px;
+    h1 {
+      font-size: ${p => p.theme.fontSizes[3]}px;
+      line-height: 1.2;
+      margin-bottom: ${p => p.theme.space[1]}px;
+    }
   }
 `

@@ -463,4 +463,7 @@ export const MediaNavitation = styled.nav`
       }
     }
   }
+  @media ${p => p.theme.mq.mobileM} {
+    margin-bottom: ${p => p.theme.space[4]}px;
+  }
 `

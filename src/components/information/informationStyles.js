@@ -173,6 +173,7 @@ export const InformationBlock = styled.article`
       }
       p {
         font-size: 16px;
+        margin-bottom: ${p => p.theme.space[2]}px;
       }
       ul {
         padding-left: ${p => p.theme.space[4]}px;
