@@ -87,6 +87,27 @@ export const HighlightedWrapper = styled.section`
       }
     }
   }
+  @media ${p => p.theme.mq.mobileM} {
+    grid-column: 2 / span 12;
+    flex-direction: column-reverse;
+    .boekje {
+      svg {
+        top: -64px;
+        right: 0;
+        left: initial;
+        max-width: 124px;
+      }
+    }
+  }
+  @media ${p => p.theme.mq.mobileS} {
+    .boekje {
+      svg {
+        right: -60px;
+        left: initial;
+        max-width: 124px;
+      }
+    }
+  }
 `
 
 export const MoreMedia = styled.nav`
@@ -159,6 +180,15 @@ export const MoreMedia = styled.nav`
       }
     }
   }
+
+  @media ${p => p.theme.mq.mobileM} {
+    grid-column: 2 / span 10;
+    height: 260px;
+    h2 {
+      padding: ${p => p.theme.space[2]}px ${p => p.theme.space[3]}px;
+      font-size: ${p => p.theme.fontSizes[1]}px;
+    }
+  }
 `
 
 export const TopVideoWrapper = styled.section`
@@ -215,6 +245,19 @@ export const TopVideoWrapper = styled.section`
   @media ${p => p.theme.mq.tablet} {
     margin-bottom: ${p => p.theme.space[5]}px;
   }
+  @media ${p => p.theme.mq.mobileM} {
+    margin-top: ${p => p.theme.space[5]}px;
+    margin-bottom: ${p => p.theme.space[4]}px;
+    h2 {
+      font-size: ${p => p.theme.fontSizes[5]}px;
+      margin-bottom: ${p => p.theme.space[5]}px;
+    }
+    .media__vidcontainer {
+      .media__video__wrapper {
+        grid-column: span 2;
+      }
+    }
+  }
 `
 
 export const TopAlbumWrapper = styled.section`
@@ -256,6 +299,18 @@ export const TopAlbumWrapper = styled.section`
   }
   @media ${p => p.theme.mq.tablet} {
     margin-bottom: ${p => p.theme.space[6]}px;
+  }
+  @media ${p => p.theme.mq.mobileM} {
+    margin-top: ${p => p.theme.space[5]}px;
+    h2 {
+      font-size: ${p => p.theme.fontSizes[5]}px;
+      margin-bottom: ${p => p.theme.space[5]}px;
+    }
+    .album__grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-column-gap: 12px;
+      grid-row-gap: 12px;
+    }
   }
 `
 
@@ -337,6 +392,25 @@ export const AlbumItem = styled.div`
     .album__body {
       a {
         margin-bottom: ${p => p.theme.space[2]}px;
+      }
+    }
+  }
+  @media ${p => p.theme.mq.mobileM} {
+    small {
+      font-size: 9px;
+    }
+    .album__header {
+      width: unset;
+      font-size: ${p => p.theme.fontSizes[1]}px;
+      align-self: flex-start;
+      padding: ${p => p.theme.space[2]}px ${p => p.theme.space[3]}px;
+    }
+    .album__body {
+      a {
+        margin-bottom: ${p => p.theme.space[0]}px;
+      }
+      .album__title {
+        font-size: 16px;
       }
     }
   }

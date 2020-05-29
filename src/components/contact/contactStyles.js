@@ -226,6 +226,7 @@ export const ContactInfoWrapper = styled.aside`
   }
   @media ${p => p.theme.mq.mobileM} {
     grid-column: 2 / span 12;
+    padding: ${p => p.theme.space[4]}px;
   }
 `
 
