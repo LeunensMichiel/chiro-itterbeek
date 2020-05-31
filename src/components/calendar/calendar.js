@@ -29,7 +29,11 @@ export const Calendar = () => {
   `)
 
   const currentDate = new Date()
-  const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth())
+  const firstDay = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    1
+  )
 
   const [dateState, setDateState] = useState(firstDay)
   const changeDate = increment => {
