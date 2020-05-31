@@ -6,15 +6,24 @@ import Klok from "../assets/icons/klok.svg"
 
 const NotFoundWrapper = styled.div`
   grid-column: 2 / span 12;
-  height: 100%;
   margin-top: ${p => p.theme.space[1]}px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 66vh;
   svg {
     width: 100%;
     max-width: 360px;
+  }
+  @media ${p => p.theme.mq.mobileM} {
+    min-height: 30vh;
+    svg {
+      max-width: 200px;
+    }
+    h1 {
+      font-size: ${p => p.theme.fontSizes[3]}px;
+    }
   }
 `
 const NotFound = () => {

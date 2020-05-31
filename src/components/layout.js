@@ -15,10 +15,9 @@ const mainCss = css`
       16px,
       1fr
     );
-  flex-grow: 1;
+  flex: 1 1 auto;
   padding-top: 100px;
   overflow-x: hidden;
-
   @media (max-width: 767px) {
     padding-top: 72px;
   }

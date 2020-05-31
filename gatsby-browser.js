@@ -16,7 +16,6 @@ const GlobalStyles = css`
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
   }
 
   button {

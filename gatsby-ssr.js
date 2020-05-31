@@ -5,6 +5,7 @@ import { Global, css } from "@emotion/core"
 const GlobalStyles = css`
   html {
     height: 100%;
+    overflow-y: scroll;
   }
   body,
   #___gatsby {
@@ -15,7 +16,6 @@ const GlobalStyles = css`
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
   }
 
   button {
@@ -24,12 +24,9 @@ const GlobalStyles = css`
     padding: 0;
     width: auto;
     overflow: visible;
-
     background: transparent;
-
     color: inherit;
     font: inherit;
-
     line-height: normal;
     cursor: pointer;
     -webkit-font-smoothing: inherit;
