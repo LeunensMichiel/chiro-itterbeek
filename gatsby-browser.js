@@ -5,6 +5,7 @@ import { Global, css } from "@emotion/core"
 const GlobalStyles = css`
   html {
     height: 100%;
+    overflow-y: scroll;
   }
   body,
   #___gatsby {

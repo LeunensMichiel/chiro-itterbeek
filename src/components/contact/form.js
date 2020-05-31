@@ -28,14 +28,7 @@ export const Form = () => {
           <label htmlFor="naam">
             Naam<sup>*</sup>
           </label>
-          <input
-            type="text"
-            autoFocus
-            id="naam"
-            name="naam"
-            required
-            autoComplete={1}
-          />
+          <input type="text" id="naam" name="naam" required autoComplete={1} />
         </StyledInput>
         <StyledInput>
           <label htmlFor="email">

@@ -33,7 +33,7 @@ export const ChooseChiro = styled.div`
     height: 550px;
     width: 330px;
     [data-name="shadow"] {
-      fill: ${p => p.theme.colors.backgroundMuted};
+      fill: ${p => p.theme.colors.backgroundMuted} !important;
       transition: fill 0.4s cubic-bezier(0.87, 0, 0.13, 1);
     }
     &:nth-of-type(2) {

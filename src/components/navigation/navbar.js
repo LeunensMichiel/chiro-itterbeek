@@ -113,6 +113,11 @@ export const Navbar = ({ show = false, hamburgerClickHandler }) => {
             onClick={() => {
               dispatch({ type: "TOGGLE_GENDER" })
             }}
+            onKeyDown={() => {
+              dispatch({ type: "TOGGLE_GENDER" })
+            }}
+            role="button"
+            tabIndex={0}
           >
             <SwitchTransition>
               <CSSTransition
@@ -130,6 +135,11 @@ export const Navbar = ({ show = false, hamburgerClickHandler }) => {
             onClick={() => {
               setColorMode(colorMode === "default" ? "dark" : "default")
             }}
+            onKeyDown={() => {
+              setColorMode(colorMode === "default" ? "dark" : "default")
+            }}
+            role="button"
+            tabIndex={0}
           >
             <SwitchTransition>
               <CSSTransition

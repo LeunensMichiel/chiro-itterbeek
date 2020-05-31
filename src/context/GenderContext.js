@@ -41,7 +41,7 @@ const GenderProvider = ({ children }) => {
       return 1
     }
   }
-  const [genderState, dispatch] = useReducer(reducer, { gender: 1 }, gender)
+  const [genderState, dispatch] = useReducer(reducer, { gender: 0 }, gender)
 
   return (
     <GenderContext.Provider value={{ genderState, dispatch }}>

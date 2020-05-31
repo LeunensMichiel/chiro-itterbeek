@@ -2,9 +2,11 @@ import React, { useContext, useState } from "react"
 import PropTypes from "prop-types"
 import { css, Global } from "@emotion/core"
 import { GenderContext } from "../context/GenderContext"
+import { useHasMounted } from "../context/hasMounted"
 
 import { Navbar, Footer } from "../components"
 import { ChoosePage } from "./chooser/choosePage"
+
 const mainCss = css`
   width: 100%;
   min-height: 100%;
@@ -21,12 +23,14 @@ const mainCss = css`
     padding-top: 72px;
   }
 `
+
 const IsIE = () => {
   if (typeof window !== `undefined`) {
     return window.navigator.userAgent.match(/(MSIE|Trident)/)
   }
 }
 const Layout = ({ children }) => {
+  const hasMounted = useHasMounted()
   const { genderState } = useContext(GenderContext)
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false)
   if (IsIE()) {
@@ -50,9 +54,11 @@ const Layout = ({ children }) => {
           document.getElementById("hamburger").classList.toggle("is-active")
         }}
       />
-      <main css={mainCss} aria-hidden={sideDrawerOpen}>
-        {genderState.gender === 0 ? <ChoosePage /> : children}
-      </main>
+      {hasMounted && (
+        <main css={mainCss} aria-hidden={sideDrawerOpen}>
+          {genderState.gender === 0 ? <ChoosePage /> : children}
+        </main>
+      )}
       <Footer />
     </>
   )
