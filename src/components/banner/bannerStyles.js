@@ -7,8 +7,20 @@ export const BannerWrapper = styled.div`
   margin-bottom: ${p => p.theme.space[7]}px;
   position: relative;
   overflow: hidden;
-  svg {
+  .banner__image__container {
+    overflow: hidden;
+    height: 0;
     width: 100%;
+    padding-bottom: 25%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  img {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
   }
   h1 {
     display: flex;
@@ -40,15 +52,21 @@ export const BannerWrapper = styled.div`
 
   @media ${p => p.theme.mq.tablet} {
     margin-bottom: ${p => p.theme.space[6]}px;
-    svg {
-      min-width: 130%;
+    .banner__image__container {
+      padding-bottom: 33%;
+    }
+    img {
+      min-width: 140%;
     }
   }
   @media ${p => p.theme.mq.mobileM} {
     h1 {
       font-size: ${p => p.theme.fontSizes[5]}px;
     }
-    svg {
+    .banner__image__container {
+      padding-bottom: 50%;
+    }
+    img {
       min-width: 250%;
     }
   }

@@ -16,7 +16,7 @@ import Instagram from "../../assets/icons/instagram.svg"
 import LinkLogo from "../../assets/icons/link.svg"
 import Chiro from "../../assets/icons/chiro.svg"
 
-export const Footer = () => {
+const Footer = () => {
   const { genderState } = useContext(GenderContext)
 
   return (
@@ -35,6 +35,7 @@ export const Footer = () => {
         </ItterbeekWrapper>
         <SocialWrapper gender={genderState.gender}>
           <a
+            aria-label="Facebook Chiro Itterbeek"
             href="https://www.facebook.com/ChiroItterbeek"
             target="_blank"
             rel="noopener noreferrer"
@@ -42,6 +43,7 @@ export const Footer = () => {
             <Facebook />
           </a>
           <a
+            aria-label="Instagram Chiro Itterbeek"
             href={`https://www.instagram.com/${
               genderState.gender === 1 ? "chirojokonta" : "chiro_allegro"
             }/`}
@@ -50,7 +52,7 @@ export const Footer = () => {
           >
             <Instagram />
           </a>
-          <button>
+          <button aria-label="Overige Links">
             <div className="links__other">
               <a
                 href="https://chiro.be/"
@@ -117,3 +119,5 @@ export const Footer = () => {
     </FooterWrapper>
   )
 }
+
+export default Footer

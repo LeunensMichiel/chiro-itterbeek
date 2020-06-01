@@ -15,10 +15,10 @@ export const ChooseChiro = styled.div`
   cursor: pointer;
   &:hover,
   &:focus {
-    svg:nth-of-type(1) {
+    img:nth-of-type(1) {
       display: none;
     }
-    svg:nth-of-type(2) {
+    img:nth-of-type(2) {
       display: block;
     }
     h2 {
@@ -27,7 +27,7 @@ export const ChooseChiro = styled.div`
       transition: color 0.3s ease;
     }
   }
-  svg {
+  img {
     margin-top: ${p => (p.jokonta ? p.theme.space[6] : -p.theme.space[6])}px;
     display: block;
     height: 550px;
@@ -63,7 +63,7 @@ export const ChooseChiro = styled.div`
     flex-direction: column-reverse;
     justify-content: center;
     align-items: ${p => (p.jokonta ? "flex-end" : "flex-start")};
-    svg {
+    img {
       height: 400px;
       width: unset;
     }
@@ -94,7 +94,7 @@ export const ChooseChiro = styled.div`
     }
   }
   @media ${p => p.theme.mq.mobileS} {
-    svg {
+    img {
       margin-top: ${p => (p.jokonta ? p.theme.space[4] : -p.theme.space[4])}px;
       height: 200px;
     }

@@ -10,7 +10,7 @@ import { InformationBlock } from "../information/informationStyles"
 import { NewsBlockWrapper } from "../news/newsStyles"
 import Chevron from "../../assets/icons/chevron.svg"
 
-export const NewsBlock = ({ news }) => {
+const NewsBlock = ({ news }) => {
   const data = useStaticQuery(graphql`
     query {
       headlineImage: file(relativePath: { eq: "images/itterbeek.jpg" }) {
@@ -65,3 +65,5 @@ export const NewsBlock = ({ news }) => {
     </NewsBlockWrapper>
   )
 }
+
+export default NewsBlock

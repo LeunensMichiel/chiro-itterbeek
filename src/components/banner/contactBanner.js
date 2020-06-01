@@ -4,7 +4,7 @@ import { useContext } from "react"
 import { ContactWrapper } from "./bannerStyles"
 import { GenderContext } from "../../context/GenderContext"
 import { Link } from "gatsby"
-export const ContactBanner = () => {
+const ContactBanner = () => {
   const { genderState } = useContext(GenderContext)
   return (
     <ContactWrapper gender={genderState.gender}>
@@ -29,3 +29,4 @@ export const ContactBanner = () => {
     </ContactWrapper>
   )
 }
+export default ContactBanner

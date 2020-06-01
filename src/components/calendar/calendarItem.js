@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React, { useContext, useState, useRef } from "react"
+import { useContext, useState, useRef, Fragment } from "react"
 import { jsx } from "theme-ui"
 import { CSSTransition } from "react-transition-group"
 import { GenderContext } from "../../context/GenderContext"
@@ -50,7 +50,7 @@ export const CalendarItem = ({ calItem, currentDate }) => {
       classNames="cal__item"
       unmountOnExit
     >
-      <>
+      <Fragment>
         {itemDate.getMonth() === currentDate.getMonth() &&
           itemDate.getFullYear() === currentDate.getFullYear() &&
           shouldShowGender() && (
@@ -98,14 +98,14 @@ export const CalendarItem = ({ calItem, currentDate }) => {
                 >
                   {calItem.description.description}
                 </p>
-                <button onClick={toggleAccordion}>
+                <button aria-label="Meer lezen" onClick={toggleAccordion}>
                   <span>{`${calItemActive ? "Minder" : "Meer"} lezen`}</span>
                   <Chevron />
                 </button>
               </CalendarItemBody>
             </CalendarItemWrapper>
           )}
-      </>
+      </Fragment>
     </CSSTransition>
   )
 }

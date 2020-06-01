@@ -7,7 +7,7 @@ import { gsap } from "gsap"
 
 import { BannerWrapper, BannerOverlay } from "./bannerStyles"
 
-export const Banner = ({ jokonta, allegro, text }) => {
+const Banner = ({ jokonta, allegro, text }) => {
   const overlay = useRef(null)
   const { genderState } = useContext(GenderContext)
   const [colorMode] = useColorMode()
@@ -38,9 +38,16 @@ export const Banner = ({ jokonta, allegro, text }) => {
           }
           classNames="fade"
         >
-          {genderState.gender === 1 ? jokonta : allegro}
+          <div className="banner__image__container">
+            <img
+              src={genderState.gender === 1 ? jokonta : allegro}
+              alt={text}
+            />
+          </div>
         </CSSTransition>
       </SwitchTransition>
     </BannerWrapper>
   )
 }
+
+export default Banner

@@ -6,7 +6,7 @@ import { GenderContext } from "../../context/GenderContext"
 import { MapWrapper } from "./contactStyles"
 import "mapbox-gl/dist/mapbox-gl.css"
 
-export const Map = () => {
+const Map = () => {
   const [colorMode] = useColorMode()
   const { genderState } = useContext(GenderContext)
 
@@ -44,3 +44,5 @@ export const Map = () => {
     </MapWrapper>
   )
 }
+
+export default Map

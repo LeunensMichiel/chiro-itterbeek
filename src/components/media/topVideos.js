@@ -5,7 +5,7 @@ import { TopVideoWrapper } from "./mediaStyles"
 import { useStaticQuery, graphql } from "gatsby"
 import { GenderContext } from "../../context/GenderContext"
 
-export const TopVideos = () => {
+const TopVideos = () => {
   const data = useStaticQuery(graphql`
     query {
       featured: allContentfulVideo(
@@ -58,3 +58,5 @@ export const TopVideos = () => {
     </TopVideoWrapper>
   )
 }
+
+export default TopVideos

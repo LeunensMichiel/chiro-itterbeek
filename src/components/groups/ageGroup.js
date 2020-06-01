@@ -4,7 +4,7 @@ import Img from "gatsby-image"
 
 import { Group, LeidingItem } from "./groupStyles"
 
-export const AgeGroup = ({ color, group }) => {
+const AgeGroup = ({ color, group }) => {
   return (
     <Group color={color}>
       <h2
@@ -53,3 +53,5 @@ export const AgeGroup = ({ color, group }) => {
     </Group>
   )
 }
+
+export default AgeGroup

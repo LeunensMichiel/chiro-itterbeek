@@ -6,7 +6,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import { GenderContext } from "../../context/GenderContext"
 
 import Chevron from "../../assets/icons/chevron.svg"
-export const NewsHighlight = ({ margin }) => {
+const NewsHighlight = ({ margin }) => {
   const data = useStaticQuery(graphql`
     query {
       headlineImage: file(relativePath: { eq: "images/itterbeek.jpg" }) {
@@ -152,3 +152,5 @@ export const NewsHighlight = ({ margin }) => {
     </HighlightWrapper>
   )
 }
+
+export default NewsHighlight

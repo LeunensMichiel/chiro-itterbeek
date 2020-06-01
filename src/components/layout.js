@@ -1,11 +1,14 @@
 import React, { useContext, useState } from "react"
+import loadable from "@loadable/component"
 import PropTypes from "prop-types"
 import { css, Global } from "@emotion/core"
+
 import { GenderContext } from "../context/GenderContext"
 import { useHasMounted } from "../context/hasMounted"
 
-import { Navbar, Footer } from "../components"
-import { ChoosePage } from "./chooser/choosePage"
+const Navbar = loadable(() => import("./navigation/navbar"))
+const Footer = loadable(() => import("./footer/footer"))
+const ChoosePage = loadable(() => import("./chooser/choosePage"))
 
 const mainCss = css`
   width: 100%;
@@ -18,6 +21,7 @@ const mainCss = css`
   flex: 1 1 auto;
   padding-top: 100px;
   overflow-x: hidden;
+
   @media (max-width: 767px) {
     padding-top: 72px;
   }

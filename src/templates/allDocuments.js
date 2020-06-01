@@ -1,15 +1,16 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 import { graphql, Link } from "gatsby"
+import loadable from "@loadable/component"
 
 import Layout from "../components/layout"
 import {
   TopAlbumWrapper,
   MediaNavitation,
 } from "../components/media/mediaStyles"
-import { Document } from "../components/media/document"
-
 import Chevron from "../assets/icons/chevron.svg"
+
+const Document = loadable(() => import("../components/media/document"))
 
 const allDocuments = ({ pageContext, data }) => {
   const { currentPage, numDocumentPages } = pageContext
@@ -67,6 +68,7 @@ export const docListQuery = graphql`
         node {
           gender
           createdAt
+          id
           title
           url
         }

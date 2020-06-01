@@ -9,7 +9,7 @@ import Facebook from "../../assets/icons/facebook.svg"
 import Instagram from "../../assets/icons/instagram.svg"
 import LinkLogo from "../../assets/icons/link.svg"
 
-export const ContactInfo = () => {
+const ContactInfo = () => {
   const data = useStaticQuery(graphql`
     query {
       info: allContentfulContactinfo(sort: { fields: updatedAt }) {
@@ -64,6 +64,7 @@ export const ContactInfo = () => {
         <p>
           Probeer eens bij de{" "}
           <button
+            aria-label="Wisselen van Chiro (Jongens of Meisjes)"
             onClick={() => {
               dispatch({ type: "TOGGLE_GENDER" })
             }}
@@ -75,6 +76,7 @@ export const ContactInfo = () => {
       <h3>Nuttige Links</h3>
       <SocialWrapper gender={genderState.gender}>
         <a
+          aria-label="Facebook Chiro Itterbeek"
           href="https://www.facebook.com/ChiroItterbeek"
           target="_blank"
           rel="noopener noreferrer"
@@ -82,6 +84,7 @@ export const ContactInfo = () => {
           <Facebook />
         </a>
         <a
+          aria-label="Instagram Chiro Itterbeek"
           href={`https://www.instagram.com/${
             genderState.gender === 1 ? "chirojokonta" : "chiro_allegro"
           }/`}
@@ -127,3 +130,5 @@ export const ContactInfo = () => {
     </ContactInfoWrapper>
   )
 }
+
+export default ContactInfo

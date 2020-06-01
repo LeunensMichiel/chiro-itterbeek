@@ -2,7 +2,7 @@ import React from "react"
 import { AlbumItem } from "./mediaStyles"
 import Chevron from "../../assets/icons/chevron.svg"
 
-export const Document = ({ document }) => {
+const Document = ({ document }) => {
   const formatter = new Intl.DateTimeFormat("nl-BE", {
     weekday: "long",
     year: "numeric",
@@ -28,7 +28,12 @@ export const Document = ({ document }) => {
           new Date(document.createdAt)
         )}`}</small>
         <div className="album__title">{document.title}</div>
-        <a href={document.url} target="_blank" rel="noopener noreferrer">
+        <a
+          aria-label="Document bekijken"
+          href={document.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <span>Bekijk document</span>
           <Chevron />
         </a>
@@ -36,3 +41,5 @@ export const Document = ({ document }) => {
     </AlbumItem>
   )
 }
+
+export default Document

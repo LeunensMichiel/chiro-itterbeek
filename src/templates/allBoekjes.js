@@ -1,15 +1,16 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 import { graphql, Link } from "gatsby"
+import loadable from "@loadable/component"
 
 import Layout from "../components/layout"
 import {
   TopAlbumWrapper,
   MediaNavitation,
 } from "../components/media/mediaStyles"
-import { Boekje } from "../components/media/boekje"
-
 import Chevron from "../assets/icons/chevron.svg"
+
+const Boekje = loadable(() => import("../components/media/boekje"))
 
 const allBoekjes = ({ pageContext, data }) => {
   const { currentPage, numBoekjePages } = pageContext

@@ -13,11 +13,11 @@ if (process.env.CONTENTFUL_HOST) {
 
 const { spaceId, accessToken } = contentfulConfig
 
-if (!spaceId || !accessToken) {
-  throw new Error(
-    "Contentful spaceId and the access token need to be provided."
-  )
-}
+// if (!spaceId || !accessToken) {
+//   throw new Error(
+//     "Contentful spaceId and the access token need to be provided."
+//   )
+// }
 
 module.exports = {
   siteMetadata: {
@@ -37,6 +37,7 @@ module.exports = {
     ],
   },
   plugins: [
+    "gatsby-plugin-loadable-components-ssr",
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -67,7 +68,7 @@ module.exports = {
       resolve: "gatsby-plugin-react-svg",
       options: {
         rule: {
-          include: /assets/,
+          include: /icons/,
         },
       },
     },
@@ -76,14 +77,31 @@ module.exports = {
       options: contentfulConfig,
     },
     {
-      resolve: "gatsby-plugin-web-font-loader",
+      resolve: `gatsby-plugin-webfonts`,
       options: {
-        custom: {
-          families: ["PT Sans, Bangers"],
-          urls: ["/fonts/fonts.css"],
+        fonts: {
+          google: [
+            {
+              family: "PT Sans",
+              variants: ["400", "700"],
+              fontDisplay: "swap",
+              strategy: "selfHosted",
+            },
+            {
+              family: "Bangers",
+              variants: ["400"],
+              fontDisplay: "swap",
+              strategy: "selfHosted",
+            },
+          ],
         },
+        formats: ["woff2", "woff"],
+        useMinify: true,
+        usePreload: true,
+        usePreconnect: false,
       },
     },
+    `gatsby-plugin-netlify`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-netlify-cache`,
   ],

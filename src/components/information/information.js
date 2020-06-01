@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
-import React, { useContext, useState } from "react"
+import { useContext, useState, Fragment } from "react"
 import Img from "gatsby-image"
 import { useStaticQuery, graphql } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
@@ -13,7 +13,7 @@ import {
   InformationBlock,
 } from "./informationStyles"
 
-export const Information = () => {
+const Information = () => {
   const data = useStaticQuery(graphql`
     query {
       infoBlocks: allContentfulInformatieblok(
@@ -102,7 +102,7 @@ export const Information = () => {
             }
             classNames="fade"
           >
-            <>
+            <Fragment>
               <Img
                 className="information__image__container"
                 fluid={filteredBlocks[currentTab].node.banner.fluid}
@@ -114,10 +114,12 @@ export const Information = () => {
                   filteredBlocks[currentTab].node.info.json
                 )}
               </div>
-            </>
+            </Fragment>
           </CSSTransition>
         </SwitchTransition>
       </InformationBlock>
     </InformationWrapper>
   )
 }
+
+export default Information

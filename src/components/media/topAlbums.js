@@ -5,9 +5,9 @@ import { TopAlbumWrapper } from "./mediaStyles"
 import { useStaticQuery, graphql } from "gatsby"
 
 import { GenderContext } from "../../context/GenderContext"
-import { Album } from "./album"
+import Album from "./album"
 
-export const TopAlbums = () => {
+const TopAlbums = () => {
   const data = useStaticQuery(graphql`
     query {
       albums: allContentfulAlbum(
@@ -49,3 +49,5 @@ export const TopAlbums = () => {
     </TopAlbumWrapper>
   )
 }
+
+export default TopAlbums

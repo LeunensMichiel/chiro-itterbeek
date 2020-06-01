@@ -6,9 +6,8 @@ import { GenderContext } from "../../context/GenderContext"
 import { Link } from "gatsby"
 
 import Chevron from "../../assets/icons/chevron.svg"
-export const More = () => {
+const More = () => {
   const { genderState } = useContext(GenderContext)
-
   return (
     <MoreMedia gender={genderState.gender}>
       <h2>Meer Media!</h2>
@@ -37,3 +36,4 @@ export const More = () => {
     </MoreMedia>
   )
 }
+export default More

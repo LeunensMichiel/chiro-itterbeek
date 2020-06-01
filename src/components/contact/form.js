@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 import { FormWrapper, StyledInput, ItterbeekForm } from "./contactStyles"
 import { GenderContext } from "../../context/GenderContext"
 
-export const Form = () => {
+const Form = () => {
   const { genderState } = useContext(GenderContext)
 
   return (
@@ -65,3 +65,5 @@ export const Form = () => {
     </FormWrapper>
   )
 }
+
+export default Form

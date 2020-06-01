@@ -1,8 +1,10 @@
 import React from "react"
 import { graphql } from "gatsby"
+import loadable from "@loadable/component"
 
 import Layout from "../components/layout"
-import { NewsBlock } from "../components"
+
+const NewsBlock = loadable(() => import("../components/news/newsBlock"))
 
 const newsPost = ({ data }) => {
   return (

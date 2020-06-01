@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, useColorMode } from "theme-ui"
-import React, { useContext } from "react"
+import { useContext, Fragment } from "react"
 import { Link } from "gatsby"
 import { SwitchTransition, CSSTransition } from "react-transition-group"
 
@@ -22,11 +22,11 @@ import Dark from "../../assets/icons/dark.svg"
 import Facebook from "../../assets/icons/facebook.svg"
 import Instagram from "../../assets/icons/instagram.svg"
 
-export const Navbar = ({ show = false, hamburgerClickHandler }) => {
+const Navbar = ({ show = false, hamburgerClickHandler }) => {
   const [colorMode, setColorMode] = useColorMode()
   const { genderState, dispatch } = useContext(GenderContext)
   return (
-    <>
+    <Fragment>
       <NavbarWrapper>
         <ItterbeekWrapper mobile>
           <Link
@@ -117,6 +117,7 @@ export const Navbar = ({ show = false, hamburgerClickHandler }) => {
               dispatch({ type: "TOGGLE_GENDER" })
             }}
             role="button"
+            aria-label="Verwisselen van Chiro (Meisjes of Jongens)"
             tabIndex={0}
           >
             <SwitchTransition>
@@ -132,6 +133,7 @@ export const Navbar = ({ show = false, hamburgerClickHandler }) => {
             </SwitchTransition>
           </a>
           <a
+            aria-label="Verwisselen van kleurenthema (donker of licht)"
             onClick={() => {
               setColorMode(colorMode === "default" ? "dark" : "default")
             }}
@@ -155,6 +157,7 @@ export const Navbar = ({ show = false, hamburgerClickHandler }) => {
           </a>
           <div className="divider__horizontal" />
           <a
+            aria-label="Facebook Chiro Itterbeek"
             href="https://www.facebook.com/ChiroItterbeek"
             target="_blank"
             rel="noopener noreferrer"
@@ -162,6 +165,7 @@ export const Navbar = ({ show = false, hamburgerClickHandler }) => {
             <Facebook />
           </a>
           <a
+            aria-label="Instagram Chiro Itterbeek"
             href={`https://www.instagram.com/${
               genderState.gender === 1 ? "chirojokonta" : "chiro_allegro"
             }/`}
@@ -172,6 +176,8 @@ export const Navbar = ({ show = false, hamburgerClickHandler }) => {
           </a>
         </SocialWrapper>
       </NavWrapper>
-    </>
+    </Fragment>
   )
 }
+
+export default Navbar

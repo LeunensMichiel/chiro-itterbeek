@@ -16,7 +16,6 @@ export const NavWrapper = styled.header`
     display: flex;
     align-items: center;
     transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
-    transition: color 0.3s ease;
     &.active {
       color: ${p =>
         p.gender === 0
@@ -56,7 +55,8 @@ export const NavWrapper = styled.header`
     height: auto;
     overflow-y: auto;
     transform: ${props => (props.show ? "translateX(0)" : "translateX(-100%)")};
-    transition: transform 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+    transition: background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1),
+      transform 0.4s cubic-bezier(0.87, 0, 0.13, 1);
   }
 `
 

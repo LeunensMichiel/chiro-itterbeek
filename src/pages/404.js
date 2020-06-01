@@ -12,13 +12,13 @@ const NotFoundWrapper = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 66vh;
-  svg {
+  img {
     width: 100%;
     max-width: 360px;
   }
   @media ${p => p.theme.mq.mobileM} {
     min-height: 30vh;
-    svg {
+    img {
       max-width: 200px;
     }
     h1 {
@@ -30,7 +30,7 @@ const NotFound = () => {
   return (
     <Layout>
       <NotFoundWrapper>
-        <Klok />
+        <img src={Klok} alt="Klok" />
         <h1>Deze pagina bestaat niet!</h1>
       </NotFoundWrapper>
     </Layout>

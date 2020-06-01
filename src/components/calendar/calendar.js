@@ -6,7 +6,7 @@ import { CalendarItem } from "./calendarItem"
 
 import Chevron from "../../assets/icons/chevron.svg"
 
-export const Calendar = () => {
+const Calendar = () => {
   const data = useStaticQuery(graphql`
     query {
       calendar: allContentfulKalenderItem(
@@ -54,6 +54,7 @@ export const Calendar = () => {
       <CalendarNavigationWrapper disabled={dateState >= currentDate}>
         <div className="cal__nav__flex">
           <button
+            aria-label="Vorige maand"
             onClick={() => {
               changeDate(false)
             }}
@@ -65,6 +66,7 @@ export const Calendar = () => {
             <div className="cal__nav__year">{dateState.getFullYear()}</div>
           </div>
           <button
+            aria-label="Volgende maand"
             onClick={e => {
               changeDate(true)
             }}
@@ -84,3 +86,5 @@ export const Calendar = () => {
     </CalendarWrapper>
   )
 }
+
+export default Calendar

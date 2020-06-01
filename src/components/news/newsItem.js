@@ -5,7 +5,7 @@ import Img from "gatsby-image"
 
 import Chevron from "../../assets/icons/chevron.svg"
 
-export const NewsItem = ({ news }) => {
+const NewsItem = ({ news }) => {
   const data = useStaticQuery(graphql`
     query {
       headlineImage: file(relativePath: { eq: "images/itterbeek.jpg" }) {
@@ -49,3 +49,5 @@ export const NewsItem = ({ news }) => {
     </NewsItemWrapper>
   )
 }
+
+export default NewsItem

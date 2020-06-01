@@ -8,7 +8,7 @@ import { GenderContext } from "../../context/GenderContext"
 
 import Boekje from "../../assets/icons/boekje.svg"
 
-export const Highlighted = () => {
+const Highlighted = () => {
   const data = useStaticQuery(graphql`
     query {
       jokontakt: allContentfulBoekje(
@@ -73,7 +73,12 @@ export const Highlighted = () => {
           Lees hier de meest recente versie van ons megatof, 2-maandelijks
           chiro-boekje!
         </p>
-        <a href={boekje.url} target="_blank" rel="noopener noreferrer">
+        <a
+          aria-label="Boekje bekijken"
+          href={boekje.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Lezen
         </a>
         <small>{`Editie ${formatter.format(startdate)} - ${formatter.format(
@@ -83,3 +88,5 @@ export const Highlighted = () => {
     </HighlightedWrapper>
   )
 }
+
+export default Highlighted

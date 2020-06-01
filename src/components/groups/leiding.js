@@ -3,11 +3,10 @@ import { jsx } from "theme-ui"
 import { useState } from "react"
 import Img from "gatsby-image"
 import { useStaticQuery, graphql } from "gatsby"
-import { SwitchTransition, CSSTransition } from "react-transition-group"
 
 import { Group, LeidingItem } from "./groupStyles"
 
-export const Leiding = ({ color, gender }) => {
+const Leiding = ({ color, gender }) => {
   const data = useStaticQuery(graphql`
     query {
       allLeiding: allContentfulLeiding(sort: { fields: firstname }) {
@@ -147,3 +146,5 @@ export const Leiding = ({ color, gender }) => {
     </Group>
   )
 }
+
+export default Leiding

@@ -2,7 +2,7 @@
 import { jsx } from "theme-ui"
 import { useState, useContext, useEffect } from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { SwitchTransition, CSSTransition } from "react-transition-group"
+import loadable from "@loadable/component"
 
 import { GenderContext } from "../../context/GenderContext"
 
@@ -11,10 +11,11 @@ import {
   GroupNavigation,
   GroupNavigationItem,
 } from "./groupStyles"
-import { Leiding } from "./leiding"
-import { AgeGroup } from "./ageGroup"
 
-export const Groups = () => {
+const Leiding = loadable(() => import("./leiding"))
+const AgeGroup = loadable(() => import("./ageGroup"))
+
+const Groups = () => {
   const data = useStaticQuery(graphql`
     query {
       allGroup: allContentfulLeeftijdsgroep(sort: { fields: rang }) {
@@ -111,3 +112,5 @@ export const Groups = () => {
     </GroupWrapper>
   )
 }
+
+export default Groups

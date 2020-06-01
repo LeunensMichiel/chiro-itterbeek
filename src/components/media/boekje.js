@@ -2,7 +2,7 @@ import React from "react"
 import { AlbumItem } from "./mediaStyles"
 import Chevron from "../../assets/icons/chevron.svg"
 
-export const Boekje = ({ boekje }) => {
+const Boekje = ({ boekje }) => {
   const startdate = new Date(boekje.startdate)
   const enddate = new Date(boekje.enddate)
   const formatter = new Intl.DateTimeFormat("nl-BE", { month: "long" })
@@ -17,7 +17,12 @@ export const Boekje = ({ boekje }) => {
           enddate
         )} ${enddate.getFullYear()}`}</small>
         <div className="album__title">{boekje.title}</div>
-        <a href={boekje.url} target="_blank" rel="noopener noreferrer">
+        <a
+          aria-label="Boekje bekijken"
+          href={boekje.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <span>Lees boekje</span>
           <Chevron />
         </a>
@@ -25,3 +30,5 @@ export const Boekje = ({ boekje }) => {
     </AlbumItem>
   )
 }
+
+export default Boekje

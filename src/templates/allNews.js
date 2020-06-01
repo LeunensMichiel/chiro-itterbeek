@@ -1,12 +1,14 @@
 import React from "react"
 import Layout from "../components/layout"
-import { NewsHighlight } from "../components"
+import loadable from "@loadable/component"
 import { graphql, Link } from "gatsby"
 
 import { NewsWrapper } from "../components/news/newsStyles"
-import { NewsItem } from "../components/news/newsItem"
 import { MediaNavitation } from "../components/media/mediaStyles"
 import Chevron from "../assets/icons/chevron.svg"
+
+const NewsHighlight = loadable(() => import("../components/news/newsHighlight"))
+const NewsItem = loadable(() => import("../components/news/newsItem"))
 
 const allNews = ({ pageContext, data }) => {
   const { currentPage, numNewsPages } = pageContext
