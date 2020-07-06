@@ -49,6 +49,7 @@ export const newsListQuery = graphql`
       sort: { fields: date, order: DESC }
       skip: $skip
       limit: $limit
+      filter: { title: { ne: "dummy" } }
     ) {
       edges {
         node {

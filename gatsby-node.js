@@ -63,6 +63,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         documents: allContentfulDocument(sort: { fields: title }) {
           edges {
             node {
+              id
               title
             }
           }

@@ -18,7 +18,11 @@ const NewsHighlight = ({ margin }) => {
       }
       itterbeekFt: allContentfulBericht(
         sort: { fields: date, order: DESC }
-        filter: { isFeatured: { eq: true }, gender: { eq: "Itterbeek" } }
+        filter: {
+          isFeatured: { eq: true }
+          gender: { eq: "Itterbeek" }
+          title: { ne: "dummy" }
+        }
       ) {
         edges {
           node {
@@ -89,7 +93,7 @@ const NewsHighlight = ({ margin }) => {
     typeof currentFeatured === "undefined" &&
     typeof data.itterbeekFt.edges[0] === "undefined"
   ) {
-    return null
+    return <HighlightWrapper />
   }
   //There is a featured post
   if (
