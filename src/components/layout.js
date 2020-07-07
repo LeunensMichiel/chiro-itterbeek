@@ -62,7 +62,7 @@ const Layout = ({ children }) => {
           {genderState.gender === 0 ? <ChoosePage /> : children}
         </main>
       )}
-      <Footer />
+      {hasMounted && <Footer />}
     </>
   )
 }
