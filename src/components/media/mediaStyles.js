@@ -360,6 +360,7 @@ export const AlbumItem = styled.div`
       font-size: ${p => p.theme.fontSizes[2]}px;
       line-height: 1;
       font-weight: 700;
+      word-break: break-all;
       color: ${p => p.theme.colors.header};
       transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
     }

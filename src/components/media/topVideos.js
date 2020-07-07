@@ -51,6 +51,8 @@ const TopVideos = () => {
               frameBorder="0"
               allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
+              importance="low"
+              loading="lazy"
             ></iframe>
           </div>
         ))}
