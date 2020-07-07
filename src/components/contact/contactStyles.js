@@ -268,7 +268,8 @@ export const SocialWrapper = styled.nav`
     position: relative;
     display: flex;
     justify-content: flex-start;
-    &:focus {
+    &:focus,
+    &:active {
       svg {
         circle {
           fill: ${p => p.theme.colors.invisibleText};
@@ -296,8 +297,10 @@ export const SocialWrapper = styled.nav`
     border-radius: ${p => p.theme.radii.borderRadius};
     transition: opacity 0.2s cubic-bezier(0.87, 0, 0.13, 1);
     z-index: 10;
+    pointer-events: none;
 
     a {
+      pointer-events: all;
       white-space: nowrap;
       font-weight: 700;
       transition: color 0.3s ease;
