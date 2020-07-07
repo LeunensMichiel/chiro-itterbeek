@@ -3,6 +3,7 @@ import Layout from "../components/layout"
 import loadable from "@loadable/component"
 import { graphql, Link } from "gatsby"
 
+import SEO from "../components/seo/seo"
 import { NewsWrapper } from "../components/news/newsStyles"
 import { MediaNavitation } from "../components/media/mediaStyles"
 import Chevron from "../assets/icons/chevron.svg"
@@ -20,6 +21,10 @@ const allNews = ({ pageContext, data }) => {
 
   return (
     <Layout>
+      <SEO
+        title="Nieuws"
+        description="Bekijk hier de laatste updates van Chiro Itterbeek. Zowel van de de meisjes (Allegro) als de jongens (Jokonta)!"
+      />
       {isFirst && <NewsHighlight margin />}
       <NewsWrapper isFirst>
         <MediaNavitation isFirst={isFirst} isLast={isLast}>

@@ -3,6 +3,7 @@ import { jsx } from "theme-ui"
 import { graphql, Link } from "gatsby"
 
 import Layout from "../components/layout"
+import SEO from "../components/seo/seo"
 import {
   TopVideoWrapper,
   MediaNavitation,
@@ -22,6 +23,10 @@ const allVideos = ({ pageContext, data }) => {
 
   return (
     <Layout>
+      <SEO
+        title="Alle video's"
+        description="Bekijk hier alle video's van Chiro Itterbeek. Zowel van de jongens als de meisjes!"
+      />
       <TopVideoWrapper>
         <Link to="/media/">
           <Chevron />

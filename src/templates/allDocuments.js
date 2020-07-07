@@ -4,6 +4,7 @@ import { graphql, Link } from "gatsby"
 import loadable from "@loadable/component"
 
 import Layout from "../components/layout"
+import SEO from "../components/seo/seo"
 import {
   TopAlbumWrapper,
   MediaNavitation,
@@ -24,6 +25,10 @@ const allDocuments = ({ pageContext, data }) => {
 
   return (
     <Layout>
+      <SEO
+        title="Overige Documenten"
+        description="Overige documenten van Chiro Itterbeek. Kampbundels, Medische fishes, privacyverklaringen, enzovoort."
+      />
       <TopAlbumWrapper>
         <Link to="/media/">
           <Chevron />

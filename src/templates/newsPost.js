@@ -3,12 +3,17 @@ import { graphql } from "gatsby"
 import loadable from "@loadable/component"
 
 import Layout from "../components/layout"
+import SEO from "../components/seo/seo"
 
 const NewsBlock = loadable(() => import("../components/news/newsBlock"))
 
 const newsPost = ({ data }) => {
   return (
     <Layout>
+      <SEO
+        title={data.bericht.title}
+        description={data.bericht.excerpt.childMarkdownRemark.excerpt}
+      />
       <NewsBlock news={data.bericht} />
     </Layout>
   )
@@ -30,6 +35,11 @@ export const newsItemquery = graphql`
       id
       body {
         json
+      }
+      excerpt {
+        childMarkdownRemark {
+          excerpt(format: PLAIN, pruneLength: 120, truncate: true)
+        }
       }
     }
   }
