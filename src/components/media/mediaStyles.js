@@ -468,3 +468,11 @@ export const MediaNavitation = styled.nav`
     margin-bottom: ${p => p.theme.space[4]}px;
   }
 `
+
+export const Disclaimer = styled.p`
+  grid-column: 2 / span 12;
+  text-align: center;
+  font-size: ${p => p.theme.fontSizes[0]}px;
+  color: ${p => p.theme.colors.border};
+  margin-bottom: ${p => p.theme.space[4]}px;
+`

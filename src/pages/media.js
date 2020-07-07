@@ -6,6 +6,7 @@ import SEO from "../components/seo/seo"
 
 import JokontaMedia from "../assets/banners/jokonta-bg-media.svg"
 import AllegroMedia from "../assets/banners/allegro-bg-media.svg"
+import { Disclaimer } from "../components/media/mediaStyles"
 const Banner = loadable(() => import("../components/banner/banner"))
 const More = loadable(() => import("../components/media/more"))
 const Highlighted = loadable(() => import("../components/media/highlighted"))
@@ -28,6 +29,10 @@ const MediaPage = () => {
       <Highlighted />
       <TopVideos />
       <TopAlbums />
+      <Disclaimer>
+        Disclaimer: de video's maken gebruik van externe cookies, aangezien deze
+        op Facebook en Youtube geüpload staan.
+      </Disclaimer>
     </Layout>
   )
 }

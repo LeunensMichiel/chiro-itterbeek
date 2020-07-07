@@ -7,6 +7,7 @@ import SEO from "../components/seo/seo"
 import {
   TopVideoWrapper,
   MediaNavitation,
+  Disclaimer,
 } from "../components/media/mediaStyles"
 
 import Chevron from "../assets/icons/chevron.svg"
@@ -68,6 +69,10 @@ const allVideos = ({ pageContext, data }) => {
           ))}
         </div>
       </TopVideoWrapper>
+      <Disclaimer>
+        Disclaimer: de video's maken gebruik van externe cookies, aangezien deze
+        op Facebook en Youtube geüpload staan.
+      </Disclaimer>
     </Layout>
   )
 }

@@ -32,7 +32,7 @@ const Navbar = ({ show = false, hamburgerClickHandler }) => {
     <Fragment>
       <NavbarWrapper>
         {hasMounted && (
-          <ItterbeekWrapper mobile>
+          <ItterbeekWrapper gender={genderState.gender} mobile>
             <Link
               sx={{
                 variant: "text.navHeading",
