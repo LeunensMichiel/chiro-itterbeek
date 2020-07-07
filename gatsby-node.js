@@ -24,7 +24,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
         rang: {
           type: "Int!",
           resolve: source => {
-            return Number(source.age[1])
+            return Number(source.age[0])
           },
         },
       },

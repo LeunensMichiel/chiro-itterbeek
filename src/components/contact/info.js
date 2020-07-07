@@ -58,7 +58,11 @@ const ContactInfo = () => {
       ))}
       <h3>Communicatie</h3>
       <div className="contact__info__sectionItem">
-        <p>chiro.allegro@outlook.com</p>
+        <p>
+          {genderState.gender === 1
+            ? "chirojokonta@outlook.com"
+            : "chiro.allegro@outlook.com"}
+        </p>
         <p>Elke zondag van 14:00 tot 17:00</p>
         <p>Niet bereikbaar en een dringende vraag?</p>
         <p>
