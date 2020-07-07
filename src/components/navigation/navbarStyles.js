@@ -15,25 +15,6 @@ export const NavWrapper = styled.header`
   a {
     display: flex;
     align-items: center;
-    transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
-    &.active {
-      color: ${p =>
-        p.gender === 0
-          ? p.theme.colors.accent
-          : p.gender === 1
-          ? p.theme.colors.jokonta
-          : p.theme.colors.allegro};
-      transition: color 0.3s ease;
-    }
-    &:hover {
-      color: ${p =>
-        p.gender === 0
-          ? p.theme.colors.accent
-          : p.gender === 1
-          ? p.theme.colors.jokontaLight
-          : p.theme.colors.allegroLight};
-      transition: color 0.3s ease;
-    }
   }
   z-index: 100;
 
@@ -65,6 +46,16 @@ export const ItterbeekWrapper = styled.div`
   display: flex;
   align-items: center;
 
+  a:hover span {
+    color: ${p =>
+      p.gender === 0
+        ? p.theme.colors.accent
+        : p.gender === 1
+        ? p.theme.colors.jokontaLight
+        : p.theme.colors.allegroLight};
+    transition: color 0.3s ease;
+  }
+
   svg {
     height: ${p => p.theme.space[6]}px;
     width: auto;
@@ -93,6 +84,25 @@ export const LinkWrapper = styled.nav`
   align-items: center;
   a {
     padding: ${p => p.theme.space[2]}px 12px;
+    transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+    &.active {
+      color: ${p =>
+        p.gender === 0
+          ? p.theme.colors.accent
+          : p.gender === 1
+          ? p.theme.colors.jokonta
+          : p.theme.colors.allegro};
+      transition: color 0.3s ease;
+    }
+    &:hover {
+      color: ${p =>
+        p.gender === 0
+          ? p.theme.colors.accent
+          : p.gender === 1
+          ? p.theme.colors.jokontaLight
+          : p.theme.colors.allegroLight};
+      transition: color 0.3s ease;
+    }
   }
   .link__home {
     display: none;

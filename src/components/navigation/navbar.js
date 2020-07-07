@@ -59,9 +59,9 @@ const Navbar = ({ show = false, hamburgerClickHandler }) => {
           </span>
         </button>
       </NavbarWrapper>
-      <NavWrapper show={show} gender={genderState.gender}>
+      <NavWrapper show={show}>
         {hasMounted && (
-          <ItterbeekWrapper>
+          <ItterbeekWrapper gender={genderState.gender}>
             <Link
               sx={{
                 variant: "text.navHeading",
