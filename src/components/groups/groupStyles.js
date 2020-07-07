@@ -54,6 +54,7 @@ export const Group = styled.div`
   grid-template-rows: auto minmax(auto, 250px) auto;
   grid-gap: 12px;
   align-items: start;
+  align-content: start;
 
   .group__header {
     grid-column: 1 / span 4;
@@ -129,7 +130,7 @@ export const Group = styled.div`
       justify-content: center;
       flex-wrap: wrap;
       height: 100%;
-      padding: ${p => p.theme.space[4]}px ${p => p.theme.space[4]}px;
+      padding: ${p => p.theme.space[3]}px ${p => p.theme.space[4]}px;
     }
     &.group__leiding__about {
       padding: ${p => p.theme.space[4]}px;

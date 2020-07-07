@@ -93,7 +93,7 @@ const NewsHighlight = ({ margin }) => {
     typeof currentFeatured === "undefined" &&
     typeof data.itterbeekFt.edges[0] === "undefined"
   ) {
-    return <HighlightWrapper />
+    return <HighlightWrapper margin={margin ? 1 : 0} noItem />
   }
   //There is a featured post
   if (

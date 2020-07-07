@@ -5,7 +5,7 @@ export const HighlightWrapper = styled.section`
   display: flex;
   flex-direction: column;
   margin-top: ${p => (p.margin ? p.theme.space[7] : 0)}px;
-  margin-bottom: ${p => p.theme.space[7]}px;
+  margin-bottom: ${p => (p.noItem ? 0 : p.theme.space[7])}px;
 
   h2 {
     align-self: flex-start;
