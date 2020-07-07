@@ -100,11 +100,9 @@ export const Group = styled.div`
     }
 
     .group__leiding__grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: auto;
-      grid-column-gap: ${p => p.theme.space[2]}px;
-      grid-row-gap: ${p => p.theme.space[2]}px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
     }
   }
 
@@ -167,6 +165,11 @@ export const Group = styled.div`
       }
     }
   }
+  @media ${p => p.theme.mq.tablet} {
+    .group__description {
+      padding: ${p => p.theme.space[4]}px;
+    }
+  }
   @media ${p => p.theme.mq.mobileM} {
     display: flex;
     flex-direction: column;
@@ -178,9 +181,6 @@ export const Group = styled.div`
     .group__image {
       min-height: 200px;
       max-height: 200px;
-    }
-    .group__description {
-      padding: ${p => p.theme.space[4]}px;
     }
     .group__leiding {
       min-height: auto;
@@ -200,9 +200,8 @@ export const LeidingItem = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
-  width: ${p => (p.small ? "100%" : "120px")};
-  height: ${p => (p.small ? "100%" : "120px")};
-  grid-column: span 1;
+  width: ${p => (p.small ? "96px" : "120px")};
+  height: ${p => (p.small ? "96px" : "120px")};
   .group__leiding__title {
     color: ${p => p.theme.colors.styledHeaderText};
     line-height: 1;
@@ -231,5 +230,9 @@ export const LeidingItem = styled.div`
       left: 0;
       right: 0;
     }
+  }
+  @media ${p => p.theme.mq.laptopMDPI} {
+    width: ${p => (p.small ? "72px" : "120px")};
+    height: ${p => (p.small ? "72px" : "120px")};
   }
 `

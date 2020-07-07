@@ -89,6 +89,7 @@ export default {
      and (max-height: 1366px) 
      and (orientation: portrait) 
      and (-webkit-min-device-pixel-ratio: 1.5)`,
+    laptopMDPI: `(max-width: 1280px)`,
     laptop: `(max-width: 1440px)`,
     desktop: `(min-width: 1680px)`,
   },
