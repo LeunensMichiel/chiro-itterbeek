@@ -175,7 +175,7 @@ export const MapWrapper = styled.aside`
   @media ${p => p.theme.mq.mobileM} {
     grid-column: 2 / span 12;
     border: none;
-    min-height: 200px;
+    height: 200px;
     margin-bottom: ${p => p.theme.space[6]}px;
     padding: 0 ${p => p.theme.space[2]}px;
   }
