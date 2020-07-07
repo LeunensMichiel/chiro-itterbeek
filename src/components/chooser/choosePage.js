@@ -4,6 +4,7 @@ import { useContext, Fragment } from "react"
 
 import { GenderContext } from "../../context/GenderContext"
 
+import SEO from "../seo/seo"
 import { ChooseChiro } from "./chooserStyles"
 import Boy from "../../assets/images/jongen.svg"
 import BoyWave from "../../assets/images/jongen-zwaaien.svg"
@@ -13,6 +14,10 @@ const ChoosePage = () => {
   const { dispatch } = useContext(GenderContext)
   return (
     <Fragment>
+      <SEO
+        title="Home"
+        description="Welkom op de website van Chiro Itterbeek! We zijn een enorm leuke jeugdbeweging gelegen in Dilbeek, België. Voor de jongens ga je naar chiro Jokonta, voor de meisjes naar chiro Allegro!"
+      />
       <ChooseChiro
         jokonta
         onClick={() => {
