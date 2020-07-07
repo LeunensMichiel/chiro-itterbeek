@@ -4,6 +4,7 @@ import { BLOCKS } from "@contentful/rich-text-types"
 import Img from "gatsby-image"
 import { useStaticQuery, graphql, Link } from "gatsby"
 
+import SEO from "../seo/seo"
 import { GenderContext } from "../../context/GenderContext"
 
 import { InformationBlock } from "../information/informationStyles"
@@ -38,6 +39,10 @@ const NewsBlock = ({ news }) => {
   }
   return (
     <NewsBlockWrapper>
+      <SEO
+        title={news.title}
+        description={news.excerpt.childMarkdownRemark.excerpt}
+      />
       <InformationBlock gender={genderState.gender}>
         <Link to="/nieuws/">
           <Chevron />
