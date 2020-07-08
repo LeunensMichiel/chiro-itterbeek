@@ -5,6 +5,7 @@ import Img from "gatsby-image"
 import { Group, LeidingItem } from "./groupStyles"
 
 const AgeGroup = ({ color, group }) => {
+  group.age.sort((a, b) => parseInt(a) - parseInt(b))
   return (
     <Group color={color}>
       <h2

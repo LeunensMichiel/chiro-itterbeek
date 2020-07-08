@@ -2,7 +2,7 @@ import React from "react"
 import styled from "@emotion/styled"
 
 import Layout from "../components/layout"
-import Klok from "../assets/icons/klok.svg"
+import Klok from "../assets/images/klok.svg"
 
 const NotFoundWrapper = styled.div`
   grid-column: 2 / span 12;
