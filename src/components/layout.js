@@ -1,14 +1,12 @@
-import React, { useContext, useState } from "react"
+import React, { useState } from "react"
 import loadable from "@loadable/component"
 import PropTypes from "prop-types"
 import { css, Global } from "@emotion/core"
 
-import { GenderContext } from "../context/GenderContext"
 import { useHasMounted } from "../context/hasMounted"
 
 const Navbar = loadable(() => import("./navigation/navbar"))
 const Footer = loadable(() => import("./footer/footer"))
-const ChoosePage = loadable(() => import("./chooser/choosePage"))
 
 const mainCss = css`
   width: 100%;
@@ -34,7 +32,6 @@ const IsIE = () => {
 }
 const Layout = ({ children }) => {
   const hasMounted = useHasMounted()
-  const { genderState } = useContext(GenderContext)
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false)
   if (IsIE()) {
     alert(
@@ -60,7 +57,7 @@ const Layout = ({ children }) => {
       />
       {hasMounted && (
         <main css={mainCss} aria-hidden={sideDrawerOpen}>
-          {genderState.gender === 0 ? <ChoosePage /> : children}
+          {children}
         </main>
       )}
       {hasMounted && <Footer />}
