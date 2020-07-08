@@ -1,10 +1,10 @@
+import "mapbox-gl/dist/mapbox-gl.css"
 import React, { useState, useContext } from "react"
 import { useColorMode } from "theme-ui"
 import ReactMapGL, { Marker, FullscreenControl } from "react-map-gl"
 import { GenderContext } from "../../context/GenderContext"
 
 import { MapWrapper } from "./contactStyles"
-import "mapbox-gl/dist/mapbox-gl.css"
 
 const Map = () => {
   const [colorMode] = useColorMode()

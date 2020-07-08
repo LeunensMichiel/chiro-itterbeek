@@ -11,13 +11,14 @@ const Form = () => {
         genderState.gender === 1 ? "Jokonta" : "Allegro"
       }`}</h1>
       <ItterbeekForm
-        name="Contactformulier"
+        name={`Contactformulier ${
+          genderState.gender === 1 ? "Jokonta" : "Allegro"
+        }`}
         // action="/success/"
         method="POST"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
       >
-        <input type="hidden" name="form-name" value="Contactformulier" />
         <input type="hidden" name="bot-field" />
         <input
           type="hidden"
@@ -62,6 +63,32 @@ const Form = () => {
           Verstuur
         </button>
       </ItterbeekForm>
+      <form
+        name="Contactformulier Allegro"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        hidden
+      >
+        <input type="hidden" name="Chiro" value="Allegro" />
+        <input type="text" name="naam" />
+        <input type="email" name="email" />
+        <input type="tel" name="telefoon" />
+        <input type="text" name="onderwerp" />
+        <textarea name="bericht"></textarea>
+      </form>
+      <form
+        name="Contactformulier Jokonta"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        hidden
+      >
+        <input type="hidden" name="Chiro" value="Jokonta" />
+        <input type="text" name="naam" />
+        <input type="email" name="email" />
+        <input type="tel" name="telefoon" />
+        <input type="text" name="onderwerp" />
+        <textarea name="bericht"></textarea>
+      </form>
     </FormWrapper>
   )
 }
