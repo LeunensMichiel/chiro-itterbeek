@@ -11,9 +11,7 @@ const Form = () => {
         genderState.gender === 1 ? "Jokonta" : "Allegro"
       }`}</h1>
       <ItterbeekForm
-        name={`Contactformulier ${
-          genderState.gender === 1 ? "Jokonta" : "Allegro"
-        }`}
+        name={`Contact ${genderState.gender === 1 ? "Jokonta" : "Allegro"}`}
         // action="/success/"
         method="POST"
         data-netlify="true"
@@ -22,9 +20,7 @@ const Form = () => {
         <input
           type="hidden"
           name="form-name"
-          value={`Contactformulier ${
-            genderState.gender === 1 ? "Jokonta" : "Allegro"
-          }`}
+          value={`Contact ${genderState.gender === 1 ? "Jokonta" : "Allegro"}`}
         />
         <input type="hidden" name="bot-field" />
         <input

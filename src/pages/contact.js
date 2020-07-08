@@ -29,16 +29,12 @@ const ContactPage = () => {
         </>
       )}
       <form
-        name="Contactformulier Allegro"
+        name="Contact Allegro"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
         hidden
       >
-        <input
-          type="hidden"
-          name="form-name"
-          value="Contactformulier Allegro"
-        />
+        <input type="hidden" name="form-name" value="Contact Allegro" />
         <input type="hidden" name="bot-field" />
         <input type="hidden" name="chiro" value="Allegro" />
         <input type="text" name="naam" />
@@ -48,16 +44,12 @@ const ContactPage = () => {
         <textarea name="bericht"></textarea>
       </form>
       <form
-        name="Contactformulier Jokonta"
+        name="Contact Jokonta"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
         hidden
       >
-        <input
-          type="hidden"
-          name="form-name"
-          value="Contactformulier Jokonta"
-        />
+        <input type="hidden" name="form-name" value="Contact Jokonta" />
         <input type="hidden" name="bot-field" />
         <input type="hidden" name="chiro" value="Jokonta" />
         <input type="text" name="naam" />
