@@ -161,7 +161,7 @@ const Navbar = ({ show = false, hamburgerClickHandler }) => {
                   }
                   classNames="fade"
                 >
-                  {colorMode === "default" ? <Dark /> : <Light />}
+                  {colorMode === "default" ? <Light /> : <Dark />}
                 </CSSTransition>
               </SwitchTransition>
             </a>

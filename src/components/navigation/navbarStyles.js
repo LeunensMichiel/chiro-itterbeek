@@ -12,10 +12,6 @@ export const NavWrapper = styled.header`
     );
   transition: background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
   box-shadow: ${p => p.theme.shadows.boxShadow.nav};
-  a {
-    display: flex;
-    align-items: center;
-  }
   z-index: 100;
 
   @media ${p => p.theme.mq.tablet} {
@@ -46,14 +42,19 @@ export const ItterbeekWrapper = styled.div`
   display: flex;
   align-items: center;
 
-  a:hover span {
-    color: ${p =>
-      p.gender === 0
-        ? p.theme.colors.accent
-        : p.gender === 1
-        ? p.theme.colors.jokontaLight
-        : p.theme.colors.allegroLight};
-    transition: color 0.3s ease;
+  a {
+    display: flex;
+    align-items: center;
+    transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
+    &:hover {
+      color: ${p =>
+        p.gender === 0
+          ? p.theme.colors.accent
+          : p.gender === 1
+          ? p.theme.colors.jokontaLight
+          : p.theme.colors.allegroLight};
+      transition: color 0.3s ease;
+    }
   }
 
   svg {
@@ -83,6 +84,8 @@ export const LinkWrapper = styled.nav`
   visibility: ${p => (p.gender === 0 ? "hidden" : "visible")};
   align-items: center;
   a {
+    display: flex;
+    align-items: center;
     padding: ${p => p.theme.space[2]}px 12px;
     transition: color 0.4s cubic-bezier(0.87, 0, 0.13, 1);
     &.active {
@@ -130,6 +133,8 @@ export const SocialWrapper = styled.nav`
   align-items: center;
   justify-self: end;
   a {
+    display: flex;
+    align-items: center;
     cursor: pointer;
     &:not(:nth-of-type(odd)) {
       margin-left: ${p => p.theme.space[2]}px;

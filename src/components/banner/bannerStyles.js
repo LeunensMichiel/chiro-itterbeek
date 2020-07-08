@@ -6,7 +6,6 @@ export const BannerWrapper = styled.div`
   justify-content: center;
   margin-bottom: ${p => p.theme.space[7]}px;
   position: relative;
-  /* overflow: hidden; */
   .banner__image__container {
     overflow: hidden;
     height: 0;
