@@ -76,6 +76,12 @@ const Form = () => {
         data-netlify-honeypot="bot-field"
         hidden
       >
+        <input
+          type="hidden"
+          name="form-name"
+          value="Contactformulier Allegro"
+        />
+        <input type="hidden" name="bot-field" />
         <input type="hidden" name="chiro" value="Allegro" />
         <input type="text" name="naam" />
         <input type="email" name="email" />
@@ -89,6 +95,12 @@ const Form = () => {
         data-netlify-honeypot="bot-field"
         hidden
       >
+        <input
+          type="hidden"
+          name="form-name"
+          value="Contactformulier Jokonta"
+        />
+        <input type="hidden" name="bot-field" />
         <input type="hidden" name="chiro" value="Jokonta" />
         <input type="text" name="naam" />
         <input type="email" name="email" />
