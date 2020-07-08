@@ -36,6 +36,13 @@ const Information = () => {
           }
         }
       }
+      defaultImage: file(relativePath: { eq: "images/itterbeek.jpg" }) {
+        childImageSharp {
+          fluid(maxWidth: 400, quality: 30) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
     }
   `)
 
@@ -46,6 +53,10 @@ const Information = () => {
       ? block.node.gender === "Jokonta"
       : block.node.gender === "Allegro"
   )
+
+  if (!filteredBlocks[currentTab].node.banner) {
+    filteredBlocks[currentTab].node.banner = data.defaultImage.childImageSharp
+  }
 
   return (
     <InformationWrapper>
@@ -109,6 +120,7 @@ const Information = () => {
                 alt={filteredBlocks[currentTab].node.title}
                 title={filteredBlocks[currentTab].node.title}
               />
+
               <div className="information__article">
                 {documentToReactComponents(
                   filteredBlocks[currentTab].node.info.json

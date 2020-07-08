@@ -18,7 +18,7 @@ export const InformationNavigation = styled.nav`
   padding: ${p => p.theme.space[5]}px;
   margin-bottom: ${p => p.theme.space[6]}px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   background-color: ${p => p.theme.colors.backgroundMuted};
   border-radius: ${p => p.theme.radii.borderRadius};
   transition: background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1);

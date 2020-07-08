@@ -36,7 +36,7 @@ export const HighlightWrapper = styled.section`
 
   @media ${p => p.theme.mq.tablet} {
     grid-column: 2 / span 12;
-    margin-bottom: ${p => p.theme.space[6]}px;
+    margin-bottom: ${p => (p.noItem ? 0 : p.theme.space[6])}px;
   }
   @media ${p => p.theme.mq.mobileM} {
     margin-top: ${p => (p.margin ? p.theme.space[6] : 0)}px;

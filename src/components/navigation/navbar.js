@@ -81,7 +81,6 @@ const Navbar = ({ show = false, hamburgerClickHandler }) => {
               }}
               to="/"
               activeClassName="active"
-              className="link__home"
             >
               Home
             </Link>

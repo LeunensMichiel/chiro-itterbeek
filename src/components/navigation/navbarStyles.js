@@ -16,7 +16,7 @@ export const NavWrapper = styled.header`
 
   @media ${p => p.theme.mq.tablet} {
     a {
-      font-size: ${p => p.theme.fontSizes[2]}px;
+      font-size: 16px;
     }
   }
 
@@ -107,8 +107,10 @@ export const LinkWrapper = styled.nav`
       transition: color 0.3s ease;
     }
   }
-  .link__home {
-    display: none;
+  @media ${p => p.theme.mq.tablet} {
+    a {
+      padding: ${p => p.theme.space[2]}px 8px;
+    }
   }
   @media ${p => p.theme.mq.mobileM} {
     flex-direction: column;
@@ -120,9 +122,6 @@ export const LinkWrapper = styled.nav`
       &:not(:nth-of-type(4)) {
         margin-bottom: ${p => p.theme.space[2]}px;
       }
-    }
-    .link__home {
-      display: flex;
     }
   }
 `
