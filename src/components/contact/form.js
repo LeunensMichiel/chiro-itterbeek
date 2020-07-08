@@ -19,7 +19,13 @@ const Form = () => {
         data-netlify="true"
         data-netlify-honeypot="bot-field"
       >
-        <input type="hidden" name="form-name" value="contact" />
+        <input
+          type="hidden"
+          name="form-name"
+          value={`Contactformulier ${
+            genderState.gender === 1 ? "Jokonta" : "Allegro"
+          }`}
+        />
         <input type="hidden" name="bot-field" />
         <input
           type="hidden"
