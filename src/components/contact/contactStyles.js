@@ -317,3 +317,20 @@ export const SocialWrapper = styled.nav`
     }
   }
 `
+
+export const Toast = styled.div`
+  width: 100%;
+  max-width: 250px;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  padding: ${p => p.theme.space[2]}px;
+  background-color: ${p => p.theme.colors.backgroundMuted2};
+  box-shadow: ${p => p.theme.shadows.boxShadow.container};
+  color: ${p => p.theme.colors.header};
+  text-align: center;
+  border-radius: ${p => p.theme.radii.borderRadius};
+  z-index: 1000;
+`

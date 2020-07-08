@@ -1,10 +1,10 @@
 import React, { useContext } from "react"
 import { FormWrapper, StyledInput, ItterbeekForm } from "./contactStyles"
 import { GenderContext } from "../../context/GenderContext"
+// import { Location } from '@reach/router';
 
-const Form = () => {
+const Form = ({ location }) => {
   const { genderState } = useContext(GenderContext)
-
   return (
     <FormWrapper gender={genderState.gender}>
       <h1>{`Contactformulier ${
@@ -12,7 +12,7 @@ const Form = () => {
       }`}</h1>
       <ItterbeekForm
         name={`Contact ${genderState.gender === 1 ? "Jokonta" : "Allegro"}`}
-        // action="/success/"
+        action="/contact/?submit=ok"
         method="POST"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
