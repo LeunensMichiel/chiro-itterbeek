@@ -136,6 +136,19 @@ export const SocialWrapper = styled.nav`
     }
     &:first-of-type {
       display: ${p => (p.gender === 0 ? "none" : "flex")};
+      svg {
+        circle {
+          fill: ${p =>
+            p.gender === 0
+              ? p.theme.colors.accent
+              : p.gender === 1
+              ? p.theme.colors.jokonta
+              : p.theme.colors.allegro};
+        }
+        path {
+          fill: ${p => p.theme.colors.styledHeaderText};
+        }
+      }
     }
     &:hover {
       svg {

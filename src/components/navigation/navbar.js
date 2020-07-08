@@ -138,7 +138,7 @@ const Navbar = ({ show = false, hamburgerClickHandler }) => {
                   }
                   classNames="fade"
                 >
-                  {genderState.gender === 1 ? <Female /> : <Male />}
+                  {genderState.gender === 1 ? <Male /> : <Female />}
                 </CSSTransition>
               </SwitchTransition>
             </a>
