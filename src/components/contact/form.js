@@ -19,10 +19,11 @@ const Form = () => {
         data-netlify="true"
         data-netlify-honeypot="bot-field"
       >
+        <input type="hidden" name="form-name" value="contact" />
         <input type="hidden" name="bot-field" />
         <input
           type="hidden"
-          name="Chiro"
+          name="chiro"
           value={genderState.gender === 1 ? "Jokonta" : "Allegro"}
         />
         <StyledInput>
@@ -69,7 +70,7 @@ const Form = () => {
         data-netlify-honeypot="bot-field"
         hidden
       >
-        <input type="hidden" name="Chiro" value="Allegro" />
+        <input type="hidden" name="chiro" value="Allegro" />
         <input type="text" name="naam" />
         <input type="email" name="email" />
         <input type="tel" name="telefoon" />
@@ -82,7 +83,7 @@ const Form = () => {
         data-netlify-honeypot="bot-field"
         hidden
       >
-        <input type="hidden" name="Chiro" value="Jokonta" />
+        <input type="hidden" name="chiro" value="Jokonta" />
         <input type="text" name="naam" />
         <input type="email" name="email" />
         <input type="tel" name="telefoon" />
