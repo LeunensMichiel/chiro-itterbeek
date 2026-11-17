@@ -6,6 +6,7 @@ import { ContactInfo } from "@/components/contact/contact-info"
 import { MapLoader } from "@/components/contact/map-loader"
 import { SubmittedToast } from "@/components/contact/submitted-toast"
 import { OnlyFor } from "@/components/only-for"
+import { CHIROS } from "@/lib/chiro"
 import { getContactInfo } from "@/lib/contentful"
 import { pageMetadata } from "@/lib/metadata"
 
@@ -27,7 +28,11 @@ export default async function ContactPage() {
         <ChoosePage />
       </OnlyFor>
       <OnlyFor chiro="chosen">
-        <ContactForm />
+        {CHIROS.map(chiro => (
+          <OnlyFor key={chiro} chiro={chiro}>
+            <ContactForm chiro={chiro} />
+          </OnlyFor>
+        ))}
         <MapLoader />
         <ContactInfo contacts={contacts} />
       </OnlyFor>

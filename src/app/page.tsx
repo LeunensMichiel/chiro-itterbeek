@@ -53,6 +53,7 @@ export default async function HomePage() {
         <ChoosePage />
       </OnlyFor>
       <OnlyFor chiro="chosen">
+        <h1 className="sr-only">Chiro Itterbeek</h1>
         <Banner
           text="Programma"
           jokonta={jokontaCalendar}

@@ -35,13 +35,12 @@ export function HighlightedBoekje({
               {boekje && (
                 <>
                   <a
-                    aria-label="Boekje bekijken"
                     href={boekje.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mb-6 inline-block rounded-xs bg-chiro px-12 py-4 leading-none font-bold text-styled-header-text uppercase no-underline shadow-container transition-colors duration-400 ease-in-out hover:bg-chiro-light max-tablet:mb-2"
+                    className="mb-6 inline-block rounded-xs bg-chiro px-12 py-4 leading-none font-bold text-styled-header-text uppercase no-underline shadow-container transition-colors duration-400 ease-in-out hover:bg-chiro-dark max-tablet:mb-2"
                   >
-                    Lezen
+                    Lezen<span className="sr-only">{` ${NAMES[chiro]}`}</span>
                   </a>
                   <small className="block text-xs text-invisible-text">
                     {formatEdition(boekje.startdate, boekje.enddate)}

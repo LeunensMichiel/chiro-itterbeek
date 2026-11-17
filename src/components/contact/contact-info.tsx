@@ -10,8 +10,16 @@ const EMAIL = {
   allegro: "chiro.allegro@outlook.com",
 }
 
-const heading = "m-0 mb-2 text-lg text-chiro uppercase"
-const section = "mb-6 [&_p]:m-0 [&_p]:wrap-break-word"
+const heading = "m-0 mb-2 text-lg text-chiro-ink uppercase"
+const section =
+  "mb-6 [&_a]:text-paragraph [&_a]:underline-offset-2 [&_a:hover]:text-chiro-ink [&_p]:m-0 [&_p]:wrap-break-word"
+
+const MAPS_URL =
+  "https://www.google.com/maps/search/?api=1&query=Plankenstraat+23,+1701+Itterbeek"
+
+/** "0470 12 34 56" → "+32470123456", for tel: links */
+const telHref = (phone: string) =>
+  `tel:${phone.replace(/[^\d+]/g, "").replace(/^0/, "+32")}`
 
 export function ContactInfo({ contacts }: { contacts: ContactInfoData[] }) {
   return (
@@ -19,8 +27,13 @@ export function ContactInfo({ contacts }: { contacts: ContactInfoData[] }) {
       <h2 className="type-nav m-0 mb-6">Contactgegevens</h2>
       <h3 className={heading}>Adres</h3>
       <div className={section}>
-        <p>Plankenstraat 23</p>
-        <p>1701 Itterbeek</p>
+        <p>
+          <a href={MAPS_URL} target="_blank" rel="noopener noreferrer">
+            Plankenstraat 23
+            <br />
+            1701 Itterbeek
+          </a>
+        </p>
         <p>Vlaams-Brabant, België</p>
       </div>
       {CHIROS.map(chiro => (
@@ -32,13 +45,21 @@ export function ContactInfo({ contacts }: { contacts: ContactInfoData[] }) {
               <div key={contact.id} className={section}>
                 <p>{contact.fullName}</p>
                 {contact.isVolwassenBegeleider && <p>(volwassen begeleider)</p>}
-                <p>{contact.email}</p>
-                <p>{contact.phone}</p>
+                <p>
+                  <a href={`mailto:${contact.email}`}>{contact.email}</a>
+                </p>
+                {contact.phone && (
+                  <p>
+                    <a href={telHref(contact.phone)}>{contact.phone}</a>
+                  </p>
+                )}
               </div>
             ))}
           <h3 className={heading}>Communicatie</h3>
           <div className={section}>
-            <p>{EMAIL[chiro]}</p>
+            <p>
+              <a href={`mailto:${EMAIL[chiro]}`}>{EMAIL[chiro]}</a>
+            </p>
             <p>Elke zondag van 14:00 tot 17:00</p>
             <p>Niet bereikbaar en een dringende vraag?</p>
             <p>
@@ -50,7 +71,7 @@ export function ContactInfo({ contacts }: { contacts: ContactInfoData[] }) {
           </div>
         </OnlyFor>
       ))}
-      <h3 className={heading}>Nuttige Links</h3>
+      <h3 className={heading}>Nuttige links</h3>
       <SocialLinks onMuted className="items-start justify-self-end" />
     </aside>
   )

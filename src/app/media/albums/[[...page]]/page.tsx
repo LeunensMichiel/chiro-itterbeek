@@ -51,10 +51,15 @@ export default async function AlbumsPage({ params }: Props) {
             title={album.title}
             href={album.url}
             linkLabel="Bekijk album"
-            ariaLabel="Album bekijken"
           />
         ))}
       </div>
+      <Pagination
+        basePath={BASE}
+        page={page}
+        pageCount={pageCount(albums.length, PER)}
+        position="bottom"
+      />
     </MediaSection>
   )
 }

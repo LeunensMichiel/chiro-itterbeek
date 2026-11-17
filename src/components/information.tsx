@@ -22,8 +22,7 @@ export function Information({ blocks }: { blocks: InfoBlock[] }) {
             image: (
               <CmsImage
                 image={block.banner}
-                alt={block.title}
-                title={block.title}
+                alt=""
                 sizes="(max-width: 1024px) 100vw, 950px"
                 className="h-[320px] w-full rounded-xs max-tablet:h-[280px] max-mobile:h-[200px]"
               />

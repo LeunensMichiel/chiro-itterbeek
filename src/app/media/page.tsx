@@ -39,6 +39,7 @@ export default async function MediaPage() {
       <OnlyFor chiro="chosen">
         <Banner
           text="Foto's en Video's"
+          level={1}
           jokonta={jokontaMedia}
           allegro={allegroMedia}
         />
@@ -64,7 +65,6 @@ export default async function MediaPage() {
                       title={album.title}
                       href={album.url}
                       linkLabel="Bekijk album"
-                      ariaLabel="Album bekijken"
                     />
                   ))}
               </div>

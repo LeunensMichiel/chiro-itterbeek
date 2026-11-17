@@ -23,7 +23,8 @@
   --color-nav-background: #272728;
   --color-highlight-text: #cacace;
   --color-aside-text: #545456;
-  --color-invisible-text: #99999e;
+  /* Fine print: ≥4.5:1 on the background in both themes */
+  --color-invisible-text: #6e6e73;
   --color-background: #f9f9fc;
   --color-background-muted: #ededf2;
   --color-background-muted-2: #f9f9fc;
@@ -32,15 +33,25 @@
   --color-border-muted: #cacace;
   --color-accent-gray: #cacace;
   --color-accent: #e1143c;
-  --color-jokonta: #2371e2;
+  --color-accent-light: #ff7a93;
+  --color-accent-dark: #b00f2f;
+  /* Dark text for bright surfaces (yellow, orange, gold), in both themes */
+  --color-on-bright: #272728;
+  /* Jokonta and Allegro are deep enough for white text (≥4.5:1) */
+  --color-jokonta: #2068d6;
   --color-jokonta-light: #a2d3ff;
   --color-jokonta-dark: #1e2f81;
-  --color-allegro: #f72585;
+  --color-allegro: #d91a6c;
   --color-allegro-light: #f793cd;
   --color-allegro-dark: #c31b62;
   /* The chosen chiro's color; the Itterbeek accent until one is chosen */
   --color-chiro: var(--color-accent);
   --color-chiro-light: var(--color-accent);
+  /* Hover for surfaces with white text: always darker */
+  --color-chiro-dark: var(--color-accent-dark);
+  /* The chiro color as text on the background, and its hover */
+  --color-chiro-ink: var(--color-chiro);
+  --color-chiro-ink-hover: var(--color-chiro-dark);
 
   /* Desktop-first breakpoints, used as max-mobile:, max-tablet:, … */
   --breakpoint-*: initial;
@@ -70,7 +81,7 @@
   --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
   --animate-reveal: reveal 0.2s var(--ease-chiro);
-  --animate-toast: toast 6.6s var(--ease-chiro) forwards;
+  --animate-toast: toast 10s var(--ease-chiro) forwards;
 
   @keyframes reveal {
     from {
@@ -118,16 +129,30 @@
   --color-input: #545456;
   --color-border-muted: #99999e;
   --color-accent-gray: #545456;
+  --color-invisible-text: #99999e;
+  /* Text in the chiro color must be lighter on the dark background */
+  --color-chiro-ink: var(--color-accent-light);
+  --color-chiro-ink-hover: var(--color-styled-header-text);
 }
 
 :root[data-chiro="jokonta"] {
   --color-chiro: var(--color-jokonta);
   --color-chiro-light: var(--color-jokonta-light);
+  --color-chiro-dark: var(--color-jokonta-dark);
 }
 
 :root[data-chiro="allegro"] {
   --color-chiro: var(--color-allegro);
   --color-chiro-light: var(--color-allegro-light);
+  --color-chiro-dark: var(--color-allegro-dark);
+}
+
+:root[data-theme="dark"][data-chiro="jokonta"] {
+  --color-chiro-ink: var(--color-jokonta-light);
+}
+
+:root[data-theme="dark"][data-chiro="allegro"] {
+  --color-chiro-ink: var(--color-allegro-light);
 }
 
 @layer base {
@@ -156,6 +181,16 @@
     min-height: 100%;
     display: flex;
     flex-direction: column;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-chiro-ink);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background-color: var(--color-chiro);
+    color: var(--color-styled-header-text);
   }
 
   button {
@@ -253,7 +288,7 @@
     i,
     strong,
     em {
-      word-break: break-all;
+      overflow-wrap: anywhere;
     }
     li p {
       margin: 0;
@@ -265,11 +300,11 @@
       width: 100%;
     }
     a {
-      color: var(--color-chiro);
+      color: var(--color-chiro-ink);
       transition: color 0.2s var(--ease-chiro);
       &:hover {
         transition: color 0.2s ease;
-        color: var(--color-chiro-light);
+        color: var(--color-chiro-ink-hover);
       }
     }
     @media (width < 768px) {
@@ -370,10 +405,21 @@
       transition: fill 0.3s ease-out;
     }
     &:hover svg circle {
-      fill: var(--social-circle-hover, var(--color-invisible-text));
+      fill: var(--social-circle-hover, var(--color-chiro-dark));
     }
     &:hover svg path {
       fill: var(--color-styled-header-text);
     }
+  }
+}
+
+/* Respect "reduce motion": no slides, reveals or color fades */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }

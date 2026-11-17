@@ -32,9 +32,33 @@ export function MoreMedia() {
             <Chevron />
           </Link>
         ))}
-        <small className="block text-xs text-invisible-text max-tablet:text-[10px]">
-          Wil je meer up to date blijven? Bezoek dan zeker ook onze instagram en
-          facebook!
+        <small className="block text-xs text-invisible-text [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-chiro-ink">
+          Wil je meer up to date blijven? Volg ons dan zeker ook op{" "}
+          <a
+            href="https://www.instagram.com/chiro_allegro/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="jokonta:hidden"
+          >
+            Instagram
+          </a>
+          <a
+            href="https://www.instagram.com/chirojokonta/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden jokonta:inline"
+          >
+            Instagram
+          </a>{" "}
+          en{" "}
+          <a
+            href="https://www.facebook.com/ChiroItterbeek"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Facebook
+          </a>
+          !
         </small>
       </div>
     </nav>

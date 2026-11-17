@@ -2,10 +2,14 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 import { NewsCard } from "@/components/news/news-card"
-import { NewsHighlight } from "@/components/news/news-highlight"
+import {
+  featuredVariants,
+  NewsHighlight,
+} from "@/components/news/news-highlight"
 import { NewsPost } from "@/components/news/news-post"
 import { Pagination } from "@/components/pagination"
 import { getPosts } from "@/lib/contentful"
+import { cx } from "@/lib/cx"
 import { pageMetadata } from "@/lib/metadata"
 import {
   PER_PAGE,
@@ -21,6 +25,12 @@ import {
  */
 
 type Props = { params: Promise<{ slug?: string[] }> }
+
+const HIDE_FOR = {
+  jokonta: "jokonta:hidden",
+  allegro: "allegro:hidden",
+  unchosen: "unchosen:hidden",
+}
 
 export const dynamicParams = false
 
@@ -74,20 +84,43 @@ export default async function NewsPage({ params }: Props) {
   if (route.kind === "post") return <NewsPost post={route.post} />
 
   const { page, posts } = route
+  const pagination = (
+    <Pagination
+      basePath="/nieuws/"
+      page={page}
+      pageCount={pageCount(posts.length, PER_PAGE.nieuws)}
+    />
+  )
+  // On page 1 the featured post is right above the grid: don't list it twice
+  const featured = page === 1 ? featuredVariants(posts) : []
+  const hiddenAsFeatured = (post: (typeof posts)[number]) =>
+    cx(
+      ...featured.map(
+        variant => variant.post?.id === post.id && HIDE_FOR[variant.key],
+      ),
+    )
+
   return (
     <>
-      {page === 1 && <NewsHighlight posts={posts} withMargin />}
+      <h1 className="sr-only">Nieuws</h1>
+      {page === 1 && <NewsHighlight posts={posts} onNewsPage />}
       <section className="col-[2/span_12] mb-24 max-tablet:mb-12">
+        {pagination}
+        <div className="grid grid-cols-3 gap-4 max-mobile:grid-cols-1">
+          {paginate(posts, page, PER_PAGE.nieuws).map(post => (
+            <NewsCard
+              key={post.id}
+              post={post}
+              className={hiddenAsFeatured(post)}
+            />
+          ))}
+        </div>
         <Pagination
           basePath="/nieuws/"
           page={page}
           pageCount={pageCount(posts.length, PER_PAGE.nieuws)}
+          position="bottom"
         />
-        <div className="grid grid-cols-3 gap-4 max-mobile:grid-cols-1">
-          {paginate(posts, page, PER_PAGE.nieuws).map(post => (
-            <NewsCard key={post.id} post={post} />
-          ))}
-        </div>
       </section>
     </>
   )

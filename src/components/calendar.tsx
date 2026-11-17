@@ -1,16 +1,16 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useLayoutEffect, useRef, useState } from "react"
 
 import type { Audience } from "@/lib/chiro"
 import type { CalendarItem } from "@/lib/contentful"
 import { cx } from "@/lib/cx"
-import { formatLongDate, formatMonth, formatTime } from "@/lib/format"
+import { formatMonth, formatTime, formatWeekday } from "@/lib/format"
 import { useToday } from "@/lib/use-today"
 
 import Chevron from "./icons/chevron"
 
-const COLLAPSED = "88px"
+const COLLAPSED = 88
 
 const visibleFor: Record<Audience, string> = {
   itterbeek: "flex",
@@ -21,29 +21,45 @@ const visibleFor: Record<Audience, string> = {
 /** Months since year 0, so months can be compared and stepped through. */
 const monthIndex = (date: Date) => date.getFullYear() * 12 + date.getMonth()
 
-function CalendarEntry({ item }: { item: CalendarItem }) {
+/** Sundays without chiro are listed too; they get a quieter card. */
+const isNoChiro = (item: CalendarItem) => /geen chiro/i.test(item.title)
+
+function CalendarEntry({ item, today }: { item: CalendarItem; today: string }) {
   const [expanded, setExpanded] = useState(false)
   const [maxHeight, setMaxHeight] = useState(COLLAPSED)
+  // Only texts that don't fit get a "Meer lezen" button
+  const [overflows, setOverflows] = useState(false)
   const textRef = useRef<HTMLParagraphElement>(null)
   const date = new Date(item.date)
+  const isPast = item.date.slice(0, 10) < today
+  const noChiro = isNoChiro(item)
 
-  const toggle = () => {
-    setMaxHeight(
-      expanded ? COLLAPSED : `${textRef.current?.scrollHeight ?? 88}px`,
-    )
-    setExpanded(!expanded)
-  }
+  useLayoutEffect(() => {
+    const text = textRef.current
+    if (!text) return
+    const measure = () => setOverflows(text.scrollHeight > COLLAPSED + 1)
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(text)
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <article
       className={cx(
         "w-full rounded-xs border border-solid transition-[border-color,opacity] duration-400 ease-chiro max-mobile:flex-col starting:opacity-0",
         expanded ? "border-border-muted" : "border-border",
+        isPast && "opacity-60",
         visibleFor[item.audience],
       )}
     >
       <div className="flex min-w-[260px] flex-col items-center justify-center bg-background-muted max-tablet:min-w-[200px] max-mobile:flex-row max-mobile:p-2">
-        <span className="mb-1 font-alt text-[96px] leading-none text-chiro max-tablet:text-7xl max-mobile:mr-4 max-mobile:mb-0">
+        <span
+          className={cx(
+            "mb-1 font-alt text-[96px] leading-none max-tablet:text-7xl max-mobile:mr-4 max-mobile:mb-0",
+            noChiro ? "text-aside-text" : "text-chiro-ink",
+          )}
+        >
           {date.getDate()}
         </span>
         <span className="type-heading">{formatMonth(date)}</span>
@@ -51,23 +67,36 @@ function CalendarEntry({ item }: { item: CalendarItem }) {
       <div className="flex h-full flex-col justify-center p-12 max-mobile:p-6">
         <h3 className="type-nav mt-0 mb-1 max-mobile:text-lg">{item.title}</h3>
         <p className="m-0 mb-4 text-sm text-aside-text uppercase max-mobile:text-xs">
-          {`${formatLongDate(date)} om ${formatTime(date)}`}
+          {isPast
+            ? `${formatWeekday(date)} · voorbij`
+            : noChiro
+              ? formatWeekday(date)
+              : `${formatWeekday(date)} · ${formatTime(date)}`}
         </p>
-        <p
-          ref={textRef}
-          className="type-paragraph m-0 mb-4 min-h-[88px] overflow-hidden p-0 whitespace-pre-line transition-[max-height,color] duration-400 ease-chiro max-mobile:text-sm"
-          style={{ maxHeight }}
-        >
-          {item.description}
-        </p>
-        <button
-          aria-expanded={expanded}
-          onClick={toggle}
-          className="flex items-center text-lg text-aside-text underline [&_svg]:mt-1 [&_svg]:ml-2 [&_svg]:h-[11px] [&_svg]:w-auto [&_svg]:fill-aside-text [&_svg]:transition-[fill,rotate] [&_svg]:duration-200 [&_svg]:ease-chiro"
-        >
-          <span>{`${expanded ? "Minder" : "Meer"} lezen`}</span>
-          <Chevron className={expanded ? "-rotate-90" : "rotate-90"} />
-        </button>
+        {item.description && (
+          <p
+            ref={textRef}
+            className="type-paragraph m-0 overflow-hidden p-0 whitespace-pre-line transition-[max-height,color] duration-400 ease-chiro max-mobile:text-sm"
+            style={{ maxHeight }}
+          >
+            {item.description}
+          </p>
+        )}
+        {(overflows || expanded) && (
+          <button
+            aria-expanded={expanded}
+            onClick={() => {
+              setMaxHeight(
+                expanded ? COLLAPSED : (textRef.current?.scrollHeight ?? 0),
+              )
+              setExpanded(!expanded)
+            }}
+            className="mt-4 flex items-center self-start text-lg text-aside-text underline underline-offset-2 [&_svg]:mt-1 [&_svg]:ml-2 [&_svg]:h-[11px] [&_svg]:w-auto [&_svg]:fill-aside-text [&_svg]:transition-[fill,rotate] [&_svg]:duration-200 [&_svg]:ease-chiro"
+          >
+            <span>{`${expanded ? "Minder" : "Meer"} lezen`}</span>
+            <Chevron className={expanded ? "-rotate-90" : "rotate-90"} />
+          </button>
+        )}
       </div>
     </article>
   )
@@ -96,6 +125,12 @@ export function Calendar({
       item => item.audience === "itterbeek" || item.audience === chiro,
     )
   const canGoBack = offset > 0
+  // …nor past the last month that has something planned
+  const lastMonth = Math.max(
+    currentMonth,
+    ...items.map(item => monthIndex(new Date(item.date))),
+  )
+  const canGoForward = shownMonth < lastMonth
 
   return (
     <section className="col-[3/span_10] mb-24 flex flex-col items-center max-tablet:col-[2/span_12] max-tablet:mb-16">
@@ -120,24 +155,31 @@ export function Calendar({
           </div>
           <button
             aria-label="Volgende maand"
+            disabled={!canGoForward}
+            className="cursor-pointer disabled:cursor-default"
             onClick={() => setOffset(offset + 1)}
           >
-            <Chevron />
+            <Chevron
+              className={cx(!canGoForward && "[&_path]:fill-accent-gray!")}
+            />
           </button>
         </div>
       </nav>
       <div className="flex w-full flex-col gap-2">
         {monthItems.map(item => (
-          <CalendarEntry key={item.id} item={item} />
+          <CalendarEntry key={item.id} item={item} today={today} />
         ))}
       </div>
       <p
         className={cx(
+          "type-paragraph m-0 w-full rounded-xs border border-dashed border-border-muted p-12 text-center text-aside-text max-mobile:p-6",
           hasItemsFor("jokonta") && "jokonta:hidden",
           hasItemsFor("allegro") && "allegro:hidden",
         )}
       >
-        Er staat niets gepland deze maand.
+        {canGoForward
+          ? "Er staat niets gepland deze maand. Kijk eens bij de volgende maand!"
+          : "Er staat nog niets gepland. Het programma volgt snel!"}
       </p>
     </section>
   )

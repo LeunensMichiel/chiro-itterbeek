@@ -8,7 +8,6 @@ type Props = {
   /** Contentful image; falls back to the default Itterbeek photo when null. */
   image: CmsImageData | null
   alt: string
-  title?: string
   /** `sizes` attribute for the responsive srcset */
   sizes: string
   quality?: 80 | 90
@@ -28,7 +27,6 @@ type Props = {
 export function CmsImage({
   image,
   alt,
-  title,
   sizes,
   quality = 90,
   fixed = false,
@@ -37,7 +35,7 @@ export function CmsImage({
 }: Props) {
   const source: CmsImageData | StaticImageData = image ?? fallbackImage
   return (
-    <div className={cx("relative overflow-hidden", className)} title={title}>
+    <div className={cx("relative overflow-hidden", className)}>
       {!fixed && (
         <div
           aria-hidden

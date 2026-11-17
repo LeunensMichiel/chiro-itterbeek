@@ -5,7 +5,7 @@ export const groupGrid =
   "grid w-full grid-cols-10 grid-rows-[auto_minmax(auto,250px)_auto] content-start items-start gap-3 max-mobile:flex max-mobile:flex-col max-mobile:items-stretch max-mobile:justify-start"
 
 export const groupHeader =
-  "type-alt col-[1/span_4] row-1 m-0 block rounded-xs p-6 text-center text-styled-header-text max-mobile:p-4"
+  "type-alt col-[1/span_4] row-1 m-0 block rounded-xs p-6 text-center max-mobile:p-4"
 
 export const groupImage =
   "col-[5/span_6] row-[1/span_2] h-full max-h-[360px] w-full rounded-xs max-mobile:max-h-[200px] max-mobile:min-h-[200px]"
@@ -26,11 +26,23 @@ export const leidingItem = (small: boolean) =>
 export const leidingName = (small: boolean) =>
   cx(
     "pointer-events-none absolute z-10 text-center leading-none font-bold text-styled-header-text uppercase",
-    small ? "text-[9px]" : "text-sm",
+    small ? "text-xs max-laptop:text-[11px]" : "text-sm",
   )
 
 export const leidingPhoto =
-  "size-full rounded-full border-4 border-solid transition-[border-color] duration-200 ease-chiro after:absolute after:inset-0 after:bg-[rgba(24,24,25,0.33)]"
+  "size-full rounded-full border-4 border-solid transition-[border-color] duration-200 ease-chiro after:absolute after:inset-0 after:bg-[rgba(24,24,25,0.45)]"
+
+/**
+ * Text on a group color: white, or dark on the bright ones (yellow, orange and
+ * the leiding's gold), where white can't be read.
+ */
+export const groupText = (color?: string) =>
+  color === "paars" ||
+  color === "groen" ||
+  color === "rood" ||
+  color === "blauw"
+    ? "text-styled-header-text"
+    : "text-on-bright"
 
 /** Group colors as set in Contentful; the leiding get a golden gradient. */
 export function groupColor(color?: string) {

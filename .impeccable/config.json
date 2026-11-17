@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "bounce-easing",
+        "value": "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+        "createdAt": "2026-11-17T19:23:26.426Z",
+        "reason": "Claude: existing hamburger 'elastic' animation (jonsuh/hamburgers) carried over unchanged from the old navbarStyles.js; user asked for a faithful port, not a redesign"
+      }
+    ]
+  }
+}

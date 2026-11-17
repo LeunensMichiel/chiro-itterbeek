@@ -33,7 +33,7 @@ function Logo({ className }: { className?: string }) {
     <div className={cx("flex items-center", className)}>
       <Link
         href="/"
-        className="type-nav flex items-center transition-colors duration-300 ease-in-out hover:text-chiro-light max-tablet:text-base max-mobile:text-lg"
+        className="type-nav flex items-center transition-colors duration-300 ease-in-out hover:text-chiro-ink max-tablet:text-base max-mobile:text-lg"
       >
         <Chiro className="mr-4 h-12 w-auto max-mobile:mx-4 max-mobile:h-9" />
         <span>Chiro Itterbeek</span>
@@ -44,7 +44,7 @@ function Logo({ className }: { className?: string }) {
 
 // Round icon buttons and links on the right of the navigation
 const socialBase =
-  "cursor-pointer items-center [&_circle]:transition-[fill] [&_circle]:duration-300 [&_circle]:ease-out [&_path]:transition-[fill] [&_path]:duration-300 [&_path]:ease-out [&_svg]:h-9 [&_svg]:w-auto hover:[&_circle]:fill-chiro-light hover:[&_path]:fill-styled-header-text max-tablet:[&_svg]:h-8 max-mobile:[&_svg]:h-9"
+  "cursor-pointer items-center [&_circle]:transition-[fill] [&_circle]:duration-300 [&_circle]:ease-out [&_path]:transition-[fill] [&_path]:duration-300 [&_path]:ease-out [&_svg]:h-9 [&_svg]:w-auto hover:[&_circle]:fill-chiro-dark hover:[&_path]:fill-styled-header-text max-tablet:[&_svg]:h-8 max-mobile:[&_svg]:h-9"
 const socialItem = `${socialBase} [&_circle]:fill-background-muted [&_path]:fill-header`
 // The visible one of two stacked icons is revealed with a growing circle
 const reveal = "[&_path]:animate-reveal"
@@ -81,8 +81,9 @@ export function Navbar({
         id="navigation"
         className={cx(
           "fixed z-100 grid h-[100px] w-full grid-cols-site bg-background shadow-nav",
-          "max-mobile:inset-x-0 max-mobile:top-[72px] max-mobile:bottom-0 max-mobile:flex max-mobile:h-auto max-mobile:flex-col max-mobile:overflow-y-auto max-mobile:transition-[background-color,translate] max-mobile:duration-400 max-mobile:ease-chiro",
-          !open && "max-mobile:-translate-x-full",
+          "max-mobile:inset-x-0 max-mobile:top-[72px] max-mobile:bottom-0 max-mobile:flex max-mobile:h-auto max-mobile:flex-col max-mobile:overflow-y-auto max-mobile:transition-[background-color,translate,visibility] max-mobile:duration-400 max-mobile:ease-chiro",
+          // Hidden, not just moved aside, so the closed menu is out of the tab order
+          !open && "max-mobile:invisible max-mobile:-translate-x-full",
         )}
       >
         <Logo className="col-[2/span_3] max-mobile:hidden" />
@@ -93,8 +94,8 @@ export function Navbar({
               key={href}
               href={href}
               className={cx(
-                "type-nav flex items-center px-3 py-2 transition-colors duration-300 ease-in-out hover:text-chiro-light max-tablet:px-2 max-tablet:text-base max-mobile:mb-2 max-mobile:px-0 max-mobile:text-4xl max-mobile:last:mb-0",
-                isActive(pathname, href) && "text-chiro",
+                "type-nav flex items-center px-3 py-2 transition-colors duration-300 ease-in-out hover:text-chiro-ink max-tablet:px-2 max-tablet:text-base max-mobile:mb-2 max-mobile:px-0 max-mobile:text-4xl max-mobile:last:mb-0",
+                isActive(pathname, href) && "text-chiro-ink",
               )}
               aria-current={isActive(pathname, href) ? "page" : undefined}
             >
@@ -103,20 +104,27 @@ export function Navbar({
           ))}
         </nav>
 
-        <nav className="col-[11/span_3] flex items-center justify-self-end max-mobile:min-h-24 max-mobile:justify-center">
+        <nav className="col-[11/span_3] flex items-center justify-self-end max-mobile:min-h-24 max-mobile:flex-wrap max-mobile:justify-center max-mobile:pb-6">
           <button
             className={cx(
               socialBase,
-              "flex unchosen:hidden [&_circle]:fill-chiro [&_path]:fill-styled-header-text",
+              "flex gap-3 max-mobile:mb-6 max-mobile:basis-full max-mobile:justify-center unchosen:hidden [&_circle]:fill-chiro [&_path]:fill-styled-header-text",
             )}
             onClick={toggleChiro}
-            aria-label="Verwisselen van Chiro (Meisjes of Jongens)"
+            title="Wissel tussen Jokonta (jongens) en Allegro (meisjes)"
           >
             <Male className={cx("hidden jokonta:block", reveal)} />
             <Female className={cx("jokonta:hidden", reveal)} />
+            {/* Spelled out in the mobile menu, a tooltip on desktop */}
+            <span className="type-nav sr-only text-base max-mobile:not-sr-only">
+              <span className="jokonta:hidden">Naar Jokonta (jongens)</span>
+              <span className="hidden jokonta:inline">
+                Naar Allegro (meisjes)
+              </span>
+            </span>
           </button>
           <button
-            className={cx(socialItem, "ml-2 flex max-mobile:ml-4")}
+            className={cx(socialItem, "ml-2 flex max-mobile:ml-0")}
             onClick={toggleColorMode}
             aria-label="Verwisselen van kleurenthema (donker of licht)"
           >
@@ -135,7 +143,7 @@ export function Navbar({
           <a
             className={cx(
               socialItem,
-              "ml-2 flex max-mobile:ml-4 jokonta:hidden",
+              "ml-2 flex max-mobile:ml-4 jokonta:hidden unchosen:hidden",
             )}
             aria-label="Instagram Chiro Allegro"
             href="https://www.instagram.com/chiro_allegro/"

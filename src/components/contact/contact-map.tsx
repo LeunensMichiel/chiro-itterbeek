@@ -16,7 +16,7 @@ export default function ContactMap() {
   return (
     <MapGL
       mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
-      initialViewState={{ latitude: 50.830913, longitude: 4.234039, zoom: 15 }}
+      initialViewState={{ latitude: 50.831854, longitude: 4.234065, zoom: 15 }}
       style={{ width: "100%", height: "100%" }}
       mapStyle={colorMode === "dark" ? DARK_STYLE : LIGHT_STYLE}
     >
@@ -24,12 +24,7 @@ export default function ContactMap() {
         position="top-right"
         style={{ margin: "12px 12px 0 0" }}
       />
-      <Marker
-        latitude={50.831854}
-        longitude={4.234065}
-        anchor="top-left"
-        offset={[-30, 10]}
-      >
+      <Marker latitude={50.831854} longitude={4.234065} anchor="center">
         <div className="block size-6 rounded-full! border-4 border-solid border-chiro-light bg-chiro" />
       </Marker>
     </MapGL>

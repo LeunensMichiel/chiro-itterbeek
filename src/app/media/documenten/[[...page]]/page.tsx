@@ -4,7 +4,7 @@ import { MediaCard } from "@/components/media/media-card"
 import { cardGrid, MediaSection } from "@/components/media/media-section"
 import { Pagination } from "@/components/pagination"
 import { getDocuments } from "@/lib/contentful"
-import { formatLongDate } from "@/lib/format"
+import { formatDate } from "@/lib/format"
 import { pageMetadata } from "@/lib/metadata"
 import {
   PER_PAGE,
@@ -18,6 +18,12 @@ type Props = { params: Promise<{ page?: string[] }> }
 
 const BASE = "/media/documenten/"
 const PER = PER_PAGE.documenten
+
+/** "PDF · " from the file's extension, or nothing when there isn't one. */
+function fileType(url: string) {
+  const extension = /\.([a-z0-9]{2,4})(?:[?#]|$)/i.exec(url)?.[1]
+  return extension ? `${extension.toUpperCase()} · ` : ""
+}
 
 export const dynamicParams = false
 export const generateStaticParams = async () =>
@@ -50,14 +56,19 @@ export default async function DocumentsPage({ params }: Props) {
           <MediaCard
             key={document.id}
             audience={document.audience}
-            meta={`Geüpload: ${formatLongDate(document.createdAt)}`}
+            meta={`${fileType(document.url)}${formatDate(document.createdAt)}`}
             title={document.title}
             href={document.url}
             linkLabel="Bekijk document"
-            ariaLabel="Document bekijken"
           />
         ))}
       </div>
+      <Pagination
+        basePath={BASE}
+        page={page}
+        pageCount={pageCount(documents.length, PER)}
+        position="bottom"
+      />
     </MediaSection>
   )
 }

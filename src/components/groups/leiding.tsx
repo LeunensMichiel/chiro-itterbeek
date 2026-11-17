@@ -3,7 +3,7 @@
 import { useState } from "react"
 
 import { CmsImage } from "@/components/cms-image"
-import type { Chiro } from "@/lib/chiro"
+import { type Chiro, chiroName } from "@/lib/chiro"
 import type { CmsImage as CmsImageData, LeidingMember } from "@/lib/contentful"
 import { cx } from "@/lib/cx"
 import { useToday } from "@/lib/use-today"
@@ -15,6 +15,7 @@ import {
   groupHeader,
   groupImage,
   groupLeidingBox,
+  groupText,
   leidingItem,
   leidingName,
   leidingPhoto,
@@ -52,18 +53,16 @@ export function Leiding({
 
   return (
     <div className={groupGrid}>
-      <h2 className={groupHeader} style={{ background }}>
+      <h3 className={cx(groupHeader, groupText())} style={{ background }}>
         Leiding
-      </h2>
-      {groupPhoto && (
-        <CmsImage
-          image={groupPhoto}
-          alt={groupPhoto.title}
-          title={groupPhoto.title}
-          sizes="(max-width: 767px) 100vw, 570px"
-          className={groupImage}
-        />
-      )}
+      </h3>
+      {/* Without a group photo, the default Itterbeek photo fills the spot */}
+      <CmsImage
+        image={groupPhoto}
+        alt={`De leiding van Chiro ${chiroName(chiro)}`}
+        sizes="(max-width: 767px) 100vw, 570px"
+        className={groupImage}
+      />
       <div className={groupDescription}>
         <h4>{`Ontmoet je ${chiro === "jokonta" ? "leiding" : "leidsters"}!`}</h4>
         <p>
@@ -84,16 +83,13 @@ export function Leiding({
               <CmsImage
                 image={member.profilePicture}
                 alt=""
-                title={member.firstname}
                 sizes="96px"
                 quality={80}
                 fixed
                 className={cx(
                   leidingPhoto,
                   "cursor-pointer",
-                  member === selected
-                    ? "border-accent-gray"
-                    : "border-transparent",
+                  member === selected ? "border-header" : "border-transparent",
                 )}
               />
             </button>
@@ -110,21 +106,26 @@ export function Leiding({
         >
           <CmsImage
             image={selected.profilePicture}
-            alt={selected.firstname}
-            title={selected.firstname}
+            alt=""
             sizes="150px"
             quality={80}
             fixed
             className="size-[150px] shrink-0 rounded-full max-mobile:mb-4"
           />
-          <div className="ml-9 text-styled-header-text [&_p]:m-0 [&_p]:mb-1 [&_p]:text-sm [&_p]:leading-[1.2]">
-            <h3 className="m-0 mb-4 text-xl leading-[1.2] uppercase">
-              {selected.firstname}
-              {' "'}
-              <span className="text-sm">{selected.nickname}</span>
-              {'" '}
+          <div
+            className={cx(
+              "ml-9 max-mobile:ml-0 [&_p]:m-0 [&_p]:mb-1 [&_p]:text-base [&_p]:leading-[1.3]",
+              groupText(),
+            )}
+            aria-live="polite"
+          >
+            <h4 className="m-0 mb-4 text-xl leading-[1.2] uppercase">
+              {selected.firstname}{" "}
+              {selected.nickname && (
+                <span className="text-sm">{`“${selected.nickname}” `}</span>
+              )}
               {selected.lastname}
-            </h3>
+            </h4>
             <p>
               Is <b>{ageOn(selected.birthday, today)}</b> jaar
             </p>

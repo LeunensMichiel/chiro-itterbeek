@@ -5,7 +5,7 @@ import { SocialLinks } from "./social-links"
 
 const external = { target: "_blank", rel: "noopener noreferrer" } as const
 const footerLink =
-  "text-invisible-text underline transition-colors duration-300 ease-in-out hover:text-aside-text"
+  "text-invisible-text underline underline-offset-2 transition-colors duration-300 ease-in-out hover:text-aside-text"
 
 export function Footer() {
   return (
@@ -14,7 +14,7 @@ export function Footer() {
         <div className="flex items-center">
           <Link
             href="/"
-            className="type-nav flex items-center transition-colors duration-300 ease-in-out hover:text-aside-text max-mobile:text-sm"
+            className="type-nav flex items-center transition-colors duration-300 ease-in-out hover:text-chiro-ink max-mobile:text-sm"
           >
             <Chiro className="mr-4 h-12 w-auto max-mobile:h-6" />
             <span>Chiro Itterbeek</span>

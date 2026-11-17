@@ -54,10 +54,15 @@ export default async function KrantjesPage({ params }: Props) {
             title={boekje.title}
             href={boekje.url}
             linkLabel="Lees boekje"
-            ariaLabel="Boekje bekijken"
           />
         ))}
       </div>
+      <Pagination
+        basePath={BASE}
+        page={page}
+        pageCount={pageCount(all.length, PER)}
+        position="bottom"
+      />
     </MediaSection>
   )
 }

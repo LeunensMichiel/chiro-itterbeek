@@ -9,9 +9,9 @@ export function SubmittedToast() {
   return (
     <div
       role="status"
-      className="fixed bottom-0 left-1/2 z-1000 w-full max-w-[250px] -translate-x-1/2 animate-toast rounded-xs bg-background-muted-2 p-2 text-center text-header opacity-0 shadow-container"
+      className="fixed bottom-0 left-1/2 z-1000 w-[calc(100%-2rem)] max-w-[360px] -translate-x-1/2 animate-toast rounded-xs bg-background-muted-2 px-6 py-4 text-center text-header opacity-0 shadow-container motion-reduce:bottom-[30px] motion-reduce:animate-none motion-reduce:opacity-100"
     >
-      Bericht succesvol verzonden!
+      Bericht verzonden! De leiding antwoordt je zo snel mogelijk.
     </div>
   )
 }

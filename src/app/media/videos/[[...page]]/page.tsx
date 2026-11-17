@@ -46,6 +46,12 @@ export default async function VideosPage({ params }: Props) {
           pageCount={pageCount(all.length, PER)}
         />
         <VideoGrid videos={paginate(all, page, PER)} />
+        <Pagination
+          basePath={BASE}
+          page={page}
+          pageCount={pageCount(all.length, PER)}
+          position="bottom"
+        />
       </MediaSection>
       <Disclaimer />
     </>

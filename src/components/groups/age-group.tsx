@@ -9,6 +9,7 @@ import {
   groupHeader,
   groupImage,
   groupLeidingBox,
+  groupText,
   leidingItem,
   leidingName,
   leidingPhoto,
@@ -18,13 +19,15 @@ export function AgeGroup({ group }: { group: AgeGroupData }) {
   const background = groupColor(group.color)
   return (
     <div className={groupGrid}>
-      <h2 className={groupHeader} style={{ background }}>
+      <h3
+        className={cx(groupHeader, groupText(group.color))}
+        style={{ background }}
+      >
         {group.name}
-      </h2>
+      </h3>
       <CmsImage
         image={group.banner}
-        alt={group.name}
-        title={group.name}
+        alt=""
         sizes="(max-width: 767px) 100vw, 570px"
         className={groupImage}
       />
@@ -35,17 +38,16 @@ export function AgeGroup({ group }: { group: AgeGroupData }) {
         <p>{group.description}</p>
       </div>
       <div className={groupLeidingBox} style={{ background }}>
-        <h3 className="type-nav-white m-0 inline-block self-start rounded-xs bg-nav-background px-6 py-2">
+        <h4 className="type-nav-white m-0 inline-block self-start rounded-xs bg-nav-background px-6 py-2">
           Leiding
-        </h3>
+        </h4>
         <div className="flex h-full flex-wrap justify-center px-6 py-4">
           {group.leiding.map(member => (
             <div key={member.id} className={leidingItem(false)}>
               <div className={leidingName(false)}>{member.firstname}</div>
               <CmsImage
                 image={member.profilePicture}
-                alt={member.firstname}
-                title={member.firstname}
+                alt=""
                 sizes="120px"
                 quality={80}
                 fixed

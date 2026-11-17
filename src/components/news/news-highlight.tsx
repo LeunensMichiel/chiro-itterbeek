@@ -11,31 +11,36 @@ import { formatLongDate } from "@/lib/format"
 import { chevronAfter } from "../chevron-link-styles"
 import { featuredPostFor } from "./featured-post"
 
+/** The featured post per choice state: each chiro's, and the unchosen one. */
+export const featuredVariants = (posts: Post[]) => [
+  ...CHIROS.map(chiro => ({
+    key: chiro,
+    post: featuredPostFor(posts, chiro),
+  })),
+  { key: "unchosen" as const, post: featuredPostFor(posts, null) },
+]
+
 /**
  * The featured news post of the chosen chiro, as a big image card (the
- * latest Itterbeek-wide one when no chiro is chosen yet).
+ * latest Itterbeek-wide one when no chiro is chosen yet). On the news page it
+ * spans the width of the news grid below it.
  */
 export function NewsHighlight({
   posts,
-  withMargin = false,
+  onNewsPage = false,
 }: {
   posts: Post[]
-  withMargin?: boolean
+  onNewsPage?: boolean
 }) {
-  const variants = [
-    ...CHIROS.map(chiro => ({
-      key: chiro,
-      post: featuredPostFor(posts, chiro),
-    })),
-    { key: "unchosen" as const, post: featuredPostFor(posts, null) },
-  ]
-  return variants.map(({ key, post }) => {
+  return featuredVariants(posts).map(({ key, post }) => {
     return (
       <OnlyFor key={key} chiro={key}>
         <section
           className={cx(
-            "col-[3/span_10] flex flex-col max-tablet:col-[2/span_12]",
-            withMargin && "mt-16 max-mobile:mt-12",
+            "flex flex-col",
+            onNewsPage
+              ? "col-[2/span_12] mt-16 max-mobile:mt-12"
+              : "col-[3/span_10] max-tablet:col-[2/span_12]",
             post && "mb-16 max-tablet:mb-12",
           )}
         >
@@ -70,7 +75,9 @@ export function NewsHighlight({
                       "text-lg text-highlight-text [&_path]:fill-highlight-text",
                     )}
                   >
-                    <span>Lees meer</span>
+                    <span>
+                      Lees meer<span className="sr-only">: {post.title}</span>
+                    </span>
                     <Chevron />
                   </Link>
                 </div>

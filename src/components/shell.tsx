@@ -21,9 +21,17 @@ export function Shell({
 
   return (
     <>
+      <a
+        href="#main"
+        className="sr-only z-100000 rounded-xs bg-chiro px-6 py-3 font-bold text-styled-header-text focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
+      >
+        Naar de inhoud
+      </a>
       <Navbar open={open} onToggle={() => setOpenOn(open ? null : pathname)} />
       <main
-        className="grid min-h-full w-full flex-auto grid-cols-site overflow-x-hidden pt-[100px] max-mobile:pt-[72px]"
+        id="main"
+        tabIndex={-1}
+        className="grid min-h-full w-full flex-auto grid-cols-site content-start overflow-x-hidden pt-[100px] outline-none max-mobile:pt-[72px]"
         aria-hidden={open || undefined}
       >
         {children}

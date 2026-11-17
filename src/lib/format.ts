@@ -9,6 +9,12 @@ const longDate = new Intl.DateTimeFormat("nl-BE", {
   day: "numeric",
 })
 const monthName = new Intl.DateTimeFormat("nl-BE", { month: "long" })
+const weekday = new Intl.DateTimeFormat("nl-BE", { weekday: "long" })
+const shortDate = new Intl.DateTimeFormat("nl-BE", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+})
 const time = new Intl.DateTimeFormat("nl-BE", {
   hour: "2-digit",
   minute: "2-digit",
@@ -17,6 +23,14 @@ const time = new Intl.DateTimeFormat("nl-BE", {
 /** "zaterdag 21 november 2026" */
 export const formatLongDate = (date: string | Date) =>
   longDate.format(new Date(date))
+
+/** "21 november 2026" */
+export const formatDate = (date: string | Date) =>
+  shortDate.format(new Date(date))
+
+/** "zaterdag" */
+export const formatWeekday = (date: string | Date) =>
+  weekday.format(new Date(date))
 
 /** "november" */
 export const formatMonth = (date: string | Date) =>

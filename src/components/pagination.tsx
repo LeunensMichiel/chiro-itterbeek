@@ -35,25 +35,40 @@ function PageLink({
   )
 }
 
-/** Previous / page number / next, for the paginated lists. */
+/**
+ * Previous / page number / next, for the paginated lists. Lists put it above
+ * and below the items (`position`); it isn't shown when there's one page.
+ */
 export function Pagination({
   basePath,
   page,
   pageCount,
+  position = "top",
 }: {
   basePath: string
   page: number
   pageCount: number
+  position?: "top" | "bottom"
 }) {
+  if (pageCount <= 1) return null
   return (
-    <nav className="mx-auto mb-12 flex w-full max-w-[570px] items-center justify-center rounded-xs bg-background-muted py-4 text-sm leading-none font-bold text-paragraph uppercase max-mobile:mb-6">
+    <nav
+      aria-label={position === "top" ? "Paginering" : "Paginering onderaan"}
+      className={cx(
+        "mx-auto flex w-full max-w-[570px] items-center justify-center rounded-xs bg-background-muted py-4 text-sm leading-none font-bold text-paragraph uppercase",
+        position === "top" ? "mb-12 max-mobile:mb-6" : "mt-12 max-mobile:mt-6",
+      )}
+    >
       <PageLink
         href={pagePath(basePath, page - 1)}
         disabled={page <= 1}
         label="Vorige pagina"
         className="[&_svg]:rotate-180"
       />
-      <div className="mx-6 text-2xl leading-none">{page}</div>
+      <div className="mx-6 text-2xl leading-none tabular-nums">
+        {page}
+        <span className="text-base text-aside-text">{` / ${pageCount}`}</span>
+      </div>
       <PageLink
         href={pagePath(basePath, page + 1)}
         disabled={page >= pageCount}

@@ -11,14 +11,12 @@ export function MediaCard({
   title,
   href,
   linkLabel,
-  ariaLabel,
 }: {
   audience: Audience
   meta?: string
   title: string
   href: string
   linkLabel: string
-  ariaLabel: string
 }) {
   return (
     <div className="flex h-full w-full flex-col rounded-xs border border-solid border-border bg-background-muted-2">
@@ -32,15 +30,14 @@ export function MediaCard({
       </div>
       <div className="flex grow flex-col p-4">
         {meta && (
-          <small className="mb-1 block text-xs text-invisible-text max-mobile:text-[9px]">
+          <small className="mb-1 block text-xs text-invisible-text">
             {meta}
           </small>
         )}
-        <div className="mb-4 text-lg leading-none font-bold break-all text-header max-mobile:text-base">
+        <div className="mb-4 text-lg leading-tight font-bold wrap-anywhere text-header max-mobile:text-base">
           {title}
         </div>
         <a
-          aria-label={ariaLabel}
           href={href}
           target="_blank"
           rel="noopener noreferrer"
@@ -49,7 +46,10 @@ export function MediaCard({
             "mt-auto mb-4 text-sm text-aside-text max-tablet:mb-2 max-mobile:mb-0 [&_path]:fill-aside-text",
           )}
         >
-          <span>{linkLabel}</span>
+          <span>
+            {linkLabel}
+            <span className="sr-only">: {title}</span>
+          </span>
           <Chevron />
         </a>
       </div>

@@ -5,7 +5,10 @@ import { backLink } from "@/components/chevron-link-styles"
 import Chevron from "@/components/icons/chevron"
 import { cx } from "@/lib/cx"
 
-/** A titled media section; list pages get a "Ga terug" link to /media/. */
+/**
+ * A titled media section; list pages get a "Ga terug" link to /media/, and
+ * their title is the page's h1.
+ */
 export function MediaSection({
   title,
   kind,
@@ -17,6 +20,7 @@ export function MediaSection({
   withBackLink?: boolean
   children: ReactNode
 }) {
+  const Heading = withBackLink ? "h1" : "h2"
   return (
     <section
       className={cx(
@@ -32,9 +36,9 @@ export function MediaSection({
           <span>Ga terug</span>
         </Link>
       )}
-      <h2 className="type-alt m-0 mb-12 text-center max-mobile:mb-9 max-mobile:text-4xl">
+      <Heading className="type-alt m-0 mb-12 text-center max-mobile:mb-9 max-mobile:text-4xl">
         {title}
-      </h2>
+      </Heading>
       {children}
     </section>
   )
@@ -45,9 +49,9 @@ export const cardGrid =
 
 export function Disclaimer() {
   return (
-    <p className="col-[2/span_12] mb-6 text-center text-xs text-border">
-      Disclaimer: de video&apos;s maken gebruik van externe cookies, aangezien
-      deze op Facebook en Youtube geüpload staan.
+    <p className="col-[2/span_12] mb-6 text-center text-sm text-invisible-text">
+      De video&apos;s staan op Facebook en YouTube, en gebruiken daarom hun
+      cookies.
     </p>
   )
 }

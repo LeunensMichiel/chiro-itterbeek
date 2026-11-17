@@ -9,9 +9,20 @@ import { formatLongDate } from "@/lib/format"
 
 import { chevronAfter } from "../chevron-link-styles"
 
-export function NewsCard({ post }: { post: Post }) {
+export function NewsCard({
+  post,
+  className,
+}: {
+  post: Post
+  className?: string
+}) {
   return (
-    <article className="flex h-[420px] w-full flex-col rounded-xs border border-solid border-border bg-background-muted-2 max-tablet:h-auto">
+    <article
+      className={cx(
+        "flex h-[420px] w-full flex-col rounded-xs border border-solid border-border bg-background-muted-2 max-tablet:h-auto",
+        className,
+      )}
+    >
       <div className="relative">
         <CmsImage
           image={post.banner}
@@ -43,7 +54,9 @@ export function NewsCard({ post }: { post: Post }) {
             "mt-auto mb-4 text-sm text-aside-text [&_path]:fill-aside-text",
           )}
         >
-          <span>Lees meer</span>
+          <span>
+            Lees meer<span className="sr-only">: {post.title}</span>
+          </span>
           <Chevron />
         </Link>
       </div>
