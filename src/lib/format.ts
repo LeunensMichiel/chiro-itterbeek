@@ -31,7 +31,7 @@ export const formatEdition = (startdate: string, enddate: string) =>
 
 /**
  * Plain-text excerpt of a Markdown field: strips the Markdown syntax and cuts
- * at `length` characters, like the old gatsby-transformer-remark excerpt.
+ * at `length` characters.
  */
 export function toPlainExcerpt(markdown: string, length = 120) {
   const text = markdown

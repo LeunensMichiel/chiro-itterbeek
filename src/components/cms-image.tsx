@@ -1,6 +1,6 @@
 import Image, { type StaticImageData } from "next/image"
 
-import fallbackImage from "@/assets/images/itterbeek-1200.jpg"
+import fallbackImage from "@/assets/images/itterbeek.jpg"
 import type { CmsImage as CmsImageData } from "@/lib/contentful"
 import { cx } from "@/lib/cx"
 
@@ -14,7 +14,7 @@ type Props = {
   quality?: 80 | 90
   /**
    * Fixed-size images (avatars) skip the aspect-ratio spacer that otherwise
-   * gives the wrapper the image's height, like Gatsby's FULL_WIDTH images.
+   * gives the wrapper the image's natural height.
    */
   fixed?: boolean
   priority?: boolean
@@ -22,8 +22,8 @@ type Props = {
 }
 
 /**
- * A cover-fitted image in a positioned wrapper (the wrapper takes the
- * className, as GatsbyImage did), resized by Contentful's Images API.
+ * A cover-fitted image in a positioned wrapper that takes the className,
+ * resized by Contentful's Images API.
  */
 export function CmsImage({
   image,

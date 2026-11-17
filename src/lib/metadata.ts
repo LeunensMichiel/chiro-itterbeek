@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import ogImage from "@/assets/images/itterbeek-1200.jpg"
+import ogImage from "@/assets/images/itterbeek.jpg"
 
 import { site } from "./site"
 

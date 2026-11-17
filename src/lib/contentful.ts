@@ -10,9 +10,8 @@ import type { Audience, Chiro } from "./chiro"
 import { toPlainExcerpt } from "./format"
 
 /*
- * Typed access to the Contentful Delivery API. Every fetcher ports one of the
- * old Gatsby GraphQL queries (same filters and sort order) and maps the entry
- * onto a small plain object, so components never touch the SDK's shapes.
+ * Typed access to the Contentful Delivery API. Every fetcher maps entries
+ * onto small plain objects, so components never touch the SDK's shapes.
  */
 
 // ---------------------------------------------------------------------------
