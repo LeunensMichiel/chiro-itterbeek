@@ -111,9 +111,9 @@ const Footer = () => {
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://leunesmedia.com/"
+          href="https://leunes.studio"
         >
-          Leunes Media
+          Leunes Studios
         </a>
       </FooterText>
     </FooterWrapper>
