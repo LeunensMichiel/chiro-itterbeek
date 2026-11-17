@@ -23,7 +23,7 @@ Create a `.env` file in the project root (it is git-ignored):
 ```sh
 CONTENTFUL_SPACE_ID=xxxxxxxxxxxx
 CONTENTFUL_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx   # Content Delivery API token
-NEXT_PUBLIC_MAPBOX_TOKEN=pk.xxxxxxxxxxxxxxxx   # the old name GATSBY_TOKEN_MAPBOX still works
+NEXT_PUBLIC_MAPBOX_TOKEN=pk.xxxxxxxxxxxxxxxx
 # optional: CONTENTFUL_HOST=preview.contentful.com (with a Preview API token)
 ```
 
