@@ -1,20 +1,24 @@
 import React from "react"
 import { graphql } from "gatsby"
-import loadable from "@loadable/component"
 
 import Layout from "../components/layout"
+import Seo from "../components/seo/seo"
+import NewsBlock from "../components/news/newsBlock"
 
-const NewsBlock = loadable(() => import("../components/news/newsBlock"))
+const NewsPost = ({ data }) => (
+  <Layout>
+    <NewsBlock news={data.bericht} />
+  </Layout>
+)
 
-const newsPost = ({ data }) => {
-  return (
-    <Layout>
-      <NewsBlock news={data.bericht} />
-    </Layout>
-  )
-}
+export default NewsPost
 
-export default newsPost
+export const Head = ({ data }) => (
+  <Seo
+    title={data.bericht.title}
+    description={data.bericht.excerpt?.childMarkdownRemark?.excerpt}
+  />
+)
 
 export const newsItemquery = graphql`
   query newsBlockquery($slug: String!) {
@@ -23,13 +27,26 @@ export const newsItemquery = graphql`
       slug
       date
       banner {
-        fluid(maxWidth: 950, quality: 90) {
-          ...GatsbyContentfulFluid_withWebp
-        }
+        gatsbyImageData(
+          layout: FULL_WIDTH
+          breakpoints: [238, 475, 950, 1425, 1900]
+          quality: 90
+          placeholder: BLURRED
+        )
       }
       id
       body {
-        json
+        raw
+        references {
+          ... on ContentfulAsset {
+            contentful_id
+            __typename
+            title
+            file {
+              url
+            }
+          }
+        }
       }
       excerpt {
         childMarkdownRemark {

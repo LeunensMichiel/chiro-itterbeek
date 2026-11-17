@@ -1,11 +1,10 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
-import Img from "gatsby-image"
+/** @jsxImportSource theme-ui */
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 import { Group, LeidingItem } from "./groupStyles"
 
 const AgeGroup = ({ color, group }) => {
-  group.age.sort((a, b) => parseInt(a) - parseInt(b))
+  const age = [...group.age].sort((a, b) => parseInt(a) - parseInt(b))
   return (
     <Group color={color}>
       <h2
@@ -16,15 +15,15 @@ const AgeGroup = ({ color, group }) => {
       >
         {group.name}
       </h2>
-      <Img
+      <GatsbyImage
         className="group__image"
-        fluid={group.banner.fluid}
+        image={getImage(group.banner)}
         title={group.name}
         alt={group.name}
       />
       <div className="group__description">
         <h4>Voor welke leeftijd?</h4>
-        <p>{`${group.age[0]} tot ${group.age[1]} jaar`}</p>
+        <p>{`${age[0]} tot ${age[1]} jaar`}</p>
         <h4>Voor wie?</h4>
         <p>{group.description.description}</p>
       </div>
@@ -41,9 +40,9 @@ const AgeGroup = ({ color, group }) => {
           {group.leiding.map(leiding => (
             <LeidingItem key={leiding.id}>
               <div className="group__leiding__title">{leiding.firstname}</div>
-              <Img
+              <GatsbyImage
                 className="group__leiding__image"
-                fixed={leiding.profilePicture.fixed}
+                image={getImage(leiding.profilePicture)}
                 alt={leiding.firstname}
                 title={leiding.firstname}
               />

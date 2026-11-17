@@ -1,8 +1,8 @@
 import React from "react"
-import { NewsItemWrapper } from "./newsStyles"
 import { useStaticQuery, graphql, Link } from "gatsby"
-import Img from "gatsby-image"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
+import { NewsItemWrapper } from "./newsStyles"
 import Chevron from "../../assets/icons/chevron.svg"
 
 const NewsItem = ({ news }) => {
@@ -10,22 +10,24 @@ const NewsItem = ({ news }) => {
     query {
       headlineImage: file(relativePath: { eq: "images/itterbeek.jpg" }) {
         childImageSharp {
-          fluid(maxWidth: 900, quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
+          gatsbyImageData(
+            layout: FULL_WIDTH
+            breakpoints: [225, 450, 900, 1350, 1800]
+            quality: 90
+            placeholder: BLURRED
+          )
         }
       }
     }
   `)
-  if (!news.banner) {
-    news.banner = data.headlineImage.childImageSharp
-  }
+  const banner = getImage(news.banner) ?? getImage(data.headlineImage)
+
   return (
     <NewsItemWrapper
       gender={news.gender === "Jokonta" ? 1 : news.gender === "Allegro" ? 2 : 3}
     >
       <div className="news__item__header">
-        <Img className="news__item__image" fluid={news.banner.fluid} />
+        <GatsbyImage className="news__item__image" image={banner} alt="" />
         <div className="news__item__type">
           {news.gender === "Itterbeek" ? "Algemeen" : news.gender}
         </div>

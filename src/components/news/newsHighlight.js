@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import { HighlightWrapper, HighlightItem } from "./newsStyles"
-import Img from "gatsby-image"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { Link } from "gatsby"
 import { useStaticQuery, graphql } from "gatsby"
 import { GenderContext } from "../../context/GenderContext"
@@ -11,13 +11,16 @@ const NewsHighlight = ({ margin }) => {
     query {
       headlineImage: file(relativePath: { eq: "images/itterbeek.jpg" }) {
         childImageSharp {
-          fluid(maxWidth: 950, quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
+          gatsbyImageData(
+            layout: FULL_WIDTH
+            breakpoints: [238, 475, 950, 1425, 1900]
+            quality: 90
+            placeholder: BLURRED
+          )
         }
       }
       itterbeekFt: allContentfulBericht(
-        sort: { fields: date, order: DESC }
+        sort: { date: DESC }
         filter: {
           isFeatured: { eq: true }
           gender: { eq: "Itterbeek" }
@@ -32,15 +35,18 @@ const NewsHighlight = ({ margin }) => {
             id
             date
             banner {
-              fluid(maxWidth: 950, quality: 90) {
-                ...GatsbyContentfulFluid_withWebp
-              }
+              gatsbyImageData(
+                layout: FULL_WIDTH
+                breakpoints: [238, 475, 950, 1425, 1900]
+                quality: 90
+                placeholder: BLURRED
+              )
             }
           }
         }
       }
       jokontaFt: allContentfulBericht(
-        sort: { fields: date, order: DESC }
+        sort: { date: DESC }
         filter: { isFeatured: { eq: true }, gender: { eq: "Jokonta" } }
       ) {
         edges {
@@ -51,15 +57,18 @@ const NewsHighlight = ({ margin }) => {
             id
             date
             banner {
-              fluid(maxWidth: 950, quality: 90) {
-                ...GatsbyContentfulFluid_withWebp
-              }
+              gatsbyImageData(
+                layout: FULL_WIDTH
+                breakpoints: [238, 475, 950, 1425, 1900]
+                quality: 90
+                placeholder: BLURRED
+              )
             }
           }
         }
       }
       allegroFt: allContentfulBericht(
-        sort: { fields: date, order: DESC }
+        sort: { date: DESC }
         filter: { isFeatured: { eq: true }, gender: { eq: "Allegro" } }
       ) {
         edges {
@@ -70,9 +79,12 @@ const NewsHighlight = ({ margin }) => {
             id
             date
             banner {
-              fluid(maxWidth: 950, quality: 90) {
-                ...GatsbyContentfulFluid_withWebp
-              }
+              gatsbyImageData(
+                layout: FULL_WIDTH
+                breakpoints: [238, 475, 950, 1425, 1900]
+                quality: 90
+                placeholder: BLURRED
+              )
             }
           }
         }
@@ -111,9 +123,8 @@ const NewsHighlight = ({ margin }) => {
     }
   }
 
-  if (!currentFeatured.node.banner) {
-    currentFeatured.node.banner = data.headlineImage.childImageSharp
-  }
+  const banner =
+    getImage(currentFeatured.node.banner) ?? getImage(data.headlineImage)
 
   return (
     <HighlightWrapper
@@ -121,8 +132,8 @@ const NewsHighlight = ({ margin }) => {
         currentFeatured.node.gender === "Jokonta"
           ? 1
           : currentFeatured.node.gender === "Allegro"
-          ? 2
-          : 3
+            ? 2
+            : 3
       }
       margin={margin ? 1 : 0}
     >
@@ -132,10 +143,7 @@ const NewsHighlight = ({ margin }) => {
           : currentFeatured.node.gender
       }`}</h2>
       <HighlightItem>
-        <Img
-          className="headline__image"
-          fluid={currentFeatured.node.banner.fluid}
-        />
+        <GatsbyImage className="headline__image" image={banner} alt="" />
         <div className="headline__text">
           <h3>{currentFeatured.node.title}</h3>
           <small>

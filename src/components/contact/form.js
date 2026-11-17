@@ -1,9 +1,8 @@
 import React, { useContext } from "react"
 import { FormWrapper, StyledInput, ItterbeekForm } from "./contactStyles"
 import { GenderContext } from "../../context/GenderContext"
-// import { Location } from '@reach/router';
 
-const Form = ({ location }) => {
+const Form = () => {
   const { genderState } = useContext(GenderContext)
   return (
     <FormWrapper gender={genderState.gender}>
@@ -32,7 +31,13 @@ const Form = ({ location }) => {
           <label htmlFor="naam">
             Naam<sup>*</sup>
           </label>
-          <input type="text" id="naam" name="naam" required autoComplete={1} />
+          <input
+            type="text"
+            id="naam"
+            name="naam"
+            required
+            autoComplete="name"
+          />
         </StyledInput>
         <StyledInput>
           <label htmlFor="email">
@@ -43,12 +48,12 @@ const Form = ({ location }) => {
             id="email"
             name="email"
             required
-            autoComplete={1}
+            autoComplete="email"
           />
         </StyledInput>
         <StyledInput>
           <label htmlFor="phone">Telefoon</label>
-          <input type="tel" id="phone" name="telefoon" />
+          <input type="tel" id="phone" name="telefoon" autoComplete="tel" />
         </StyledInput>
         <StyledInput>
           <label htmlFor="subject">

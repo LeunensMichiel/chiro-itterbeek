@@ -1,56 +1,52 @@
 import React, { useContext } from "react"
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import { renderRichText } from "gatsby-source-contentful/rich-text"
 import { BLOCKS } from "@contentful/rich-text-types"
-import Img from "gatsby-image"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { useStaticQuery, graphql, Link } from "gatsby"
 
-import SEO from "../seo/seo"
 import { GenderContext } from "../../context/GenderContext"
 
 import { InformationBlock } from "../information/informationStyles"
 import { NewsBlockWrapper } from "../news/newsStyles"
 import Chevron from "../../assets/icons/chevron.svg"
 
+const richTextOptions = {
+  renderNode: {
+    [BLOCKS.EMBEDDED_ASSET]: node => {
+      const url = node.data?.target?.file?.url
+      return url ? <img alt="Nieuws foto" src={url} loading="lazy" /> : null
+    },
+  },
+}
+
 const NewsBlock = ({ news }) => {
   const data = useStaticQuery(graphql`
     query {
       headlineImage: file(relativePath: { eq: "images/itterbeek.jpg" }) {
         childImageSharp {
-          fluid(maxWidth: 900, quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
+          gatsbyImageData(
+            layout: FULL_WIDTH
+            breakpoints: [225, 450, 900, 1350, 1800]
+            quality: 90
+            placeholder: BLURRED
+          )
         }
       }
     }
   `)
   const { genderState } = useContext(GenderContext)
-  const options = {
-    renderNode: {
-      [BLOCKS.EMBEDDED_ASSET]: node => (
-        <img
-          alt="Nieuws foto"
-          src={node.data?.target?.fields?.file["nl-BE"]?.url}
-        />
-      ),
-    },
-  }
-  if (!news.banner) {
-    news.banner = data.headlineImage.childImageSharp
-  }
+  const banner = getImage(news.banner) ?? getImage(data.headlineImage)
+
   return (
     <NewsBlockWrapper>
-      <SEO
-        title={news.title}
-        description={news.excerpt.childMarkdownRemark.excerpt}
-      />
       <InformationBlock gender={genderState.gender}>
         <Link to="/nieuws/">
           <Chevron />
           <span>Ga terug</span>
         </Link>
-        <Img
+        <GatsbyImage
           className="information__image__container"
-          fluid={news.banner.fluid}
+          image={banner}
           alt={news.title}
           title={news.title}
         />
@@ -64,7 +60,7 @@ const NewsBlock = ({ news }) => {
               day: "numeric",
             })}
           </small>
-          {documentToReactComponents(news.body.json, options)}
+          {news.body && renderRichText(news.body, richTextOptions)}
         </div>
       </InformationBlock>
     </NewsBlockWrapper>

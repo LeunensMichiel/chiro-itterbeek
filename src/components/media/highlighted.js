@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
+/** @jsxImportSource theme-ui */
 import { useContext } from "react"
 import { HighlightedWrapper } from "./mediaStyles"
 import { useStaticQuery, graphql } from "gatsby"
@@ -12,7 +11,7 @@ const Highlighted = () => {
   const data = useStaticQuery(graphql`
     query {
       jokontakt: allContentfulBoekje(
-        sort: { fields: createdAt, order: ASC }
+        sort: { createdAt: ASC }
         limit: 1
         filter: { gender: { eq: true } }
       ) {
@@ -27,7 +26,7 @@ const Highlighted = () => {
         }
       }
       chirokrantje: allContentfulBoekje(
-        sort: { fields: createdAt, order: ASC }
+        sort: { createdAt: ASC }
         limit: 1
         filter: { gender: { eq: false } }
       ) {

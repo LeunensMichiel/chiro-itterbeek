@@ -1,5 +1,8 @@
 export default {
-  useColorSchemeMediaQuery: true,
+  config: {
+    useColorSchemeMediaQuery: true,
+    initialColorModeName: "light",
+  },
   colors: {
     //according to figma spec
     //black 3 (& white 2)
@@ -59,8 +62,7 @@ export default {
   },
   space: [0, 4, 8, 16, 24, 36, 48, 64, 96],
   fonts: {
-    body:
-      '"PT Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+    body: '"PT Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
     heading:
       '"PT Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
     headingAlternate:

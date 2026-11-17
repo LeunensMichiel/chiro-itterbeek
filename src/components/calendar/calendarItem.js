@@ -1,6 +1,5 @@
-/** @jsx jsx */
+/** @jsxImportSource theme-ui */
 import { useContext, useState, useRef, Fragment } from "react"
-import { jsx } from "theme-ui"
 import { CSSTransition } from "react-transition-group"
 import { GenderContext } from "../../context/GenderContext"
 import {
@@ -15,6 +14,7 @@ export const CalendarItem = ({ calItem, currentDate }) => {
   const [calItemActive, setItemActive] = useState("")
   const [calItemHeight, setHeightState] = useState("88px")
   const contentRef = useRef(null)
+  const itemRef = useRef(null)
 
   const { genderState } = useContext(GenderContext)
   const itemDate = new Date(calItem.date)
@@ -44,9 +44,12 @@ export const CalendarItem = ({ calItem, currentDate }) => {
   return (
     <CSSTransition
       in={shouldShowGender()}
-      addEndListener={(node, done) =>
-        node.addEventListener("transitionend", done, false)
-      }
+      nodeRef={itemRef}
+      addEndListener={done => {
+        // the item may not be rendered (other month) — finish immediately
+        if (!itemRef.current) return done()
+        itemRef.current.addEventListener("transitionend", done, false)
+      }}
       classNames="cal__item"
       unmountOnExit
     >
@@ -55,6 +58,7 @@ export const CalendarItem = ({ calItem, currentDate }) => {
           itemDate.getFullYear() === currentDate.getFullYear() &&
           shouldShowGender() && (
             <CalendarItemWrapper
+              ref={itemRef}
               maxHeight={calItemHeight}
               className={`${calItemActive}`}
             >

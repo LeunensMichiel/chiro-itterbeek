@@ -1,17 +1,15 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
+/** @jsxImportSource theme-ui */
 import { graphql, Link } from "gatsby"
-import loadable from "@loadable/component"
 
 import Layout from "../components/layout"
-import SEO from "../components/seo/seo"
+import Seo from "../components/seo/seo"
 import {
   TopAlbumWrapper,
   MediaNavitation,
 } from "../components/media/mediaStyles"
 import Chevron from "../assets/icons/chevron.svg"
 
-const Boekje = loadable(() => import("../components/media/boekje"))
+import Boekje from "../components/media/boekje"
 
 const allBoekjes = ({ pageContext, data }) => {
   const { currentPage, numBoekjePages } = pageContext
@@ -25,10 +23,6 @@ const allBoekjes = ({ pageContext, data }) => {
 
   return (
     <Layout>
-      <SEO
-        title="Krantjes"
-        description="Bekijk hier alle krantjes van Chiro Itterbeek. Alle edities van Jokontakt en Chirokrantje zijn aanwezig!"
-      />
       <TopAlbumWrapper>
         <Link to="/media/">
           <Chevron />
@@ -62,10 +56,17 @@ const allBoekjes = ({ pageContext, data }) => {
 
 export default allBoekjes
 
+export const Head = () => (
+  <Seo
+    title="Krantjes"
+    description="Bekijk hier alle krantjes van Chiro Itterbeek. Alle edities van Jokontakt en Chirokrantje zijn aanwezig!"
+  />
+)
+
 export const boekjesListQuery = graphql`
   query allBoekjesQuery($skip: Int!, $limit: Int!) {
     boekjes: allContentfulBoekje(
-      sort: { fields: enddate, order: DESC }
+      sort: { enddate: DESC }
       skip: $skip
       limit: $limit
     ) {

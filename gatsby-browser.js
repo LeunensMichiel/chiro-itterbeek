@@ -1,43 +1,9 @@
-import React from "react"
-import GenderProvider from "./src/context/GenderContext"
-import { Global, css } from "@emotion/core"
+// Latin + Latin Extended cover Dutch/French; other subsets aren't needed.
+import "@fontsource/pt-sans/latin-400.css"
+import "@fontsource/pt-sans/latin-ext-400.css"
+import "@fontsource/pt-sans/latin-700.css"
+import "@fontsource/pt-sans/latin-ext-700.css"
+import "@fontsource/bangers/latin-400.css"
+import "@fontsource/bangers/latin-ext-400.css"
 
-const GlobalStyles = css`
-  html {
-    height: 100%;
-    overflow-y: scroll;
-  }
-  body,
-  #___gatsby {
-    height: 100%;
-  }
-
-  #gatsby-focus-wrapper {
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  button {
-    border: none;
-    margin: 0;
-    padding: 0;
-    width: auto;
-    overflow: visible;
-    background: transparent;
-    color: inherit;
-    font: inherit;
-    line-height: normal;
-    cursor: pointer;
-    -webkit-font-smoothing: inherit;
-    -moz-osx-font-smoothing: inherit;
-    -webkit-appearance: none;
-  }
-`
-
-export const wrapRootElement = ({ element }) => (
-  <GenderProvider>
-    <Global styles={GlobalStyles} />
-    {element}
-  </GenderProvider>
-)
+export { default as wrapRootElement } from "./src/wrapRootElement"

@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
+/** @jsxImportSource theme-ui */
 import { useContext } from "react"
 import { ContactWrapper } from "./bannerStyles"
 import { GenderContext } from "../../context/GenderContext"

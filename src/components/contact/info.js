@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
+/** @jsxImportSource theme-ui */
 import { useContext } from "react"
 import { ContactInfoWrapper, SocialWrapper } from "./contactStyles"
 import { useStaticQuery, graphql } from "gatsby"
@@ -12,7 +11,7 @@ import LinkLogo from "../../assets/icons/link.svg"
 const ContactInfo = () => {
   const data = useStaticQuery(graphql`
     query {
-      info: allContentfulContactinfo(sort: { fields: updatedAt }) {
+      info: allContentfulContactinfo(sort: { updatedAt: ASC }) {
         edges {
           node {
             gender

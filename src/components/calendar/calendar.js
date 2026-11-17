@@ -11,7 +11,7 @@ const Calendar = () => {
     query {
       calendar: allContentfulKalenderItem(
         filter: { isFuture: { eq: true } }
-        sort: { fields: date, order: ASC }
+        sort: { date: ASC }
       ) {
         edges {
           node {
@@ -37,16 +37,14 @@ const Calendar = () => {
 
   const [dateState, setDateState] = useState(firstDay)
   const changeDate = increment => {
-    let newDate
-    if (increment) {
-      newDate = new Date(dateState.setMonth(dateState.getMonth() + 1))
-      setDateState(newDate)
-    } else {
-      if (dateState >= currentDate) {
-        newDate = new Date(dateState.setMonth(dateState.getMonth() - 1))
-        setDateState(newDate)
-      }
-    }
+    if (!increment && dateState < currentDate) return
+    setDateState(
+      new Date(
+        dateState.getFullYear(),
+        dateState.getMonth() + (increment ? 1 : -1),
+        1
+      )
+    )
   }
 
   return (

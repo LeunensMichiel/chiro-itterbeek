@@ -1,0 +1,26 @@
+[build]
+  command = "npm run build"
+  publish = "public"
+
+[build.environment]
+  NODE_VERSION = "24"
+
+# Security headers previously added by gatsby-plugin-netlify.
+# Referrer-Policy is relaxed from "same-origin" (which strips the Referer on
+# cross-origin requests and breaks YouTube embeds with "Error 153") to the
+# browser default, which only ever sends the origin cross-origin.
+# (Caching headers are handled by gatsby-adapter-netlify, which Gatsby
+# installs automatically when building on Netlify.)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# gatsby-plugin-sitemap v6 writes sitemap-index.xml instead of sitemap.xml
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap-index.xml"
+  status = 301

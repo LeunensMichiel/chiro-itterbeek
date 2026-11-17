@@ -1,42 +1,63 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
+/** @jsxImportSource theme-ui */
 import { useState } from "react"
-import Img from "gatsby-image"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { useStaticQuery, graphql } from "gatsby"
 
 import { Group, LeidingItem } from "./groupStyles"
 
+// Exact age in whole years (calculated in the browser, so it's always current)
+const getAge = birthday => {
+  // use the calendar date as entered in Contentful (YYYY-MM-DD…), not UTC
+  const [year, month, day] = String(birthday)
+    .slice(0, 10)
+    .split("-")
+    .map(Number)
+  const now = new Date()
+  let age = now.getFullYear() - year
+  const hadBirthday =
+    now.getMonth() + 1 > month ||
+    (now.getMonth() + 1 === month && now.getDate() >= day)
+  if (!hadBirthday) age -= 1
+  return age
+}
+
 const Leiding = ({ color, gender }) => {
   const data = useStaticQuery(graphql`
     query {
-      allLeiding: allContentfulLeiding(sort: { fields: firstname }) {
+      allLeiding: allContentfulLeiding(sort: { firstname: ASC }) {
         edges {
           node {
             firstname
             food
             gender
             id
-            birthday(fromNow: true)
+            birthday
             lastname
             nickname
             activities
             profilePicture {
-              fluid(maxWidth: 150, quality: 80) {
-                ...GatsbyContentfulFluid_withWebp
-              }
+              gatsbyImageData(
+                layout: FULL_WIDTH
+                breakpoints: [38, 75, 150, 225, 300]
+                quality: 80
+                placeholder: BLURRED
+              )
             }
           }
         }
       }
       images: allContentfulAsset(
         filter: { title: { regex: "/Vervangbaar/" } }
-        sort: { fields: title }
+        sort: { title: ASC }
       ) {
         edges {
           node {
-            fluid(maxWidth: 600, quality: 90) {
-              ...GatsbyContentfulFluid_withWebp
-            }
+            gatsbyImageData(
+              layout: FULL_WIDTH
+              breakpoints: [150, 300, 600, 900, 1200]
+              quality: 90
+              placeholder: BLURRED
+            )
             title
           }
         }
@@ -49,6 +70,9 @@ const Leiding = ({ color, gender }) => {
   )
 
   const [selectedLeiding, setSelectedLeiding] = useState(0)
+  const groupImage = data.images.edges[gender === 1 ? 1 : 0]?.node
+  const selected = (filteredLeiding[selectedLeiding] || filteredLeiding[0])
+    ?.node
 
   return (
     <Group color={color}>
@@ -60,12 +84,14 @@ const Leiding = ({ color, gender }) => {
       >
         Leiding
       </h2>
-      <Img
-        className="group__image"
-        fluid={data.images.edges[gender === 1 ? 1 : 0].node.fluid}
-        title={data.images.edges[gender === 1 ? 1 : 0].node.title}
-        alt={data.images.edges[gender === 1 ? 1 : 0].node.title}
-      />
+      {groupImage && (
+        <GatsbyImage
+          className="group__image"
+          image={getImage(groupImage)}
+          title={groupImage.title}
+          alt={groupImage.title}
+        />
+      )}
       <div className="group__description">
         <h4>{`Ontmoet je ${gender === 1 ? "leiding" : "leidsters"}!`}</h4>
         {gender === 1 ? (
@@ -90,9 +116,9 @@ const Leiding = ({ color, gender }) => {
               <div className="group__leiding__title">
                 {leiding.node.firstname}
               </div>
-              <Img
+              <GatsbyImage
                 className="group__leiding__image"
-                fluid={leiding.node.profilePicture.fluid}
+                image={getImage(leiding.node.profilePicture)}
                 alt={leiding.node.firstname}
                 title={leiding.node.firstname}
               />
@@ -100,49 +126,38 @@ const Leiding = ({ color, gender }) => {
           ))}
         </div>
       </div>
-      <div className="group__leiding group__leiding__about">
-        <Img
-          className="group__leiding__about__image"
-          fluid={filteredLeiding[selectedLeiding].node.profilePicture.fluid}
-          alt={filteredLeiding[selectedLeiding].node.firstname}
-          title={filteredLeiding[selectedLeiding].node.firstname}
-        />
-        <div className="group__leiding__about__text">
-          <h3>
-            {filteredLeiding[selectedLeiding].node.firstname}
-            {' "'}
-            <span className="group__leiding__about__nickname">
-              {filteredLeiding[selectedLeiding].node.nickname}
-            </span>
-            {'" '}
-            {filteredLeiding[selectedLeiding].node.lastname}
-          </h3>
-          <p>
-            Is{" "}
-            <b>
-              {filteredLeiding[selectedLeiding].node.birthday.substring(0, 2)}
-            </b>{" "}
-            jaar
-          </p>
-          <p>
-            Eet op de chiro graag{" "}
-            <b>
-              {filteredLeiding[selectedLeiding].node.food
-                .map(f => f.toLowerCase())
-                .join(", ")}
-            </b>
-          </p>
-          <p>
-            Op de chiro houdt {filteredLeiding[selectedLeiding].node.firstname}{" "}
-            van{" "}
-            <b>
-              {filteredLeiding[selectedLeiding].node.activities
-                .map(f => f.toLowerCase())
-                .join(", ")}
-            </b>
-          </p>
+      {selected && (
+        <div className="group__leiding group__leiding__about">
+          <GatsbyImage
+            className="group__leiding__about__image"
+            image={getImage(selected.profilePicture)}
+            alt={selected.firstname}
+            title={selected.firstname}
+          />
+          <div className="group__leiding__about__text">
+            <h3>
+              {selected.firstname}
+              {' "'}
+              <span className="group__leiding__about__nickname">
+                {selected.nickname}
+              </span>
+              {'" '}
+              {selected.lastname}
+            </h3>
+            <p>
+              Is <b>{getAge(selected.birthday)}</b> jaar
+            </p>
+            <p>
+              Eet op de chiro graag{" "}
+              <b>{selected.food.map(f => f.toLowerCase()).join(", ")}</b>
+            </p>
+            <p>
+              Op de chiro houdt {selected.firstname} van{" "}
+              <b>{selected.activities.map(f => f.toLowerCase()).join(", ")}</b>
+            </p>
+          </div>
         </div>
-      </div>
+      )}
     </Group>
   )
 }

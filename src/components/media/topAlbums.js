@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
+/** @jsxImportSource theme-ui */
 import { useContext } from "react"
 import { TopAlbumWrapper } from "./mediaStyles"
 import { useStaticQuery, graphql } from "gatsby"
@@ -10,10 +9,7 @@ import Album from "./album"
 const TopAlbums = () => {
   const data = useStaticQuery(graphql`
     query {
-      albums: allContentfulAlbum(
-        sort: { fields: date, order: DESC }
-        limit: 9
-      ) {
+      albums: allContentfulAlbum(sort: { date: DESC }, limit: 9) {
         edges {
           node {
             gender

@@ -1,9 +1,8 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
-import { useContext, useState, Fragment } from "react"
-import Img from "gatsby-image"
+/** @jsxImportSource theme-ui */
+import { useContext, useState, useRef, Fragment } from "react"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { useStaticQuery, graphql } from "gatsby"
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import { renderRichText } from "gatsby-source-contentful/rich-text"
 import { SwitchTransition, CSSTransition } from "react-transition-group"
 import { GenderContext } from "../../context/GenderContext"
 
@@ -13,12 +12,12 @@ import {
   InformationBlock,
 } from "./informationStyles"
 
+const TABS = ["Algemeen", "Inschrijven", "Uniform"]
+
 const Information = () => {
   const data = useStaticQuery(graphql`
     query {
-      infoBlocks: allContentfulInformatieblok(
-        sort: { fields: rank, order: ASC }
-      ) {
+      infoBlocks: allContentfulInformatieblok(sort: { rank: ASC }) {
         edges {
           node {
             gender
@@ -26,21 +25,27 @@ const Information = () => {
             title
             id
             banner {
-              fluid(maxWidth: 950, quality: 90) {
-                ...GatsbyContentfulFluid_withWebp
-              }
+              gatsbyImageData(
+                layout: FULL_WIDTH
+                breakpoints: [238, 475, 950, 1425, 1900]
+                quality: 90
+                placeholder: BLURRED
+              )
             }
             info {
-              json
+              raw
             }
           }
         }
       }
       defaultImage: file(relativePath: { eq: "images/itterbeek.jpg" }) {
         childImageSharp {
-          fluid(maxWidth: 400, quality: 30) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
+          gatsbyImageData(
+            layout: FULL_WIDTH
+            breakpoints: [100, 200, 400, 600, 800]
+            quality: 30
+            placeholder: BLURRED
+          )
         }
       }
     }
@@ -48,83 +53,64 @@ const Information = () => {
 
   const { genderState } = useContext(GenderContext)
   const [currentTab, setCurrentTab] = useState(0)
+  const imageRef = useRef(null)
   const filteredBlocks = data.infoBlocks.edges.filter(block =>
     genderState.gender === 1
       ? block.node.gender === "Jokonta"
       : block.node.gender === "Allegro"
   )
 
-  if (!filteredBlocks[currentTab].node.banner) {
-    filteredBlocks[currentTab].node.banner = data.defaultImage.childImageSharp
-  }
+  // Tabs map onto the blocks in rank order; only show tabs that have a block.
+  const tabs = TABS.slice(0, filteredBlocks.length)
+  const activeTab = currentTab < tabs.length ? currentTab : 0
+  const currentBlock = filteredBlocks[activeTab]?.node
+  if (!currentBlock) return null
+  const banner = getImage(currentBlock.banner) ?? getImage(data.defaultImage)
+  const activeColor = genderState.gender === 1 ? "jokonta" : "allegro"
 
   return (
     <InformationWrapper>
       <InformationNavigation gender={genderState.gender}>
-        <button
-          sx={{
-            variant: "text.navHeading",
-            color:
-              currentTab === 0
-                ? genderState.gender === 1
-                  ? "jokonta"
-                  : "allegro"
-                : "header",
-          }}
-          onClick={() => setCurrentTab(0)}
-        >
-          Algemeen
-        </button>
-        <button
-          sx={{
-            variant: "text.navHeading",
-            color:
-              currentTab === 1
-                ? genderState.gender === 1
-                  ? "jokonta"
-                  : "allegro"
-                : "header",
-          }}
-          onClick={() => setCurrentTab(1)}
-        >
-          Inschrijven
-        </button>
-        <button
-          sx={{
-            variant: "text.navHeading",
-            color:
-              currentTab === 2
-                ? genderState.gender === 1
-                  ? "jokonta"
-                  : "allegro"
-                : "header",
-          }}
-          onClick={() => setCurrentTab(2)}
-        >
-          Uniform
-        </button>
+        {tabs.map((label, index) => (
+          <button
+            key={label}
+            sx={{
+              variant: "text.navHeading",
+              color: activeTab === index ? activeColor : "header",
+            }}
+            onClick={() => setCurrentTab(index)}
+          >
+            {label}
+          </button>
+        ))}
       </InformationNavigation>
       <InformationBlock gender={genderState.gender}>
         <SwitchTransition>
           <CSSTransition
-            key={filteredBlocks[currentTab].node.id}
-            addEndListener={(node, done) =>
-              node.addEventListener("transitionend", done, false)
+            key={currentBlock.id}
+            nodeRef={imageRef}
+            addEndListener={done =>
+              imageRef.current?.addEventListener("transitionend", done, false)
             }
             classNames="fade"
           >
             <Fragment>
-              <Img
-                className="information__image__container"
-                fluid={filteredBlocks[currentTab].node.banner.fluid}
-                alt={filteredBlocks[currentTab].node.title}
-                title={filteredBlocks[currentTab].node.title}
-              />
+              {/* Only the image fades (as before); the wrapper carries the ref. */}
+              <div className="information__image__container" ref={imageRef}>
+                <GatsbyImage
+                  image={banner}
+                  alt={currentBlock.title}
+                  title={currentBlock.title}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "inherit",
+                  }}
+                />
+              </div>
 
               <div className="information__article">
-                {documentToReactComponents(
-                  filteredBlocks[currentTab].node.info.json
-                )}
+                {currentBlock.info && renderRichText(currentBlock.info)}
               </div>
             </Fragment>
           </CSSTransition>

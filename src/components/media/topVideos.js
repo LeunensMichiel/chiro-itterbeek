@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
+/** @jsxImportSource theme-ui */
 import { useContext } from "react"
 import { TopVideoWrapper } from "./mediaStyles"
 import { useStaticQuery, graphql } from "gatsby"
@@ -9,7 +8,7 @@ const TopVideos = () => {
   const data = useStaticQuery(graphql`
     query {
       featured: allContentfulVideo(
-        sort: { fields: createdAt, order: ASC }
+        sort: { createdAt: ASC }
         filter: { featured: { eq: true } }
       ) {
         edges {
@@ -51,8 +50,8 @@ const TopVideos = () => {
               frameBorder="0"
               allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-              importance="low"
               loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
             ></iframe>
           </div>
         ))}

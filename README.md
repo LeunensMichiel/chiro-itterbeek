@@ -1,46 +1,47 @@
 # Chiro Itterbeek
 
-Site for Chiro Itterbeek, youth movement in Belgium. Uses the Gatsbyjs frontend framework based on React. Sources content from the Contentful API, and is deployed on Netlify.
-[Chiro Itterbeek](https://wwww.chiroitterbeek.be/)
+Website of [Chiro Itterbeek](https://chiroitterbeek.be/), a youth movement in Dilbeek, Belgium.
+Built with [Gatsby 5](https://www.gatsbyjs.com/) + React 19, content managed in
+[Contentful](https://www.contentful.com/), hosted on [Netlify](https://www.netlify.com/).
 
-See below for official instructions provided by Gatsby and Contentful. Contact me if you want you fork this repository.
+## Requirements
 
-### Set up of the needed content model and create a configuration file
+- Node.js 24 (see `.nvmrc`)
+- A Contentful space with the Chiro Itterbeek content model
+- A Mapbox access token (for the map on the contact page)
 
-This project comes with a Contentful setup command `npm run setup`.
+## Setup
 
-This command will ask you for a space ID, and access tokens for the Contentful Management and Delivery API and then import the needed content model into the space you define and write a config file (`./.contentful.json`).
+```sh
+nvm use
+npm install
+```
 
-`npm run setup` automates that for you but if you want to do it yourself rename `.contentful.json.sample` to `.contentful.json` and add your configuration in this file.
+Create a `.env` file in the project root (it is git-ignored):
 
-## Crucial Commands
+```sh
+CONTENTFUL_SPACE_ID=xxxxxxxxxxxx
+CONTENTFUL_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx   # Content Delivery API token
+GATSBY_TOKEN_MAPBOX=pk.xxxxxxxxxxxxxxxx
+# optional: CONTENTFUL_HOST=preview.contentful.com (with a Preview API token)
+```
 
-### `npm run dev`
+On Netlify these variables are set in the site's environment settings instead.
 
-Run the project locally with live reload in development mode.
+## Commands
 
-### `npm run build`
+| Command         | What it does                                           |
+| --------------- | ------------------------------------------------------ |
+| `npm run dev`   | Development server with hot reload at `localhost:8000` |
+| `npm run build` | Production build into `./public`                       |
+| `npm run serve` | Serve the production build at `localhost:9000`         |
+| `npm run clean` | Clear Gatsby's `.cache` and `public` folders           |
 
-Run a production build into `./public`. The result is ready to be put on any static hosting you prefer.
+## Deployment
 
-### `npm run serve`
+Netlify builds every push using `netlify.toml` (Node 24, `npm run build`, publish `public`).
+Gatsby automatically uses `gatsby-adapter-netlify` there. Content changes in
+Contentful should trigger a Netlify build hook.
 
-Spin up a production-ready server with your blog. Don't forget to build your page beforehand.
-
-## Contentful Gatsby Starter Blog
-
-Create a [Gatsby](http://gatsbyjs.com/) blog powered by [Contentful](https://www.contentful.com). This is a simplified version of the [Gatsby Contentful Starter](https://github.com/contentful-userland/gatsby-contentful-starter) which is maintained by our Community.
-
-Static sites are scalable, secure and have very little required maintenance. They come with a drawback though. Not everybody feels good editing files, building a project and uploading it somewhere. This is where Contentful comes into play.
-
-With Contentful and Gatsby you can connect your favorite static site generator with an API that provides an easy to use interface for people writing content and automate the publishing using services like [Travis CI](https://travis-ci.org/) or [Netlify](https://www.netlify.com/).
-
-## Features
-
-- Simple content model and structure. Easy to adjust to your needs.
-- Use the [synchronization feature](https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/synchronization) of our [Delivery API](https://www.contentful.com/developers/docs/references/content-delivery-api/).
-- Responsive/adaptive images via [gatsby-image](https://www.gatsbyjs.org/packages/gatsby-image/) and our [Images API](https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/synchronization/initial-synchronization-of-entries-of-a-specific-content-type).
-
-## Getting started
-
-See our [official Contentful getting started guide](https://www.contentful.com/developers/docs/tutorials/general/get-started/).
+The contact forms use Netlify Forms. Hidden copies of both forms are rendered into
+the static HTML of `/contact/` (see `gatsby-ssr.js`) so Netlify detects them at deploy time.

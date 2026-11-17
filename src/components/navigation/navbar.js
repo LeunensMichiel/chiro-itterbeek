@@ -1,6 +1,6 @@
-/** @jsx jsx */
-import { jsx, useColorMode } from "theme-ui"
-import { useContext, Fragment } from "react"
+/** @jsxImportSource theme-ui */
+import { useColorMode } from "theme-ui"
+import { useContext, useRef, Fragment } from "react"
 import { Link } from "gatsby"
 import { SwitchTransition, CSSTransition } from "react-transition-group"
 
@@ -23,10 +23,24 @@ import Dark from "../../assets/icons/dark.svg"
 import Facebook from "../../assets/icons/facebook.svg"
 import Instagram from "../../assets/icons/instagram.svg"
 
+// Activate role="button" links with Enter/Space only (not on every key, e.g. Tab)
+const onActivateKey = handler => event => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault()
+    handler()
+  }
+}
+
 const Navbar = ({ show = false, hamburgerClickHandler }) => {
   const [colorMode, setColorMode] = useColorMode()
   const { genderState, dispatch } = useContext(GenderContext)
   const hasMounted = useHasMounted()
+  const genderIconRef = useRef(null)
+  const colorIconRef = useRef(null)
+  const isDark = colorMode === "dark"
+
+  const toggleGender = () => dispatch({ type: "TOGGLE_GENDER" })
+  const toggleColorMode = () => setColorMode(isDark ? "light" : "dark")
 
   return (
     <Fragment>
@@ -45,10 +59,9 @@ const Navbar = ({ show = false, hamburgerClickHandler }) => {
           </ItterbeekWrapper>
         )}
         <button
-          className="hamburger hamburger--elastic"
+          className={`hamburger hamburger--elastic${show ? " is-active" : ""}`}
           type="button"
           onClick={hamburgerClickHandler}
-          onKeyDown={hamburgerClickHandler}
           id="hamburger"
           aria-label="Menu"
           aria-controls="navigation"
@@ -119,12 +132,8 @@ const Navbar = ({ show = false, hamburgerClickHandler }) => {
         {hasMounted && (
           <SocialWrapper gender={genderState.gender}>
             <a
-              onClick={() => {
-                dispatch({ type: "TOGGLE_GENDER" })
-              }}
-              onKeyDown={() => {
-                dispatch({ type: "TOGGLE_GENDER" })
-              }}
+              onClick={toggleGender}
+              onKeyDown={onActivateKey(toggleGender)}
               role="button"
               aria-label="Verwisselen van Chiro (Meisjes of Jongens)"
               tabIndex={0}
@@ -132,35 +141,49 @@ const Navbar = ({ show = false, hamburgerClickHandler }) => {
               <SwitchTransition>
                 <CSSTransition
                   key={genderState.gender}
-                  addEndListener={(node, done) =>
-                    node.addEventListener("transitionend", done, false)
+                  nodeRef={genderIconRef}
+                  addEndListener={done =>
+                    genderIconRef.current?.addEventListener(
+                      "transitionend",
+                      done,
+                      false
+                    )
                   }
                   classNames="fade"
                 >
-                  {genderState.gender === 1 ? <Male /> : <Female />}
+                  {genderState.gender === 1 ? (
+                    <Male ref={genderIconRef} />
+                  ) : (
+                    <Female ref={genderIconRef} />
+                  )}
                 </CSSTransition>
               </SwitchTransition>
             </a>
             <a
               aria-label="Verwisselen van kleurenthema (donker of licht)"
-              onClick={() => {
-                setColorMode(colorMode === "default" ? "dark" : "default")
-              }}
-              onKeyDown={() => {
-                setColorMode(colorMode === "default" ? "dark" : "default")
-              }}
+              onClick={toggleColorMode}
+              onKeyDown={onActivateKey(toggleColorMode)}
               role="button"
               tabIndex={0}
             >
               <SwitchTransition>
                 <CSSTransition
-                  key={colorMode}
-                  addEndListener={(node, done) =>
-                    node.addEventListener("transitionend", done, false)
+                  key={isDark ? "dark" : "light"}
+                  nodeRef={colorIconRef}
+                  addEndListener={done =>
+                    colorIconRef.current?.addEventListener(
+                      "transitionend",
+                      done,
+                      false
+                    )
                   }
                   classNames="fade"
                 >
-                  {colorMode === "default" ? <Light /> : <Dark />}
+                  {isDark ? (
+                    <Dark ref={colorIconRef} />
+                  ) : (
+                    <Light ref={colorIconRef} />
+                  )}
                 </CSSTransition>
               </SwitchTransition>
             </a>

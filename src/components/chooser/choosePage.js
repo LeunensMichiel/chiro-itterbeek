@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
+/** @jsxImportSource theme-ui */
 import { useContext, Fragment } from "react"
 
 import { GenderContext } from "../../context/GenderContext"

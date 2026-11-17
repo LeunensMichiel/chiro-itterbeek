@@ -1,8 +1,6 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
+/** @jsxImportSource theme-ui */
 import { useState, useContext, useEffect } from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import loadable from "@loadable/component"
 
 import { GenderContext } from "../../context/GenderContext"
 
@@ -11,21 +9,23 @@ import {
   GroupNavigation,
   GroupNavigationItem,
 } from "./groupStyles"
-
-const Leiding = loadable(() => import("./leiding"))
-const AgeGroup = loadable(() => import("./ageGroup"))
+import Leiding from "./leiding"
+import AgeGroup from "./ageGroup"
 
 const Groups = () => {
   const data = useStaticQuery(graphql`
     query {
-      allGroup: allContentfulLeeftijdsgroep(sort: { fields: rang }) {
+      allGroup: allContentfulLeeftijdsgroep(sort: { rang: ASC }) {
         edges {
           node {
             age
             banner {
-              fluid(maxWidth: 600, quality: 90) {
-                ...GatsbyContentfulFluid_withWebp
-              }
+              gatsbyImageData(
+                layout: FULL_WIDTH
+                breakpoints: [150, 300, 600, 900, 1200]
+                quality: 90
+                placeholder: BLURRED
+              )
             }
             color
             id
@@ -38,9 +38,13 @@ const Groups = () => {
               id
               firstname
               profilePicture {
-                fixed(height: 120, width: 120, quality: 80) {
-                  ...GatsbyContentfulFixed_withWebp
-                }
+                gatsbyImageData(
+                  layout: FIXED
+                  width: 120
+                  height: 120
+                  quality: 80
+                  placeholder: BLURRED
+                )
               }
             }
           }
@@ -64,6 +68,10 @@ const Groups = () => {
   )
 
   const currentGroup = filteredGroups[activeGroup] || filteredGroups[0]
+  // The leiding tab sits after the groups; it's the only view when a chiro has
+  // no age groups in Contentful (otherwise there's nothing to render).
+  const leidingIndex = filteredGroups.length + 1
+  const showLeiding = activeGroup === leidingIndex || !currentGroup
 
   const getColor = color => {
     switch (color) {
@@ -97,11 +105,11 @@ const Groups = () => {
         ))}
         <GroupNavigationItem
           color={getColor()}
-          onClick={() => setActiveGroup(filteredGroups.length + 1)}
-          isActive={filteredGroups.length + 1 === activeGroup}
+          onClick={() => setActiveGroup(leidingIndex)}
+          isActive={showLeiding}
         />
       </GroupNavigation>
-      {activeGroup === filteredGroups.length + 1 ? (
+      {showLeiding ? (
         <Leiding color={getColor()} gender={genderState.gender} />
       ) : (
         <AgeGroup

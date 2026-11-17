@@ -1,17 +1,15 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
+/** @jsxImportSource theme-ui */
 import { graphql, Link } from "gatsby"
-import loadable from "@loadable/component"
 
 import Layout from "../components/layout"
-import SEO from "../components/seo/seo"
+import Seo from "../components/seo/seo"
 import {
   TopAlbumWrapper,
   MediaNavitation,
 } from "../components/media/mediaStyles"
 import Chevron from "../assets/icons/chevron.svg"
 
-const Album = loadable(() => import("../components/media/album"))
+import Album from "../components/media/album"
 
 const allAlbums = ({ pageContext, data }) => {
   const { currentPage, numAlbumPages } = pageContext
@@ -25,10 +23,6 @@ const allAlbums = ({ pageContext, data }) => {
 
   return (
     <Layout>
-      <SEO
-        title="Albums"
-        description="Alle albums van chiro Jokonta en chiro Allegro."
-      />
       <TopAlbumWrapper>
         <Link to="/media/">
           <Chevron />
@@ -62,10 +56,17 @@ const allAlbums = ({ pageContext, data }) => {
 
 export default allAlbums
 
+export const Head = () => (
+  <Seo
+    title="Albums"
+    description="Alle albums van chiro Jokonta en chiro Allegro."
+  />
+)
+
 export const albumListQuery = graphql`
   query allAlbumsQuery($skip: Int!, $limit: Int!) {
     albums: allContentfulAlbum(
-      sort: { fields: date, order: DESC }
+      sort: { date: DESC }
       skip: $skip
       limit: $limit
     ) {

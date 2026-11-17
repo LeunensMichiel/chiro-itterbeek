@@ -1,21 +1,19 @@
 import React, { useState } from "react"
-import loadable from "@loadable/component"
 import PropTypes from "prop-types"
-import { css, Global } from "@emotion/core"
+import { css, Global } from "@emotion/react"
 
 import { useHasMounted } from "../context/hasMounted"
-
-const Navbar = loadable(() => import("./navigation/navbar"))
-const Footer = loadable(() => import("./footer/footer"))
+import { useColorModeClass } from "../context/useColorModeClass"
+import Navbar from "./navigation/navbar"
+import Footer from "./footer/footer"
 
 const mainCss = css`
   width: 100%;
   min-height: 100%;
   display: grid;
-  grid-template-columns: minmax(16px, 1fr) repeat(12, minmax(24px, 95px)) minmax(
-      16px,
-      1fr
-    );
+  grid-template-columns:
+    minmax(16px, 1fr) repeat(12, minmax(24px, 95px))
+    minmax(16px, 1fr);
   flex: 1 1 auto;
   padding-top: 100px;
   overflow-x: hidden;
@@ -25,35 +23,23 @@ const mainCss = css`
   }
 `
 
-const IsIE = () => {
-  if (typeof window !== `undefined`) {
-    return window.navigator.userAgent.match(/(MSIE|Trident)/)
-  }
+const bodyTransition = {
+  body: {
+    transition: "background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1)",
+  },
 }
+
 const Layout = ({ children }) => {
   const hasMounted = useHasMounted()
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false)
-  if (IsIE()) {
-    alert(
-      "Internet Explorer is oud en wordt niet meer ondersteund. Chiroitterbeek.be zal hier niet goed op draaien. Gelieve een moderne browser te downloaden zoals Google Chrome of Firefox"
-    )
-    window.open("https://www.google.com/intl/nl/chrome/")
-  }
+  useColorModeClass()
+
   return (
     <>
-      <Global
-        styles={theme => ({
-          body: {
-            transition: "background-color 0.4s cubic-bezier(0.87, 0, 0.13, 1)",
-          },
-        })}
-      />
+      <Global styles={bodyTransition} />
       <Navbar
         show={sideDrawerOpen}
-        hamburgerClickHandler={() => {
-          setSideDrawerOpen(!sideDrawerOpen)
-          document.getElementById("hamburger").classList.toggle("is-active")
-        }}
+        hamburgerClickHandler={() => setSideDrawerOpen(open => !open)}
       />
       {hasMounted && (
         <main css={mainCss} aria-hidden={sideDrawerOpen}>

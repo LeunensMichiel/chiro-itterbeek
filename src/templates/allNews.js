@@ -1,15 +1,14 @@
 import React from "react"
 import Layout from "../components/layout"
-import loadable from "@loadable/component"
 import { graphql, Link } from "gatsby"
 
-import SEO from "../components/seo/seo"
+import Seo from "../components/seo/seo"
 import { NewsWrapper } from "../components/news/newsStyles"
 import { MediaNavitation } from "../components/media/mediaStyles"
 import Chevron from "../assets/icons/chevron.svg"
 
-const NewsHighlight = loadable(() => import("../components/news/newsHighlight"))
-const NewsItem = loadable(() => import("../components/news/newsItem"))
+import NewsHighlight from "../components/news/newsHighlight"
+import NewsItem from "../components/news/newsItem"
 
 const allNews = ({ pageContext, data }) => {
   const { currentPage, numNewsPages } = pageContext
@@ -21,10 +20,6 @@ const allNews = ({ pageContext, data }) => {
 
   return (
     <Layout>
-      <SEO
-        title="Nieuws"
-        description="Bekijk hier de laatste updates van Chiro Itterbeek. Zowel van de de meisjes (Allegro) als de jongens (Jokonta)!"
-      />
       {isFirst && <NewsHighlight margin />}
       <NewsWrapper isFirst>
         <MediaNavitation isFirst={isFirst} isLast={isLast}>
@@ -48,10 +43,17 @@ const allNews = ({ pageContext, data }) => {
 
 export default allNews
 
+export const Head = () => (
+  <Seo
+    title="Nieuws"
+    description="Bekijk hier de laatste updates van Chiro Itterbeek. Zowel van de de meisjes (Allegro) als de jongens (Jokonta)!"
+  />
+)
+
 export const newsListQuery = graphql`
   query allNewsQuery($skip: Int!, $limit: Int!) {
     news: allContentfulBericht(
-      sort: { fields: date, order: DESC }
+      sort: { date: DESC }
       skip: $skip
       limit: $limit
       filter: { title: { ne: "dummy" } }
@@ -62,14 +64,14 @@ export const newsListQuery = graphql`
           title
           gender
           id
-          body {
-            json
-          }
           date
           banner {
-            fluid(maxWidth: 950, quality: 90) {
-              ...GatsbyContentfulFluid_withWebp
-            }
+            gatsbyImageData(
+              layout: FULL_WIDTH
+              breakpoints: [238, 475, 950, 1425, 1900]
+              quality: 90
+              placeholder: BLURRED
+            )
           }
           excerpt {
             childMarkdownRemark {

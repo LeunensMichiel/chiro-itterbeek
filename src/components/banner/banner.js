@@ -1,5 +1,5 @@
-/** @jsx jsx */
-import { jsx, useColorMode } from "theme-ui"
+/** @jsxImportSource theme-ui */
+import { useColorMode } from "theme-ui"
 import { useContext, useRef, useEffect } from "react"
 import { SwitchTransition, CSSTransition } from "react-transition-group"
 import { GenderContext } from "../../context/GenderContext"
@@ -9,6 +9,7 @@ import { BannerWrapper, BannerOverlay } from "./bannerStyles"
 
 const Banner = ({ jokonta, allegro, text }) => {
   const overlay = useRef(null)
+  const imageRef = useRef(null)
   const { genderState } = useContext(GenderContext)
   const [colorMode] = useColorMode()
 
@@ -33,12 +34,13 @@ const Banner = ({ jokonta, allegro, text }) => {
       <SwitchTransition>
         <CSSTransition
           key={genderState.gender}
-          addEndListener={(node, done) =>
-            node.addEventListener("transitionend", done, false)
+          nodeRef={imageRef}
+          addEndListener={done =>
+            imageRef.current?.addEventListener("transitionend", done, false)
           }
           classNames="fade"
         >
-          <div className="banner__image__container">
+          <div className="banner__image__container" ref={imageRef}>
             <img
               src={genderState.gender === 1 ? jokonta : allegro}
               alt={text}

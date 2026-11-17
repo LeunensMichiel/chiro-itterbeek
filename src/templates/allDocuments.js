@@ -1,17 +1,15 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
+/** @jsxImportSource theme-ui */
 import { graphql, Link } from "gatsby"
-import loadable from "@loadable/component"
 
 import Layout from "../components/layout"
-import SEO from "../components/seo/seo"
+import Seo from "../components/seo/seo"
 import {
   TopAlbumWrapper,
   MediaNavitation,
 } from "../components/media/mediaStyles"
 import Chevron from "../assets/icons/chevron.svg"
 
-const Document = loadable(() => import("../components/media/document"))
+import Document from "../components/media/document"
 
 const allDocuments = ({ pageContext, data }) => {
   const { currentPage, numDocumentPages } = pageContext
@@ -25,10 +23,6 @@ const allDocuments = ({ pageContext, data }) => {
 
   return (
     <Layout>
-      <SEO
-        title="Overige Documenten"
-        description="Overige documenten van Chiro Itterbeek. Kampbundels, Medische fishes, privacyverklaringen, enzovoort."
-      />
       <TopAlbumWrapper>
         <Link to="/media/">
           <Chevron />
@@ -62,10 +56,17 @@ const allDocuments = ({ pageContext, data }) => {
 
 export default allDocuments
 
+export const Head = () => (
+  <Seo
+    title="Overige Documenten"
+    description="Overige documenten van Chiro Itterbeek. Kampbundels, Medische fishes, privacyverklaringen, enzovoort."
+  />
+)
+
 export const docListQuery = graphql`
   query alldocQuery($skip: Int!, $limit: Int!) {
     documents: allContentfulDocument(
-      sort: { fields: title }
+      sort: { title: ASC }
       skip: $skip
       limit: $limit
     ) {
