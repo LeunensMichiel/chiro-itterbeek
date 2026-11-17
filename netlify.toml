@@ -1,16 +1,15 @@
 [build]
   command = "npm run build"
-  publish = "public"
+  # Static export (next.config.ts: output "export")
+  publish = "out"
 
 [build.environment]
   NODE_VERSION = "24"
 
-# Security headers previously added by gatsby-plugin-netlify.
+# Security headers.
 # Referrer-Policy is relaxed from "same-origin" (which strips the Referer on
 # cross-origin requests and breaks YouTube embeds with "Error 153") to the
 # browser default, which only ever sends the origin cross-origin.
-# (Caching headers are handled by gatsby-adapter-netlify, which Gatsby
-# installs automatically when building on Netlify.)
 [[headers]]
   for = "/*"
   [headers.values]
@@ -19,8 +18,14 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
-# gatsby-plugin-sitemap v6 writes sitemap-index.xml instead of sitemap.xml
+# Next.js puts a content hash in every file name under /_next/static/
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# The Gatsby site's sitemap lived at /sitemap-index.xml
 [[redirects]]
-  from = "/sitemap.xml"
-  to = "/sitemap-index.xml"
+  from = "/sitemap-index.xml"
+  to = "/sitemap.xml"
   status = 301

@@ -1,0 +1,379 @@
+/*
+ * Tailwind without its preflight reset: the design was built on the browser's
+ * default element styles (heading sizes, paragraph margins, …), so only the
+ * few resets the old site had are applied in the base layer below.
+ */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+/* Visitor preferences, set on <html> before first paint (see lib/chiro.ts) */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+@custom-variant jokonta (&:where([data-chiro="jokonta"] *));
+@custom-variant allegro (&:where([data-chiro="allegro"] *));
+@custom-variant unchosen (&:where([data-chiro="none"] *));
+
+@theme {
+  /* Colors, "according to figma spec". Dark-mode values are further below. */
+  --color-*: initial;
+  --color-header: #3b3b3d;
+  --color-styled-header-text: #f9f9fc;
+  --color-text: #272728;
+  --color-paragraph: #272728;
+  --color-nav-background: #272728;
+  --color-highlight-text: #cacace;
+  --color-aside-text: #545456;
+  --color-invisible-text: #99999e;
+  --color-background: #f9f9fc;
+  --color-background-muted: #ededf2;
+  --color-background-muted-2: #f9f9fc;
+  --color-input: #ededf2;
+  --color-border: #e3e3e8;
+  --color-border-muted: #cacace;
+  --color-accent-gray: #cacace;
+  --color-accent: #e1143c;
+  --color-jokonta: #2371e2;
+  --color-jokonta-light: #a2d3ff;
+  --color-jokonta-dark: #1e2f81;
+  --color-allegro: #f72585;
+  --color-allegro-light: #f793cd;
+  --color-allegro-dark: #c31b62;
+  /* The chosen chiro's color; the Itterbeek accent until one is chosen */
+  --color-chiro: var(--color-accent);
+  --color-chiro-light: var(--color-accent);
+
+  /* Desktop-first breakpoints, used as max-mobile:, max-tablet:, … */
+  --breakpoint-*: initial;
+  --breakpoint-mobile-s: 375px;
+  --breakpoint-mobile: 768px;
+  --breakpoint-tablet: 1025px;
+  --breakpoint-laptop: 1281px;
+
+  /* Font sizes only (line-height stays inherited, as before) */
+  --text-*: initial;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-7xl: 4.5rem;
+  --text-9xl: 12.5rem;
+
+  --shadow-nav: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  --shadow-container:
+    0px 4px 10px rgba(0, 0, 0, 0.1), 0px 2px 25px rgba(0, 0, 0, 0.1);
+
+  --ease-chiro: cubic-bezier(0.87, 0, 0.13, 1);
+  --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  --animate-reveal: reveal 0.2s var(--ease-chiro);
+  --animate-toast: toast 6.6s var(--ease-chiro) forwards;
+
+  @keyframes reveal {
+    from {
+      clip-path: circle(0%);
+    }
+    to {
+      clip-path: circle(50%);
+    }
+  }
+  @keyframes toast {
+    0% {
+      bottom: 0;
+      opacity: 0;
+    }
+    5%,
+    95% {
+      bottom: 30px;
+      opacity: 1;
+    }
+    100% {
+      bottom: 0;
+      opacity: 0;
+    }
+  }
+}
+
+@theme inline {
+  --font-body:
+    var(--font-pt-sans), system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-alt:
+    var(--font-bangers), var(--font-pt-sans), system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+
+:root[data-theme="dark"] {
+  --color-header: #f9f9fc;
+  --color-text: #ededf2;
+  --color-paragraph: #ededf2;
+  --color-aside-text: #cacace;
+  --color-background: #272728;
+  --color-background-muted: #3b3b3d;
+  --color-background-muted-2: #3b3b3d;
+  --color-border: #545456;
+  --color-input: #545456;
+  --color-border-muted: #99999e;
+  --color-accent-gray: #545456;
+}
+
+:root[data-chiro="jokonta"] {
+  --color-chiro: var(--color-jokonta);
+  --color-chiro-light: var(--color-jokonta-light);
+}
+
+:root[data-chiro="allegro"] {
+  --color-chiro: var(--color-allegro);
+  --color-chiro-light: var(--color-allegro-light);
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+    /* Colors ease along when switching between light and dark mode */
+    transition-property: color, background-color, border-color, fill;
+    transition-duration: 0.4s;
+    transition-timing-function: var(--ease-chiro);
+  }
+
+  html {
+    height: 100%;
+    overflow-y: scroll;
+    font-family: var(--font-body);
+    line-height: 1.5625;
+    font-weight: 400;
+    color: var(--color-paragraph);
+    background-color: var(--color-background);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  button {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    line-height: normal;
+    cursor: pointer;
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+    -webkit-appearance: none;
+  }
+}
+
+/* The page grid: 12 columns of max 95px with flexible gutters on both sides */
+@utility grid-cols-site {
+  grid-template-columns:
+    minmax(16px, 1fr) repeat(12, minmax(24px, 95px))
+    minmax(16px, 1fr);
+}
+
+@layer components {
+  /* Text styles (the old theme-ui `text` variants) */
+  .type-heading,
+  .type-nav,
+  .type-nav-white {
+    font-family: var(--font-body);
+    line-height: 1;
+    font-weight: 700;
+    color: var(--color-header);
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: var(--text-xl);
+  }
+  .type-heading {
+    font-size: var(--text-2xl);
+  }
+  .type-nav-white {
+    color: var(--color-styled-header-text);
+  }
+  .type-banner,
+  .type-alt {
+    font-family: var(--font-alt);
+    line-height: 1;
+    font-weight: 400;
+    color: var(--color-header);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-size: var(--text-5xl);
+  }
+  .type-banner {
+    color: var(--color-styled-header-text);
+    font-size: var(--text-7xl);
+  }
+  .type-footer {
+    font-family: var(--font-body);
+    line-height: 1;
+    font-weight: 400;
+    color: var(--color-invisible-text);
+    text-decoration: none;
+    font-size: var(--text-sm);
+  }
+  .type-paragraph {
+    font-family: var(--font-body);
+    line-height: 1.5625;
+    font-weight: 400;
+    color: var(--color-paragraph);
+    text-decoration: none;
+    font-size: var(--text-lg);
+  }
+
+  /* Rich text from Contentful (information blocks and news posts) */
+  .rich-text {
+    h2,
+    h3 {
+      margin: 0;
+      text-transform: uppercase;
+    }
+    h2 {
+      font-size: var(--text-xl);
+    }
+    h3 {
+      font-size: var(--text-lg);
+    }
+    > p {
+      margin-top: 0.25rem;
+      margin-bottom: 1.5rem;
+      white-space: pre-line;
+    }
+    i,
+    strong,
+    em {
+      word-break: break-all;
+    }
+    li p {
+      margin: 0;
+    }
+    img {
+      display: block;
+      max-width: 500px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    a {
+      color: var(--color-chiro);
+      transition: color 0.2s var(--ease-chiro);
+      &:hover {
+        transition: color 0.2s ease;
+        color: var(--color-chiro-light);
+      }
+    }
+    @media (width < 768px) {
+      h2 {
+        font-size: var(--text-lg);
+      }
+      h3 {
+        font-size: var(--text-base);
+      }
+      p {
+        font-size: var(--text-base);
+        margin-bottom: 0.5rem;
+      }
+      ul {
+        padding-left: 1.5rem;
+      }
+    }
+  }
+
+  /* Hamburger button, by https://github.com/jonsuh/hamburgers ("elastic") */
+  .hamburger {
+    padding: 16px;
+    display: inline-block;
+    cursor: pointer;
+    transition-property: opacity, filter;
+    transition-duration: 0.15s;
+    transition-timing-function: linear;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+  .hamburger-box {
+    width: 40px;
+    height: 24px;
+    display: inline-block;
+    position: relative;
+  }
+  .hamburger-inner,
+  .hamburger-inner::before,
+  .hamburger-inner::after {
+    width: 40px;
+    height: 4px;
+    background-color: var(--color-header);
+    border-radius: 2px;
+    position: absolute;
+    transition-property: transform;
+    transition-duration: 0.15s;
+    transition-timing-function: ease;
+  }
+  .hamburger-inner {
+    display: block;
+    top: 2px;
+    margin-top: -2px;
+    transition-duration: 0.275s;
+    transition-timing-function: var(--ease-elastic);
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+    }
+    &::before {
+      top: 10px;
+      transition: opacity 0.125s 0.275s ease;
+    }
+    &::after {
+      top: 20px;
+      transition: transform 0.275s var(--ease-elastic);
+    }
+  }
+  .hamburger[aria-expanded="true"] .hamburger-inner {
+    transform: translate3d(0, 10px, 0) rotate(135deg);
+    transition-delay: 0.075s;
+    &::before {
+      transition-delay: 0s;
+      opacity: 0;
+    }
+    &::after {
+      transform: translate3d(0, -20px, 0) rotate(-270deg);
+      transition-delay: 0.075s;
+    }
+  }
+
+  /* Round social icons: a filled circle with the glyph on top */
+  .social-icon {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    svg {
+      height: 36px;
+      width: auto;
+    }
+    svg circle {
+      fill: var(--social-circle, var(--color-background-muted));
+      transition: fill 0.3s ease-out;
+    }
+    svg path {
+      fill: var(--color-header);
+      transition: fill 0.3s ease-out;
+    }
+    &:hover svg circle {
+      fill: var(--social-circle-hover, var(--color-invisible-text));
+    }
+    &:hover svg path {
+      fill: var(--color-styled-header-text);
+    }
+  }
+}

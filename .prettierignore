@@ -1,4 +1,5 @@
-.cache
-package.json
+.next
+out
 package-lock.json
 public
+src/components/icons

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>Netlify Forms</title>
+  </head>
+  <body>
+    <!--
+      Netlify detects forms in the deployed static HTML. The contact form is
+      rendered for the visitor's chosen chiro, so both variants are declared
+      here. Field names must match src/components/contact/contact-form.tsx.
+    -->
+    <form name="Contact Jokonta" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="Contact Jokonta" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="chiro" />
+      <input type="text" name="naam" />
+      <input type="email" name="email" />
+      <input type="tel" name="telefoon" />
+      <input type="text" name="onderwerp" />
+      <textarea name="bericht"></textarea>
+    </form>
+    <form name="Contact Allegro" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="Contact Allegro" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="chiro" />
+      <input type="text" name="naam" />
+      <input type="email" name="email" />
+      <input type="tel" name="telefoon" />
+      <input type="text" name="onderwerp" />
+      <textarea name="bericht"></textarea>
+    </form>
+  </body>
+</html>
